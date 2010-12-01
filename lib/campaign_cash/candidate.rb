@@ -41,7 +41,7 @@ module CampaignCash
 							 :date_coverage_to => params['date_coverage_to'] 
 		end
 		
-		def self.create_search_results_from_api(params={})
+		def self.create_from_api_search_results(params={})
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
 		           :state => params['state'],
@@ -61,9 +61,14 @@ module CampaignCash
     def self.search(cycle, name)
 			reply = invoke("#{cycle}/candidates/search", {:query => name})
 			results = reply['results']      
-      results.map{|c| self.create_search_results_from_api(c)}
+      results.map{|c| self.create_from_api_search_results(c)}
     end
     
+    def self.new_candidates(cycle)
+			reply = invoke("#{cycle}/candidates/new",{})
+			results = reply['results']      
+      results.map{|c| self.create_from_api(c)}      
+    end
     
   end
 end
