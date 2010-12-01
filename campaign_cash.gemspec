@@ -5,11 +5,11 @@ Gem::Specification.new do |s|
   s.name        = "campaign_cash"
   s.version     = CampaignCash::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = []
-  s.email       = []
+  s.authors     = ['Derek Willis']
+  s.email       = ['dwillis@gmail.com']
   s.homepage    = "http://rubygems.org/gems/campaign_cash"
-  s.summary     = "TODO: Write a gem summary"
-  s.description = "TODO: Write a gem description"
+  s.summary     = "A thin client for The New York Times Campaign Finance API"
+  s.description = "Following the money."
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "campaign_cash"
