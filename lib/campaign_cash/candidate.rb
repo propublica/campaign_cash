@@ -6,7 +6,7 @@ module CampaignCash
                 :total_receipts, :total_contributions, :total_from_individuals, 
                 :total_from_pacs, :candidate_loans, :total_disbursements,
                 :total_refunds, :debts_owed, :begin_cash, :end_cash, :status,
-                :date_coverage_to, :date_coverage_from
+                :date_coverage_to, :date_coverage_from, :relative_uri
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -40,13 +40,28 @@ module CampaignCash
 							 :date_coverage_from => params['date_coverage_from'],
 							 :date_coverage_to => params['date_coverage_to'] 
 		end
+		
+		def self.create_search_results_from_api(params={})
+		  self.new :name => params['candidate']['name'],
+		           :id => params['candidate']['id'],
+		           :state => params['state'],
+		           :district => params['district'],
+		           :party => params['candidate']['party'],
+		           :relative_uri => params['candidate']['relative_uri'],
+		           :committee => params['committee']
+		  
+		end
     
     def self.find_by_fecid(cycle, fecid)
-      
 			reply = invoke("#{cycle}/candidates/#{fecid}")
 			result = reply['results']
 			self.create_from_api(result.first) if result.first
-      
+    end
+    
+    def self.search(cycle, name)
+			reply = invoke("#{cycle}/candidates/search", {:query => name})
+			results = reply['results']      
+      results.map{|c| self.create_search_results_from_api(c)}
     end
     
     
