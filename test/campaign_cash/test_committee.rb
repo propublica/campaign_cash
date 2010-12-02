@@ -12,7 +12,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 			assert_kind_of(Committee, @committee)
 		end
 		
-		%w(name id state district party fec_uri committee).each do |attr|
+		%w(name id state party fec_uri candidate).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(COMMITTEE_HASH[attr], @committee.send(attr))
 			end
@@ -26,7 +26,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  end
 	  
 	  should "return two committee objects" do
-	    assert_equal @committees.size, 2
+	    assert_equal @committees.size, 1
 	    assert_kind_of(Committee, @committees.first)
 	    assert_kind_of(Committee, @committees.last)
 	  end

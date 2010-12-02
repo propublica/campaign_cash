@@ -2,7 +2,7 @@ module CampaignCash
   class Committee < Base
     
     attr_reader :name, :id, :state, :district, :party, :fec_uri, :candidate, 
-                :city, :address, :state, :zip, :relative_uri
+                :city, :address, :state, :zip, :relative_uri,
                 :total_receipts, :total_contributions, :total_from_individuals, 
                 :total_from_pacs, :candidate_loans, :total_disbursements,
                 :total_refunds, :debts_owed, :begin_cash, :end_cash,

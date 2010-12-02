@@ -36,9 +36,9 @@ CANDIDATE_RESULT_HASH = {
 
 CANDIDATE_HASH_REPLY = CANDIDATE_RESULT_HASH.to_json
 
-CANDIDATE_SEARCH_HASH = [{"district"=>"/seats/NM/senate.json", "committee"=>{"name"=>"UDALL, TOM", "id"=>"S8NM00184", 
+CANDIDATE_SEARCH_HASH = [{"district"=>"/seats/NM/senate.json", "candidate"=>{"name"=>"UDALL, TOM", "id"=>"S8NM00184", 
                     "relative_uri"=>"/committees/S8NM00184.json", "party"=>"DEM"}, "committee"=>"/committees/C00329896.json", 
-                    "state"=>"/seats/NM.json"}, {"district"=>"/seats/CO/house/02.json", "committee"=>{"name"=>"UDALL, MARK E.", 
+                    "state"=>"/seats/NM.json"}, {"district"=>"/seats/CO/house/02.json", "candidate"=>{"name"=>"UDALL, MARK E.", 
                     "id"=>"H8CO02087", "relative_uri"=>"/committees/H8CO02087.json", "party"=>"DEM"}, "committee"=>"/committees/C00331439.json", 
                     "state"=>"/seats/CO.json"}]
 
@@ -67,6 +67,30 @@ NEW_CANDIDATES_RESULT_HASH = {
 	"results" => NEW_CANDIDATES_HASH
 }
 
-COMMITTEE_HASH = {}
-COMMITTEE_SEARCH_RESULT_HASH = {}
-NEW_COMMITTEES_RESULT_HASH = {}
+COMMITTEE_HASH = {"name"=>"BLUE CROSS AND BLUE SHIELD OF NORTH CAROLINA EMPLOYEE POLITICAL ACTION COMMITTEE", "address"=>"P.O. Box 2291", "city"=>"Durham", 
+                "begin_cash"=>18098.1, "total_from_individuals"=>205135.0, "zip"=>"27702", "date_coverage_to"=>"2010-10-13", "total_disbursements"=>203640.0, 
+                "total_receipts"=>205135.0, "total_refunds"=>769.57, "treasurer"=>"Wright, Kenneth", "end_cash"=>19593.7, "id"=>"C00312223", 
+                "date_coverage_from"=>"2009-01-01", "candidate"=>nil, "party"=>"", "debts_owed"=>0.0, 
+                "total_from_pacs"=>0.0, "state"=>"NC", "total_contributions"=>205135.0, "fec_uri"=>"http://query.nictusa.com/cgi-bin/dcdev/forms/C00312223/"}
+                
+COMMITTEE_SEARCH_RESULT_HASH = {
+  "status" => "OK",
+	"copyright" => "Copyright (c) 2010 The New York Times Company.  All Rights Reserved.",
+	"num_results" => 1,
+	"results" => [COMMITTEE_HASH]
+}
+NEW_COMMITTEES_HASH = [{"name"=>"REDWHITEANDTRUEBLUE.US", "address"=>"1110 CUMMINGS AVE", "city"=>"COPPERAS COVE", "zip"=>"76522", "treasurer"=>"WILLIAM THOMAS", 
+                            "id"=>"C00491266", "relative_uri"=>"/committees/C00491266.json", "candidate"=>nil, "party"=>"", "state"=>"TX", "fec_uri"=>"http://query.nictusa.com/cgi-bin/dcdev/forms/C00491266/"}, 
+                            {"name"=>"LIBERTY COALITION PAC DBA OREGON TEA PARTY", "address"=>"PO BOX 25313", "city"=>"PORTLAND", "zip"=>"97298", "treasurer"=>"GEOFF LUDT", 
+                            "id"=>"C00491274", "relative_uri"=>"/committees/C00491274.json", "candidate"=>nil, "party"=>"", "state"=>"OR", "fec_uri"=>"http://query.nictusa.com/cgi-bin/dcdev/forms/C00491274/"}, 
+                            {"name"=>"REPUBLICAN INDIAN COMMITTEE PAC", "address"=>"10319 WESTLAKE DRIVE SUITE #234", "city"=>"BETHESDA", "zip"=>"20817", "treasurer"=>"JODY VENKATESAN", 
+                            "id"=>"C00491282", "relative_uri"=>"/committees/C00491282.json", "candidate"=>nil, "party"=>"", "state"=>"MD", "fec_uri"=>"http://query.nictusa.com/cgi-bin/dcdev/forms/C00491282/"}, 
+                            {"name"=>"TEA PARTY NATION", "address"=>"1155 15TH STREET NW SUITE 410", "city"=>"WASHINGTON", "zip"=>"20005", "treasurer"=>"SCOTT B MACKENZIE", 
+                            "id"=>"C00491290", "relative_uri"=>"/committees/C00491290.json", "candidate"=>nil, "party"=>"", "state"=>"DC", "fec_uri"=>"http://query.nictusa.com/cgi-bin/dcdev/forms/C00491290/"}] 
+
+NEW_COMMITTEES_RESULT_HASH = {
+	"status" => "OK",
+	"copyright" => "Copyright (c) 2010 The New York Times Company.  All Rights Reserved.",
+	"num_results" => 4,
+	"results" => NEW_COMMITTEES_HASH
+}
