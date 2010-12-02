@@ -27,7 +27,10 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	  
 	  should "return two candidate objects" do
 	    assert_equal @candidates.size, 2
+	    assert_kind_of(Candidate, @candidates.first)
+	    assert_kind_of(Candidate, @candidates.last)
 	  end
+	  
 	end
 			
 end
