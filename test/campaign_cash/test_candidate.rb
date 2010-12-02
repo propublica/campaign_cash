@@ -30,7 +30,17 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	    assert_kind_of(Candidate, @candidates.first)
 	    assert_kind_of(Candidate, @candidates.last)
 	  end
+	end
+	
+	context "New Candidates" do
+	  setup do
+	    results = NEW_CANDIDATES_RESULT_HASH['results']
+	    @candidates = results.map{|c| Candidate.create_from_api(c)}
+	  end
 	  
+	  should "return 4 new candidates" do
+	    assert_equal @candidates.size, 4
+	  end
 	end
 			
 end

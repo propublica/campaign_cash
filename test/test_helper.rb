@@ -1,7 +1,6 @@
 require 'test/unit'
 require 'rubygems'
 require 'shoulda'
-require 'fake_web'
 require 'mocha'
 require 'json'
 
@@ -45,4 +44,22 @@ CANDIDATE_SEARCH_RESULT_HASH = {
 	"copyright" => "Copyright (c) 2010 The New York Times Company.  All Rights Reserved.",
 	"num_results" => 2,
 	"results" => CANDIDATE_SEARCH_HASH
+}
+
+NEW_CANDIDATES_HASH = [{"mailing_state"=>"PA", "name"=>"SCARINGI, MARC ANTHONY", "mailing_city"=>"CAMP HILL", "district"=>"/seats/PA/senate.json", 
+  "mailing_zip"=>"17011", "id"=>"S0PA00491", "relative_uri"=>"/candidates/S0PA00491.json", "committee"=>nil, "party"=>"REP", "state"=>"/seats/PA.json", 
+  "fec_uri"=>"http://query.nictusa.com/cgi-bin/fecimg/?S0PA00491"}, {"mailing_state"=>"TX", "name"=>"MORENOFF, DAN", "mailing_city"=>"DALLAS", 
+  "district"=>nil, "mailing_zip"=>"75201", "id"=>"H2TX00106", "relative_uri"=>"/candidates/H2TX00106.json", "committee"=>"/committees/C00491308.json", 
+  "party"=>"REP", "state"=>"/seats/TX.json", "fec_uri"=>"http://query.nictusa.com/cgi-bin/fecimg/?H2TX00106"}, {"mailing_state"=>"MT",
+  "name"=>"DAINES, STEVEN", "mailing_city"=>"BOZEMAN", "district"=>"/seats/MT/senate.json", "mailing_zip"=>"59705", "id"=>"S2MT00096", 
+  "relative_uri"=>"/candidates/S2MT00096.json", "committee"=>"/committees/C00491357.json", "party"=>"REP", "state"=>"/seats/MT.json", 
+  "fec_uri"=>"http://query.nictusa.com/cgi-bin/fecimg/?S2MT00096"}, {"mailing_state"=>"AK", "name"=>"CRAWFORD, HARRY T JR", "mailing_city"=>"ANCHORAGE", 
+  "district"=>nil, "mailing_zip"=>"99504", "id"=>"H0AK00089", "relative_uri"=>"/candidates/H0AK00089.json", "committee"=>"/committees/C00466698.json", 
+  "party"=>"DEM", "state"=>"/seats/AK.json", "fec_uri"=>"http://query.nictusa.com/cgi-bin/fecimg/?H0AK00089"}]
+  
+NEW_CANDIDATES_RESULT_HASH = {
+	"status" => "OK",
+	"copyright" => "Copyright (c) 2010 The New York Times Company.  All Rights Reserved.",
+	"num_results" => 4,
+	"results" => NEW_CANDIDATES_HASH
 }
