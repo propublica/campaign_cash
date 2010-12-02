@@ -40,6 +40,8 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	  
 	  should "return 4 new candidates" do
 	    assert_equal @candidates.size, 4
+	    assert_kind_of(Candidate, @candidates.first)
+	    assert_kind_of(Candidate, @candidates.last)
 	  end
 	end
 			
