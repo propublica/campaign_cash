@@ -33,3 +33,16 @@ CANDIDATE_RESULT_HASH = {
 }
 
 CANDIDATE_HASH_REPLY = CANDIDATE_RESULT_HASH.to_json
+
+CANDIDATE_SEARCH_HASH = [{"district"=>"/seats/NM/senate.json", "candidate"=>{"name"=>"UDALL, TOM", "id"=>"S8NM00184", 
+                    "relative_uri"=>"/candidates/S8NM00184.json", "party"=>"DEM"}, "committee"=>"/committees/C00329896.json", 
+                    "state"=>"/seats/NM.json"}, {"district"=>"/seats/CO/house/02.json", "candidate"=>{"name"=>"UDALL, MARK E.", 
+                    "id"=>"H8CO02087", "relative_uri"=>"/candidates/H8CO02087.json", "party"=>"DEM"}, "committee"=>"/committees/C00331439.json", 
+                    "state"=>"/seats/CO.json"}]
+
+CANDIDATE_SEARCH_RESULT_HASH = {
+	"status" => "OK",
+	"copyright" => "Copyright (c) 2010 The New York Times Company.  All Rights Reserved.",
+	"num_results" => 2,
+	"results" => CANDIDATE_SEARCH_HASH
+}

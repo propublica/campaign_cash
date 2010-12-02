@@ -3,12 +3,6 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	include CampaignCash
 	
-	# global setup
-	def setup
-		FakeWeb.clean_registry
-		FakeWeb.register_uri(Base::API_SERVER, :body => nil, :status => [])
-	end
-	
 	context "Candidate.create_from_api" do
 		setup do
 			@candidate = Candidate.create_from_api(CANDIDATE_HASH)
@@ -23,6 +17,17 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 				assert_equal(CANDIDATE_HASH[attr], @candidate.send(attr))
 			end
 		end
+	end
+	
+	context "Candidate search" do
+	  setup do
+	    results = CANDIDATE_SEARCH_RESULT_HASH['results']
+	    @candidates = results.map{|c| Candidate.create_from_api_search_results(c)}
+	  end
+	  
+	  should "return two candidate objects" do
+	    assert_equal @candidates.size, 2
+	  end
 	end
 			
 end
