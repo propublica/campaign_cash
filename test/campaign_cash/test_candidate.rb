@@ -65,7 +65,9 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "request missing cycle" do
 	  should "return an error" do
-	    Base.invoke('/candidates/new.json', {})
+	    assert_raise RuntimeError do
+	      Base.invoke('/candidates/new.json', {})
+	    end
 	  end
 	end
 	
