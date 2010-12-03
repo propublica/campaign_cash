@@ -5,7 +5,9 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "Candidate.create_from_api" do
 		setup do
-			@candidate = Candidate.create_from_api(CANDIDATE_HASH)
+		  reply = Base.invoke('2010/candidates/H4NY07011', {})
+			@result = reply['results'].first
+			@candidate = Candidate.create_from_api(@result)
 		end
 		
 		should "return an object of the Candidate type" do
@@ -14,14 +16,15 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 		
 		%w(name id state district party fec_uri committee).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
-				assert_equal(CANDIDATE_HASH[attr], @candidate.send(attr))
+				assert_equal(@result[attr], @candidate.send(attr))
 			end
 		end
-	end
+  end
 	
 	context "Candidate search" do
 	  setup do
-	    results = CANDIDATE_SEARCH_RESULT_HASH['results']
+		  reply = Base.invoke('2010/candidates/search', {:query => "Udall"})
+			results = reply['results']
 	    @candidates = results.map{|c| Candidate.create_from_api_search_results(c)}
 	  end
 	  
@@ -34,12 +37,13 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "New Candidates" do
 	  setup do
-	    results = NEW_CANDIDATES_RESULT_HASH['results']
+		  reply = Base.invoke('2010/candidates/new', {})
+			results = reply['results']
 	    @candidates = results.map{|c| Candidate.create_from_api(c)}
 	  end
 	  
-	  should "return 4 new candidates" do
-	    assert_equal @candidates.size, 4
+	  should "return 20 new candidates" do
+	    assert_equal @candidates.size, 20
 	    assert_kind_of(Candidate, @candidates.first)
 	    assert_kind_of(Candidate, @candidates.last)
 	  end
@@ -47,14 +51,22 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "candidate leaders" do
 	  setup do
-	    results = CANDIDATE_LEADERS_RESULT_HASH['results']
+		  reply = Base.invoke('2010/candidates/leaders/end_cash', {})
+			results = reply['results']
 	    @candidates = results.map{|c| Candidate.create_from_api(c)}
 	  end
 	  
-	  should "return 4 candidates each with a greater end_cash value than the next" do
+	  should "return 20 candidates each with a greater end_cash value than the next" do
 	    assert (@candidates[0].end_cash >= @candidates[1].end_cash)
 	    assert (@candidates[1].end_cash >= @candidates[2].end_cash)
 	    assert (@candidates[2].end_cash >= @candidates[3].end_cash)
 	  end
 	end
+	
+	context "request missing cycle" do
+	  should "return an error" do
+	    Base.invoke('/candidates/new.json', {})
+	  end
+	end
+	
 end

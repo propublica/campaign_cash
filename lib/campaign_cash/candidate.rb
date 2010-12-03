@@ -58,6 +58,12 @@ module CampaignCash
 			self.create_from_api(result.first) if result.first
     end
     
+    def self.leaders(cycle, category)
+			reply = invoke("#{cycle}/candidates/leaders/#{category}",{})
+			results = reply['results']
+      results.map{|c| self.create_from_api(c)}
+    end
+    
     def self.search(cycle, name)
 			reply = invoke("#{cycle}/candidates/search", {:query => name})
 			results = reply['results']      

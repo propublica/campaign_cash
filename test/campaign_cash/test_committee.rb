@@ -5,7 +5,9 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	
 	context "Committee.create_from_api" do
 		setup do
-			@committee = Committee.create_from_api(COMMITTEE_HASH)
+		  reply = Base.invoke('2010/committees/C00312223', {})
+			@result = reply['results'].first
+			@committee = Committee.create_from_api(@result)
 		end
 		
 		should "return an object of the Committee type" do
@@ -14,14 +16,15 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 		
 		%w(name id state party fec_uri candidate).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
-				assert_equal(COMMITTEE_HASH[attr], @committee.send(attr))
+				assert_equal(@result[attr], @committee.send(attr))
 			end
 		end
 	end
 	
 	context "Committee search" do
 	  setup do
-	    results = COMMITTEE_SEARCH_RESULT_HASH['results']
+		  reply = Base.invoke('2010/committees/search', {:query => "Boeing"})
+			results = reply['results']
 	    @committees = results.map{|c| Committee.create_from_api_search_results(c)}
 	  end
 	  
@@ -34,12 +37,13 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	
 	context "New Committees" do
 	  setup do
-	    results = NEW_COMMITTEES_RESULT_HASH['results']
-	    @committees = results.map{|c| Committee.create_from_api(c)}
+		  reply = Base.invoke('2010/committees/new', {})
+			results = reply['results']
+	    @committees = results.map{|c| Committee.create_from_api_search_results(c)}
 	  end
 	  
-	  should "return 4 new committees" do
-	    assert_equal @committees.size, 4
+	  should "return 20 new committees" do
+	    assert_equal @committees.size, 20
 	    assert_kind_of(Committee, @committees.first)
 	    assert_kind_of(Committee, @committees.last)
 	  end
