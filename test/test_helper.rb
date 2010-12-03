@@ -67,6 +67,29 @@ NEW_CANDIDATES_RESULT_HASH = {
 	"results" => NEW_CANDIDATES_HASH
 }
 
+CANDIDATE_LEADERS_HASH = [{"name"=>"SHELBY, RICHARD C", "begin_cash"=>13381000.0, "total_from_individuals"=>2998770.0, "date_coverage_to"=>"2010-10-13", 
+                         "total_disbursements"=>1457040.0, "total_refunds"=>25800.0, "district"=>"00", "end_cash"=>17028200.0, "relative_uri"=>"/candidates/S6AL00013.json", 
+                         "date_coverage_from"=>"2009-01-01", "committee"=>"/committees/C00193623.json", "party"=>"REP", "debts_owed"=>nil, "candidate_loans"=>nil, 
+                         "status"=>"I", "total_from_pacs"=>1563800.0, "state"=>"/seats/AL.json", "total_contributions"=>4561570.0}, {"name"=>"SCHUMER, CHARLES E", 
+                         "begin_cash"=>10571100.0, "total_from_individuals"=>13412700.0, "date_coverage_to"=>"2010-10-13", "total_disbursements"=>11824600.0, 
+                         "total_refunds"=>58350.0, "district"=>"00", "end_cash"=>16048500.0, "relative_uri"=>"/candidates/S8NY00082.json", "date_coverage_from"=>"2009-01-01", 
+                         "committee"=>"/committees/C00346312.json", "party"=>"DEM", "debts_owed"=>nil, "candidate_loans"=>nil, "status"=>"I", "total_from_pacs"=>2792880.0, 
+                         "state"=>"/seats/NY.json", "total_contributions"=>16205600.0}, {"name"=>"THUNE, JOHN", "begin_cash"=>3900450.0, "total_from_individuals"=>4148020.0, 
+                         "date_coverage_to"=>"2010-10-13", "total_disbursements"=>2988650.0, "total_refunds"=>33697.0, "district"=>"00", "end_cash"=>7194550.0, 
+                         "relative_uri"=>"/candidates/S2SD00068.json", "date_coverage_from"=>"2009-01-01", "committee"=>"/committees/C00409581.json", "party"=>"REP", 
+                         "debts_owed"=>nil, "candidate_loans"=>nil, "status"=>"I", "total_from_pacs"=>1897980.0, "state"=>"/seats/SD.json", "total_contributions"=>5951400.0}, 
+                         {"name"=>"BROWN, SCOTT P", "begin_cash"=>nil, "total_from_individuals"=>16532700.0, "date_coverage_to"=>"2010-09-30", "total_disbursements"=>10757100.0, 
+                         "total_refunds"=>34993.0, "district"=>"00", "end_cash"=>6770800.0, "relative_uri"=>"/candidates/S0MA00109.json", "date_coverage_from"=>"2009-09-14", 
+                         "committee"=>"/committees/C00467233.json", "party"=>"REP", "debts_owed"=>nil, "candidate_loans"=>nil, "status"=>"I", "total_from_pacs"=>670892.0, 
+                         "state"=>"/seats/MA.json", "total_contributions"=>17229100.0}]
+
+CANDIDATE_LEADERS_RESULT_HASH = {
+	"status" => "OK",
+	"copyright" => "Copyright (c) 2010 The New York Times Company.  All Rights Reserved.",
+	"num_results" => 4,
+	"results" => CANDIDATE_LEADERS_HASH
+}
+
 COMMITTEE_HASH = {"name"=>"BLUE CROSS AND BLUE SHIELD OF NORTH CAROLINA EMPLOYEE POLITICAL ACTION COMMITTEE", "address"=>"P.O. Box 2291", "city"=>"Durham", 
                 "begin_cash"=>18098.1, "total_from_individuals"=>205135.0, "zip"=>"27702", "date_coverage_to"=>"2010-10-13", "total_disbursements"=>203640.0, 
                 "total_receipts"=>205135.0, "total_refunds"=>769.57, "treasurer"=>"Wright, Kenneth", "end_cash"=>19593.7, "id"=>"C00312223", 

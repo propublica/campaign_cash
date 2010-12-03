@@ -44,5 +44,17 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	    assert_kind_of(Candidate, @candidates.last)
 	  end
 	end
-			
+	
+	context "candidate leaders" do
+	  setup do
+	    results = CANDIDATE_LEADERS_RESULT_HASH['results']
+	    @candidates = results.map{|c| Candidate.create_from_api(c)}
+	  end
+	  
+	  should "return 4 candidates each with a greater end_cash value than the next" do
+	    assert (@candidates[0].end_cash >= @candidates[1].end_cash)
+	    assert (@candidates[1].end_cash >= @candidates[2].end_cash)
+	    assert (@candidates[2].end_cash >= @candidates[3].end_cash)
+	  end
+	end
 end
