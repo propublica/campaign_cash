@@ -48,5 +48,12 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    assert_kind_of(Committee, @committees.last)
 	  end
 	end
-			
+
+	context "request with missing id" do
+	  should "return an error" do
+	    assert_raise RuntimeError do
+	      Base.invoke('2010/committees/', {})
+	    end
+	  end
+	end
 end
