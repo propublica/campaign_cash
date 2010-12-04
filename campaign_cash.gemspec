@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Derek Willis']
   s.email       = ['dwillis@gmail.com']
   s.homepage    = "http://rubygems.org/gems/campaign_cash"
-  s.summary     = "A thin client for The New York Times Campaign Finance API"
-  s.description = "Following the money."
+  s.description = "A thin client for The New York Times Campaign Finance API"
+  s.summary     = "Following the money."
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "campaign_cash"
