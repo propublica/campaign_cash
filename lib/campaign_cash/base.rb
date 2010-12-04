@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'open-uri'
 require 'json'
+require 'date'
 
 module CampaignCash
   class Base
@@ -36,6 +37,14 @@ module CampaignCash
 
   		def api_key
   			@@api_key
+  		end
+  		
+  		def date_parser(date)
+  		  date ? Date.parse(date) : nil
+  		end
+  		
+  		def cycle_from_date(date=Date.today)
+  		  date.year.even? ? date.year : date.year+1
   		end
 
   		##
