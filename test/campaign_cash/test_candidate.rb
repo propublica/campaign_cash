@@ -71,4 +71,13 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	  end
 	end
 	
+	context "state candidates" do
+	  setup do
+		  @candidates = Candidate.state_chamber(2010, 'RI', 'house')
+	  end
+	  
+	  should "return 29 House candidates from Rhode Island" do
+	    assert_equal @candidates.size, 29
+	  end
+	end
 end

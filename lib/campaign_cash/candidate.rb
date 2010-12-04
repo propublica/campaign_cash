@@ -51,7 +51,7 @@ module CampaignCash
 		           :committee => params['committee']
 		  
 		end
-    
+
     def self.find_by_fecid(cycle, fecid)
 			reply = invoke("#{cycle}/candidates/#{fecid}")
 			result = reply['results']
@@ -74,6 +74,13 @@ module CampaignCash
 			reply = invoke("#{cycle}/candidates/new",{})
 			results = reply['results']      
       results.map{|c| self.create_from_api(c)}      
+    end
+    
+    def self.state_chamber(cycle, state, chamber, district=nil)
+      district ? path = "#{cycle}/seats/#{state}/#{chamber}/#{district}" : path = "#{cycle}/seats/#{state}/#{chamber}"
+			reply = invoke(path,{})
+			results = reply['results']
+      results.map{|c| self.create_from_api_search_results(c)}      
     end
     
   end
