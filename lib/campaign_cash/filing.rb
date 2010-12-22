@@ -27,7 +27,7 @@ module CampaignCash
 			@filings = results.map{|c| Filing.create_from_api(c)}
 		end
 		
-		def self.ymd(year, month, day)
+		def self.date(year, month, day)
 		  cycle = cycle_from_date(Date.parse("#{month}/#{day}/#{year}"))
 		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {})
 		  results = reply['results']
