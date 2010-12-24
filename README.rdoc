@@ -23,9 +23,9 @@ You'll want to set your API key as an environment variable in order to run the t
 Currently there are methods to support retrieving candidates and committees, and every method requires at least one parameter,
 the election cycle. Some examples (provided you've done include CampaignCash):
 
-  Candidate.find_by_fecid(2010,"H4NY07011")  # find Gary Ackerman's details for the 2010 cycle
-  Committee.search(2010, "Growth") # find all committees in the 2010 cycle with the word 'Growth' in the name.
-  Candidate.search(2010, "Udall") # find all candidates in the 2010 cycle with the name 'Udall'
+  Candidate.find("H4NY07011", 2010)  # find Gary Ackerman's details for the 2010 cycle
+  Committee.search("Growth", 2010) # find all committees in the 2010 cycle with the word 'Growth' in the name.
+  Candidate.search("Udall", 2010) # find all candidates in the 2010 cycle with the name 'Udall'
 
 Check out the tests for further examples.
 
