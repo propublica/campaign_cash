@@ -9,6 +9,7 @@ module CampaignCash
   	API_VERSION = 'v3'
   	API_NAME = 'elections/us'
   	API_BASE = "/svc/#{API_NAME}/#{API_VERSION}/finances"
+  	CURRENT_CYCLE = 2010
 
   	@@api_key = nil
   	@@copyright = nil

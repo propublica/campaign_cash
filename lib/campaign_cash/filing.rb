@@ -21,7 +21,7 @@ module CampaignCash
 		end
 		
 		def self.today
-		  cycle = cycle_from_date
+		  cycle=CURRENT_CYCLE
 		  reply = Base.invoke("#{cycle}/filings", {})
 		  results = reply['results']
 			@filings = results.map{|c| Filing.create_from_api(c)}

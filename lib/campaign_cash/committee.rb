@@ -52,19 +52,19 @@ module CampaignCash
 		  
 		end
     
-    def self.find_by_fecid(cycle, fecid)
+    def self.find(fecid, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/#{fecid}")
 			result = reply['results']
 			self.create_from_api(result.first) if result.first
     end
     
-    def self.search(cycle, name)
+    def self.search(name, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/search", {:query => name})
 			results = reply['results']      
       results.map{|c| self.create_from_api_search_results(c)}
     end
     
-    def self.new_candidates(cycle)
+    def self.new_candidates(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/new",{})
 			results = reply['results']      
       results.map{|c| self.create_from_api(c)}      

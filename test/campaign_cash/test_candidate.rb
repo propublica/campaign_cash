@@ -73,7 +73,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "state candidates" do
 	  setup do
-		  @candidates = Candidate.state_chamber(2010, 'RI', 'house')
+		  @candidates = Candidate.state_chamber('RI', 'house', nil, 2010)
 	  end
 	  
 	  should "return 29 House candidates from Rhode Island" do
