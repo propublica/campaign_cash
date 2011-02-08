@@ -56,4 +56,17 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    end
 	  end
 	end
+	
+	context "committee filings" do
+	  setup do
+	    reply = Base.invoke('2010/committees/C00312223/filings', {})
+	    results = reply['results']
+	    @filings = results.map{|f| Filing.create_from_api_filings(f)}
+	  end
+	  
+	  should "return 10 filings" do
+	    assert_equal @filings.size, 10
+	  end
+	end
+	
 end
