@@ -69,4 +69,17 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  end
 	end
 	
+	context "committee contributions" do
+	  setup do
+	    reply = Base.invoke('2010/committees/C00458588/contributions', {})
+	    results = reply['results']
+	    @num_records = reply['total_results']
+	    @total_amount = reply['total_amount']
+	    @contributions = results.map{|c| Contribution.create_from_api(c)}
+	  end
+	  
+	  should "return 125 total results" do
+	    assert_equal @num_records, 125
+	  end
+	end
 end

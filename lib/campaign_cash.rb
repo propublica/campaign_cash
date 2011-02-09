@@ -4,5 +4,6 @@ $:.unshift(File.dirname(__FILE__)) unless
 require "campaign_cash/base"
 require "campaign_cash/candidate"
 require "campaign_cash/committee"
+require "campaign_cash/contribution"
 require "campaign_cash/filing"
 require "campaign_cash/version"
