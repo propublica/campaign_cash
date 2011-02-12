@@ -47,5 +47,12 @@ module CampaignCash
 		  results = reply['results']
 			@filings = results.map{|c| Filing.create(c)}
 		end
+		
+		def self.by_type(cycle, form_type)
+		  cycle = cycle
+		  reply = Base.invoke("#{cycle}/filings/types/#{form_type}")
+		  results = reply['results']
+			@filings = results.map{|c| Filing.create(c)}
+		end
 	end
 end
