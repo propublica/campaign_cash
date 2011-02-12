@@ -73,13 +73,33 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  setup do
 	    reply = Base.invoke('2010/committees/C00458588/contributions', {})
 	    results = reply['results']
+	    @committee = reply['committee']
 	    @num_records = reply['total_results']
 	    @total_amount = reply['total_amount']
-	    @contributions = results.map{|c| Contribution.create_from_api(c)}
+	    @contributions = results.map{|c| Contribution.create_from_api(@committee, c)}
 	  end
 	  
 	  should "return 125 total results" do
 	    assert_equal @num_records, 125
 	  end
 	end
+	
+	context "committee contributions to a candidate" do
+	  setup do
+	    reply = Base.invoke('2010/committees/C00458588/contributions/candidates/H0NC02059', {})
+	    results = reply['results']
+	    @cycle = reply['cycle']
+	    @committee = reply['committee']
+	    @candidate = reply['candidate']
+	    @total_amount = reply['total_amount']
+	    @contributions = results.map{|c| Contribution.create_from_api(@cycle, @committee, c, @candidate)}
+	  end
+	  
+	  should "return 2 results totaling $10,000" do
+	    assert_equal @contributions.size, 2
+	    assert_equal @total_amount, 10000
+	  end
+	  
+	end
+	
 end
