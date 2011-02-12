@@ -3,13 +3,13 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 class TestCampaignCash::TestForm < Test::Unit::TestCase
 	include CampaignCash
 		
-	context "today's filings" do
+	context "form types" do
 	  setup do
-			@filings = Filing.today
+			@forms = Form.form_types
 	  end
 	  
 		should "return a list of objects of the Filing type" do
-			assert_kind_of(Filing, @filings.first)
+			assert_kind_of(Form, @forms.first)
 		end
 	end
 end
