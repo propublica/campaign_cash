@@ -14,7 +14,7 @@ module CampaignCash
       end
     end
     
-		def self.create_from_api(params={})
+		def self.create(params={})
 			self.new :name => params['name'],
 							 :id => params['id'],
 							 :state => params['state'],
@@ -38,7 +38,7 @@ module CampaignCash
 							 :candidate => params['candidate']
 		end
 		
-		def self.create_from_api_search_results(params={})
+		def self.create_from_search_results(params={})
 		  self.new :name => params['name'],
 		           :id => params['id'],
 		           :city => params['city'],

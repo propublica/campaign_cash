@@ -23,5 +23,4 @@ class TestCampaignCash::TestFiling < Test::Unit::TestCase
 			assert_kind_of(Filing, @filings.first)
 		end
 	end
-	
 end

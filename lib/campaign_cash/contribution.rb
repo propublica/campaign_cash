@@ -9,7 +9,7 @@ module CampaignCash
       end
     end
     
-		def self.create_from_api(cycle, committee, params={}, candidate = params['candidate'])
+		def self.create(cycle, committee, params={}, candidate = params['candidate'])
 		  self.new :date => date_parser(params[:date]),
 		           :candidate_uri => candidate,
 		           :committee_uri => committee,

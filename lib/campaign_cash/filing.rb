@@ -9,7 +9,7 @@ module CampaignCash
       end
     end
     
-		def self.create_from_api(params={})
+		def self.create(params={})
 			self.new :committee_name => params['committee_name'],
 							 :date_coverage_from => date_parser(params['date_coverage_from']),
 							 :date_coverage_to => date_parser(params['date_coverage_to']),
@@ -21,7 +21,7 @@ module CampaignCash
 							 :form_type => params['form_type']
 		end
 		
-		def self.create_from_api_filings(params={})
+		def self.create_from_filings(params={})
 			self.new :date_coverage_from => date_parser(params['date_coverage_from']),
 							 :date_coverage_to => date_parser(params['date_coverage_to']),
 							 :report_title => params['report_title'].strip,
@@ -38,15 +38,14 @@ module CampaignCash
 		  cycle=CURRENT_CYCLE
 		  reply = Base.invoke("#{cycle}/filings", {})
 		  results = reply['results']
-			@filings = results.map{|c| Filing.create_from_api(c)}
+			@filings = results.map{|c| Filing.create(c)}
 		end
 		
 		def self.date(year, month, day)
 		  cycle = cycle_from_date(Date.parse("#{month}/#{day}/#{year}"))
 		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {})
 		  results = reply['results']
-			@filings = results.map{|c| Filing.create_from_api(c)}
+			@filings = results.map{|c| Filing.create(c)}
 		end
-		
-  end
+	end
 end

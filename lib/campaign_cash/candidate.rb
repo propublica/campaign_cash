@@ -14,7 +14,7 @@ module CampaignCash
       end
     end
     
-		def self.create_from_api(params={})
+		def self.create(params={})
 			self.new :name => params['name'],
 							 :id => params['id'],
 							 :state => params['state'],
@@ -41,7 +41,7 @@ module CampaignCash
 							 :date_coverage_to => params['date_coverage_to'] 
 		end
 		
-		def self.create_from_api_search_results(params={})
+		def self.create_from_search_results(params={})
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
 		           :state => params['state'],
@@ -55,32 +55,32 @@ module CampaignCash
     def self.find(fecid, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/#{fecid}")
 			result = reply['results']
-			self.create_from_api(result.first) if result.first
+			self.create(result.first) if result.first
     end
     
     def self.leaders(category, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/leaders/#{category}",{})
 			results = reply['results']
-      results.map{|c| self.create_from_api(c)}
+      results.map{|c| self.create(c)}
     end
     
     def self.search(name, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/search", {:query => name})
 			results = reply['results']      
-      results.map{|c| self.create_from_api_search_results(c)}
+      results.map{|c| self.create_from_search_results(c)}
     end
     
     def self.new_candidates(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/new",{})
 			results = reply['results']      
-      results.map{|c| self.create_from_api(c)}      
+      results.map{|c| self.create(c)}      
     end
     
     def self.state_chamber(state, chamber, district=nil, cycle=CURRENT_CYCLE)
       district ? path = "#{cycle}/seats/#{state}/#{chamber}/#{district}" : path = "#{cycle}/seats/#{state}/#{chamber}"
 			reply = invoke(path,{})
 			results = reply['results']
-      results.map{|c| self.create_from_api_search_results(c)}      
+      results.map{|c| self.create_from_search_results(c)}      
     end
     
   end

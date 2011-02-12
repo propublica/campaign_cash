@@ -3,11 +3,11 @@ require File.dirname(__FILE__) + '/../test_helper.rb'
 class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	include CampaignCash
 	
-	context "Candidate.create_from_api" do
+	context "Candidate.create" do
 		setup do
 		  reply = Base.invoke('2010/candidates/H4NY07011', {})
 			@result = reply['results'].first
-			@candidate = Candidate.create_from_api(@result)
+			@candidate = Candidate.create(@result)
 		end
 		
 		should "return an object of the Candidate type" do
@@ -25,7 +25,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	  setup do
 		  reply = Base.invoke('2010/candidates/search', {:query => "Udall"})
 			results = reply['results']
-	    @candidates = results.map{|c| Candidate.create_from_api_search_results(c)}
+	    @candidates = results.map{|c| Candidate.create_from_search_results(c)}
 	  end
 	  
 	  should "return two candidate objects" do
@@ -39,7 +39,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	  setup do
 		  reply = Base.invoke('2010/candidates/new', {})
 			results = reply['results']
-	    @candidates = results.map{|c| Candidate.create_from_api(c)}
+	    @candidates = results.map{|c| Candidate.create(c)}
 	  end
 	  
 	  should "return 20 new candidates" do
@@ -53,7 +53,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	  setup do
 		  reply = Base.invoke('2010/candidates/leaders/end_cash', {})
 			results = reply['results']
-	    @candidates = results.map{|c| Candidate.create_from_api(c)}
+	    @candidates = results.map{|c| Candidate.create(c)}
 	  end
 	  
 	  should "return 20 candidates each with a greater end_cash value than the next" do
