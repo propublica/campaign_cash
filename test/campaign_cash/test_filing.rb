@@ -24,4 +24,14 @@ class TestCampaignCash::TestFiling < Test::Unit::TestCase
 		end
 	end
 	
+	context "recent statements of organization" do
+	  setup do
+	    @filings = Filing.by_type(2012, "F1")
+	  end
+	  
+	  should "return a list of the 20 most recent Filings that are statements of organization" do
+	    assert_equal @filings.size, 20
+	    assert_equal @filings.first.report_title, "STATEMENT OF ORGANIZATION"
+	  end
+	end
 end

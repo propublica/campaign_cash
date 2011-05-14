@@ -10,4 +10,6 @@ require "campaign_cash/candidate"
 require "campaign_cash/committee"
 # [Filing methods](filing.html)
 require "campaign_cash/filing"
+require "campaign_cash/contribution"
+require "campaign_cash/form"
 require "campaign_cash/version"

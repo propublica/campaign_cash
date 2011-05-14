@@ -7,7 +7,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 		setup do
 		  reply = Base.invoke('2010/committees/C00312223', {})
 			@result = reply['results'].first
-			@committee = Committee.create_from_api(@result)
+			@committee = Committee.create(@result)
 		end
 		
 		should "return an object of the Committee type" do
@@ -25,7 +25,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  setup do
 		  reply = Base.invoke('2010/committees/search', {:query => "Boeing"})
 			results = reply['results']
-	    @committees = results.map{|c| Committee.create_from_api_search_results(c)}
+	    @committees = results.map{|c| Committee.create_from_search_results(c)}
 	  end
 	  
 	  should "return two committee objects" do
@@ -39,7 +39,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  setup do
 		  reply = Base.invoke('2010/committees/new', {})
 			results = reply['results']
-	    @committees = results.map{|c| Committee.create_from_api_search_results(c)}
+	    @committees = results.map{|c| Committee.create_from_search_results(c)}
 	  end
 	  
 	  should "return 20 new committees" do
@@ -54,6 +54,50 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    assert_raise RuntimeError do
 	      Base.invoke('2010/committees/', {})
 	    end
+	  end
+	end
+	
+	context "committee filings" do
+	  setup do
+	    reply = Base.invoke('2010/committees/C00312223/filings', {})
+	    results = reply['results']
+	    @filings = results.map{|f| Filing.create_from_filings(f)}
+	  end
+	  
+	  should "return 10 filings" do
+	    assert_equal @filings.size, 10
+	  end
+	end
+	
+	context "committee contributions" do
+	  setup do
+	    reply = Base.invoke('2010/committees/C00458588/contributions', {})
+	    results = reply['results']
+	    @committee = reply['committee']
+	    @num_records = reply['total_results']
+	    @total_amount = reply['total_amount']
+	    @contributions = results.map{|c| Contribution.create(@committee, c)}
+	  end
+	  
+	  should "return 125 total results" do
+	    assert_equal @num_records, 125
+	  end
+	end
+	
+	context "committee contributions to a candidate" do
+	  setup do
+	    reply = Base.invoke('2010/committees/C00458588/contributions/candidates/H0NC02059', {})
+	    results = reply['results']
+	    @cycle = reply['cycle']
+	    @committee = reply['committee']
+	    @candidate = reply['candidate']
+	    @total_amount = reply['total_amount']
+	    @contributions = results.map{|c| Contribution.create(@cycle, @committee, c, @candidate)}
+	  end
+	  
+	  should "return 2 results totaling $10,000" do
+	    assert_equal @contributions.size, 2
+	    assert_equal @total_amount, 10000
 	  end
 	end
 end

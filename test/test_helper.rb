@@ -8,7 +8,9 @@ require File.dirname(__FILE__) + '/../lib/campaign_cash'
 require File.dirname(__FILE__) + '/../lib/campaign_cash/base'
 require File.dirname(__FILE__) + '/../lib/campaign_cash/candidate'
 require File.dirname(__FILE__) + '/../lib/campaign_cash/committee'
+require File.dirname(__FILE__) + '/../lib/campaign_cash/contribution'
 require File.dirname(__FILE__) + '/../lib/campaign_cash/filing'
+require File.dirname(__FILE__) + '/../lib/campaign_cash/form'
 
 # set your NYT Campaign Finance API key as an environment variable to run the tests
 API_KEY = ENV['NYT_CAMPFIN_API_KEY']

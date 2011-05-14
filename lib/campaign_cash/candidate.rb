@@ -18,7 +18,7 @@ module CampaignCash
     end
     
     # Creates a new candidate object from a JSON API response.
-		def self.create_from_api(params={})
+		def self.create(params={})
 			self.new :name => params['name'],
 							 :id => params['id'],
 							 :state => params['state'],
@@ -45,7 +45,7 @@ module CampaignCash
 							 :date_coverage_to => params['date_coverage_to'] 
 		end
 		
-		def self.create_from_api_search_results(params={})
+		def self.create_from_search_results(params={})
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
 		           :state => params['state'],
@@ -61,7 +61,7 @@ module CampaignCash
     def self.find(fecid, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/#{fecid}")
 			result = reply['results']
-			self.create_from_api(result.first) if result.first
+			self.create(result.first) if result.first
     end
     
     # Returns leading candidates for given categories from campaign filings within a cycle.
@@ -70,7 +70,7 @@ module CampaignCash
     def self.leaders(category, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/leaders/#{category}",{})
 			results = reply['results']
-      results.map{|c| self.create_from_api(c)}
+      results.map{|c| self.create(c)}
     end
     
     # Returns an array of candidates matching a search term within a cycle. Defaults to the
@@ -78,7 +78,7 @@ module CampaignCash
     def self.search(name, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/search", {:query => name})
 			results = reply['results']      
-      results.map{|c| self.create_from_api_search_results(c)}
+      results.map{|c| self.create_from_search_results(c)}
     end
     
     # Returns an array of newly created FEC candidates within a current cycle. Defaults to the
@@ -86,7 +86,7 @@ module CampaignCash
     def self.new_candidates(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/new",{})
 			results = reply['results']      
-      results.map{|c| self.create_from_api(c)}      
+      results.map{|c| self.create(c)}      
     end
     
     # Returns an array of candidates for a given state and chamber within a cycle, with an optional
@@ -95,7 +95,7 @@ module CampaignCash
       district ? path = "#{cycle}/seats/#{state}/#{chamber}/#{district}" : path = "#{cycle}/seats/#{state}/#{chamber}"
 			reply = invoke(path,{})
 			results = reply['results']
-      results.map{|c| self.create_from_api_search_results(c)}      
+      results.map{|c| self.create_from_search_results(c)}      
     end
     
   end
