@@ -64,7 +64,7 @@ module CampaignCash
       results.map{|c| self.create_from_api_search_results(c)}
     end
     
-    def self.new_candidates(cycle=CURRENT_CYCLE)
+    def self.new_committees(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/new",{})
 			results = reply['results']      
       results.map{|c| self.create_from_api(c)}      
