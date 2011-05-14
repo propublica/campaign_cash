@@ -44,6 +44,7 @@ module CampaignCash
   		  date ? Date.parse(date) : nil
   		end
   		
+  		# Returns the election cycle (even-numbered) from a date.
   		def cycle_from_date(date=Date.today)
   		  date.year.even? ? date.year : date.year+1
   		end
