@@ -48,14 +48,6 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    assert_kind_of(Committee, @committees.last)
 	  end
 	end
-
-	context "request with missing id" do
-	  should "return an error" do
-	    assert_raise RuntimeError do
-	      Base.invoke('2010/committees/', {})
-	    end
-	  end
-	end
 	
 	context "committee filings" do
 	  setup do
@@ -64,8 +56,8 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    @filings = results.map{|f| Filing.create_from_filings(f)}
 	  end
 	  
-	  should "return 10 filings" do
-	    assert_equal @filings.size, 10
+	  should "return 20 filings" do
+	    assert_equal @filings.size, 20
 	  end
 	end
 	

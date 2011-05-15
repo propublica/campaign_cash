@@ -62,15 +62,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	    assert (@candidates[2].end_cash >= @candidates[3].end_cash)
 	  end
 	end
-	
-	context "request with missing cycle" do
-	  should "return an error" do
-	    assert_raise RuntimeError do
-	      Base.invoke('/candidates/new', {})
-	    end
-	  end
-	end
-	
+		
 	context "state candidates" do
 	  setup do
 		  @candidates = Candidate.state_chamber('RI', 'house', nil, 2010)
