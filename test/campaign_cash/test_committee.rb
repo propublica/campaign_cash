@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper.rb'
+require 'test_helper'
 
 class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	include CampaignCash
@@ -56,8 +56,8 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    @filings = results.map{|f| Filing.create_from_filings(f)}
 	  end
 	  
-	  should "return 20 filings" do
-	    assert_equal @filings.size, 20
+	  should "return 11 filings" do
+	    assert_equal @filings.size, 11
 	  end
 	end
 	
