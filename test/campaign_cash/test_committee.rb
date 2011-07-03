@@ -60,36 +60,41 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    assert_equal @filings.size, 11
 	  end
 	end
+
+	context "committee detail" do
+	  setup do
+	    @committee = Committee.find('C00084475', 2012)
+	  end
+	  
+	  should "return 16 other cycles" do
+	    assert_equal @committee.other_cycles.size, 16
+	  end
+	end
 	
 	context "committee contributions" do
 	  setup do
-	    reply = Base.invoke('2010/committees/C00458588/contributions', {})
-	    results = reply['results']
-	    @committee = reply['committee']
-	    @num_records = reply['total_results']
-	    @total_amount = reply['total_amount']
-	    @contributions = results.map{|c| Contribution.create(@committee, c)}
+	    @contribution = Contribution.find('C00458588', 2010)
 	  end
 	  
 	  should "return 125 total results" do
-	    assert_equal @num_records, 125
+	    assert_equal @contribution.total_results, 125
 	  end
+	  
+	  should "return a $5,000 contribution to Renee Ellmers" do
+	    assert_equal @contribution.results.detect{|c| c.candidate_uri == "/candidates/H0NC02059.json"}.amount, 5000
+	  end
+	  
 	end
 	
 	context "committee contributions to a candidate" do
 	  setup do
 	    reply = Base.invoke('2010/committees/C00458588/contributions/candidates/H0NC02059', {})
-	    results = reply['results']
-	    @cycle = reply['cycle']
-	    @committee = reply['committee']
-	    @candidate = reply['candidate']
-	    @total_amount = reply['total_amount']
-	    @contributions = results.map{|c| Contribution.create(@cycle, @committee, c, @candidate)}
+	    @contribution = Contribution.create(reply)
 	  end
 	  
 	  should "return 2 results totaling $10,000" do
-	    assert_equal @contributions.size, 2
-	    assert_equal @total_amount, 10000
+	    assert_equal @contribution.results.size, 2
+	    assert_equal @contribution.total_amount, 10000
 	  end
 	end
 end

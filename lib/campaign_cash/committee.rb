@@ -6,7 +6,7 @@ module CampaignCash
                 :total_receipts, :total_contributions, :total_from_individuals, 
                 :total_from_pacs, :candidate_loans, :total_disbursements,
                 :total_refunds, :debts_owed, :begin_cash, :end_cash,
-                :date_coverage_to, :date_coverage_from
+                :date_coverage_to, :date_coverage_from, :other_cycles
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -35,7 +35,8 @@ module CampaignCash
 							 :end_cash => params['end_cash'],
 							 :date_coverage_from => params['date_coverage_from'],
 							 :date_coverage_to => params['date_coverage_to'],
-							 :candidate => params['candidate']
+							 :candidate => params['candidate'],
+							 :other_cycles => params['other_cycles'].map{|cycle| cycle['cycle']['fec_committee']['cycle']}
 		end
 		
 		def self.create_from_search_results(params={})
@@ -55,19 +56,24 @@ module CampaignCash
     def self.find(fecid, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/#{fecid}")
 			result = reply['results']
-			self.create_from_api(result.first) if result.first
+			create(result.first) if result.first
     end
     
     def self.search(name, cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/search", {:query => name})
 			results = reply['results']      
-      results.map{|c| self.create_from_api_search_results(c)}
+      results.map{|c| create_from_search_results(c)}
     end
     
     def self.new_committees(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/new",{})
 			results = reply['results']      
-      results.map{|c| self.create_from_api(c)}      
+      results.map{|c| create(c)}      
+    end
+    
+    def contributions
+      reply = invoke("#{cycle}/committees/#{id}/contributions")
+      
     end
     
   end

@@ -1,7 +1,7 @@
 module CampaignCash
   class Contribution < Base
     
-    attr_reader :date, :candidate_uri, :primary_general, :amount, :state, :name, :image_uri, :party, :district
+    attr_reader :date, :candidate_uri, :primary_general, :amount, :state, :name, :image_uri, :party, :district, :committee_uri, :results, :total_results, :total_amount, :cycle
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -9,18 +9,32 @@ module CampaignCash
       end
     end
     
-		def self.create(cycle, committee, params={}, candidate = params['candidate'])
-		  self.new :date => date_parser(params[:date]),
-		           :candidate_uri => candidate,
-		           :committee_uri => committee,
-		           :primary_general => params[:primary_general],
-		           :amount => params[:amount],
-		           :state => params[:state],
-		           :name => params[:name],
-		           :image_uri => params[:image_uri],
-		           :party => params[:party],
-		           :district => params[:district],
-		           :cycle => cycle
+		def self.create(params={})
+		  self.new :committee_uri => params['committee'],
+		           :total_results => params['total_results'],
+		           :cycle => params['cycle'],
+		           :total_amount => params['total_amount'],
+		           :results => params['results'].map{|c| OpenStruct.new({
+               :date => date_parser(c['date']),
+		           :candidate_uri => c['candidate_uri'],
+		           :primary_general => c['primary_general'],
+		           :amount => c['amount'],
+		           :state => c['state'],
+		           :name => c['name'],
+		           :image_uri => c['image_uri'],
+		           :party => c['party'],
+		           :district => c['district']})}
+		           
 		end
+		
+    def self.find(fecid, cycle=CURRENT_CYCLE, candidate=nil)
+      if candidate
+        reply = invoke("#{cycle}/committees/#{fecid}/contributions/candidates/#{candidate}")
+			else
+			  reply = invoke("#{cycle}/committees/#{fecid}/contributions")
+			end
+			create(reply)
+    end
+		
   end
 end

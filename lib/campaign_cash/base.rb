@@ -2,6 +2,7 @@ require 'rubygems'
 require 'open-uri'
 require 'json'
 require 'date'
+require 'ostruct'
 
 module CampaignCash
   class Base
