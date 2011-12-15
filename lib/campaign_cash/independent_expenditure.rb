@@ -51,5 +51,16 @@ module CampaignCash
       @independent_expenditures
     end
     
+    def self.candidate(id, cycle)
+      @independent_expenditures = []
+      reply = Base.invoke("#{cycle}/candidates/#{id}/independent_expenditures")
+      results = reply['results']
+      cand = reply['fec_candidate']
+      results.each do |result|
+        result['fec_candidate'] = cand
+        @independent_expenditures << IndependentExpenditure.create(result)
+      end
+      @independent_expenditures
+    end
   end
 end

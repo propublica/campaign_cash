@@ -33,4 +33,17 @@ class TestCampaignCash::TestIndependentExpenditure < Test::Unit::TestCase
 	  end
 	end
 	
+	context "independent expenditures about a given candidate" do
+	  setup do
+	    @independent_expenditures = IndependentExpenditure.candidate("P60003654", 2012)
+	    @candidate = Candidate.find('P60003654')
+	  end
+	  
+	  should "return an array  of IEs about presidential candidate Newt Gingrich" do
+	    assert_equal("President", @independent_expenditures.first.office)
+	    assert_equal(@candidate.name, "GINGRICH, NEWT")
+	  end
+	  
+	end
+	
 end
