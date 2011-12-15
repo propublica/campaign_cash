@@ -39,6 +39,17 @@ module CampaignCash
       @independent_expenditures = results.map{|c| IndependentExpenditure.create(c)}      
     end
     
+    def self.committee(id, cycle)
+      @independent_expenditures = []
+      reply = Base.invoke("#{cycle}/committees/#{id}/independent_expenditures")
+      results = reply['results']
+      comm = reply['fec_committee']
+      results.each do |result|
+        result['fec_committee'] = comm
+        @independent_expenditures << IndependentExpenditure.create(result)
+      end
+      @independent_expenditures
+    end
     
   end
 end

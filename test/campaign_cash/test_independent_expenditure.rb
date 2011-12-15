@@ -21,7 +21,16 @@ class TestCampaignCash::TestIndependentExpenditure < Test::Unit::TestCase
 	  should "return at least one independent expenditure against Barack Obama" do
 	    assert_equal("P80003338", @independent_expenditures.first.fec_candidate_id)
 	  end
+	end
+	
+	context "a committee's independent expenditures in a cycle" do
+	  setup do
+	    @independent_expenditures = IndependentExpenditure.committee("C00490045", 2012)
+	  end
 	  
+	  should "return an array of IEs in the presidential race" do
+	    assert_equal("President", @independent_expenditures.first.office)
+	  end
 	end
 	
 end
