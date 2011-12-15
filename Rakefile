@@ -1,4 +1,5 @@
 require 'bundler'
+include Rake::DSL
 Bundler::GemHelper.install_tasks
 
 require 'rake/testtask'
@@ -9,13 +10,3 @@ Rake::TestTask.new(:test) do |test|
 end
 
 task :default => :test
-
-require 'rake/rdoctask'
-Rake::RDocTask.new do |rdoc|
-  version = File.exist?('VERSION') ? File.read('VERSION') : ""
-
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "campaign_cash #{version}"
-  rdoc.rdoc_files.include('README*')
-  rdoc.rdoc_files.include('lib/**/*.rb')
-end
