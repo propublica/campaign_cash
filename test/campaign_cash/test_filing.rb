@@ -19,8 +19,12 @@ class TestCampaignCash::TestFiling < Test::Unit::TestCase
 			@filings = Filing.today
 	  end
 	  
-		should "return a list of objects of the Filing type" do
-			assert_kind_of(Filing, @filings.first)
+		should "return a list of objects of the Filing type or an empty list" do
+		  if @filings.size > 0
+			  assert_kind_of(Filing, @filings.first)
+			else
+			  assert_equal([], @filings)
+			end
 		end
 	end
 	
