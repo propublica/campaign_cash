@@ -34,7 +34,7 @@ module CampaignCash
     def self.date(date)
       d = Date.parse(date)
       cycle = cycle_from_date(d)
-      reply = Base.invoke("cycle/independent_expenditures/#{d.year}/#{d.month}/#{d.day}")
+      reply = Base.invoke("#{cycle}/independent_expenditures/#{d.year}/#{d.month}/#{d.day}")
       results = reply['results']
       @independent_expenditures = results.map{|c| IndependentExpenditure.create(c)}      
     end
