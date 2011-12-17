@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = CampaignCash::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ['Derek Willis']
-  s.email       = ['dwillis@gmail.com']
+  s.email       = ['dwillis@nytimes.com']
   s.homepage    = "http://rubygems.org/gems/campaign_cash"
   s.description = "A thin client for The New York Times Campaign Finance API"
   s.summary     = "Following the money."
