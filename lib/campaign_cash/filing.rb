@@ -34,7 +34,8 @@ module CampaignCash
 		end
 		
 		
-		def self.today(cycle=CURRENT_CYCLE)
+		def self.today
+		  cycle=CURRENT_CYCLE
 		  reply = Base.invoke("#{cycle}/filings", {})
 		  results = reply['results']
 			@filings = results.map{|c| Filing.create(c)}
