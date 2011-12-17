@@ -1,7 +1,6 @@
 = campaign_cash
 
-* Docs[http://dwillis.github.com/campaign_cash/]
-* Source[http://github.com/dwillis/campaign_cash]
+* Source[http://github.com/nytimes/campaign_cash]
 
 == DESCRIPTION:
 
