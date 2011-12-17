@@ -9,7 +9,7 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == INSTALL:
 
-* <tt>sudo gem install campaign_cash</tt>
+* <tt>gem install campaign_cash</tt>
 
 == USAGE:
 
@@ -20,12 +20,14 @@ You'll want to set your API key as an environment variable in order to run the t
 
   Base.api_key = YOUR_API_KEY
   
-Currently there are methods to support retrieving candidates and committees, and every method requires at least one parameter,
-the election cycle. Some examples (provided you've done include CampaignCash):
+Currently there are methods to support retrieving candidates, committees, electronic filings, committee contributions and independent expenditures. Almost every method requires at least one parameter, the election cycle. Some examples (provided you've done include CampaignCash):
 
-  Candidate.find("H4NY07011", 2010)  # find Gary Ackerman's details for the 2010 cycle
-  Committee.search("Growth", 2010) # find all committees in the 2010 cycle with the word 'Growth' in the name.
+  Candidate.find("H4NY07011", 2012)  # find Gary Ackerman's details for the 2012 cycle
+  Committee.search("Growth", 2012) # find all committees in the 2012 cycle with the word 'Growth' in the name.
   Candidate.search("Udall", 2010) # find all candidates in the 2010 cycle with the name 'Udall'
+  Filing.today  # find all the electronic filings made today.
+  Contribution.find("C00458588",2010,"H0NC02059") # find all contributions by the committee to the candidate in the 2010 cycle.
+  IndependentExpenditure.candidate("P60003654", 2012) # find independent expenditures about Newt Gingrich in the 2012 cycle.
 
 Check out the tests for further examples.
 
@@ -39,27 +41,6 @@ Check out the tests for further examples.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== LICENSE:
+== Copyright
 
-(The MIT License)
-
-Copyright (c) 2010 Derek Willis
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+Copyright (c) 2011 The New York Times Company. See LICENSE for details.
