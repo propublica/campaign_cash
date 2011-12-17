@@ -62,5 +62,12 @@ module CampaignCash
       end
       @independent_expenditures
     end
+    
+    def self.president(cycle=Base::CURRENT_CYCLE)
+      reply = Base.invoke("#{cycle}/president/independent_expenditures")
+      results = reply['results']
+      @independent_expenditures = results.map{|c| IndependentExpenditure.create(c)}
+    end
+    
   end
 end
