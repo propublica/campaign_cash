@@ -2,11 +2,11 @@ module CampaignCash
   class Committee < Base
     
     attr_reader :name, :id, :state, :district, :party, :fec_uri, :candidate, 
-                :city, :address, :state, :zip, :relative_uri,
+                :city, :address, :state, :zip, :relative_uri, :sponsor_name,
                 :total_receipts, :total_contributions, :total_from_individuals, 
                 :total_from_pacs, :candidate_loans, :total_disbursements,
                 :total_refunds, :debts_owed, :begin_cash, :end_cash,
-                :date_coverage_to, :date_coverage_from, :other_cycles
+                :date_coverage_to, :date_coverage_from, :other_cycles, :super_pac
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -49,7 +49,10 @@ module CampaignCash
 		           :party => params['party'],
 		           :relative_uri => params['relative_uri'],
 		           :candidate => params['candidate'],
-		           :treasurer => params['treasurer']
+		           :treasurer => params['treasurer'],
+		           :fec_uri => params['fec_uri'],
+		           :super_pac => params['super_pac'],
+		           :sponsor_name => params['sponsor_name']
 		  
 		end
     
@@ -71,9 +74,10 @@ module CampaignCash
       results.map{|c| create(c)}      
     end
     
-    def contributions
-      reply = invoke("#{cycle}/committees/#{id}/contributions")
-      
+    def self.superpacs(cycle=CURRENT_CYCLE)
+      reply = invoke("#{cycle}/committees/superpacs")
+			results = reply['results']      
+      results.map{|c| create_from_search_results(c)}
     end
     
   end

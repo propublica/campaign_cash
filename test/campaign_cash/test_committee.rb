@@ -97,4 +97,17 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    assert_equal @contribution.total_amount, 10000
 	  end
 	end
+	
+	context "superpacs" do
+	  setup do
+	    reply = Base.invoke('2012/committees/superpacs')
+	    @committees = reply['results'].map{|c| Committee.create_from_search_results(c) }
+	  end
+	  
+	  should "return an array of super pacs" do
+	    assert_equal([true], @committees.map{|c| c.super_pac }.uniq)
+	  end
+	  
+	end
+	
 end
