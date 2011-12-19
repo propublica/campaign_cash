@@ -22,7 +22,7 @@ module CampaignCash
 			self.new :name => params['name'],
 							 :id => params['id'],
 							 :state => params['state'].split('/').last[0..1],
-							 :office => parse_office(params['id'].first),
+							 :office => parse_office(params['id'][0..0]),
 							 :district => parse_district(params['district']),
 							 :party => params['party'],
 							 :fec_uri => params['fec_uri'],
@@ -50,7 +50,7 @@ module CampaignCash
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
 		           :state => params['state'].split('/').last[0..1],
-		           :office => parse_office(params['candidate']['id']),
+		           :office => parse_office(params['candidate']['id'][0..0]),
 		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
 		           :committee_id => params['committee'].split('/').last[0..8]
@@ -58,7 +58,7 @@ module CampaignCash
 		end
 		
 		def self.parse_office(id)
-		  if id.first == "H"
+		  if id == "H"
 		    'house'
 		  elsif id.first == 'S'
 		    'senate'
