@@ -22,7 +22,7 @@ module CampaignCash
 			self.new :name => params['name'],
 							 :id => params['id'],
 							 :state => params['state'],
-							 :office => parse_office(params['id'].first)
+							 :office => parse_office(params['id'].first),
 							 :district => parse_district(params['district']),
 							 :party => params['party'],
 							 :fec_uri => params['fec_uri'],
