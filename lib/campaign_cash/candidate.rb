@@ -4,12 +4,12 @@ module CampaignCash
     # Represents a candidate object based on the FEC's candidate and candidate summary files.
     # A candidate is a person seeking a particular office within a particular two-year election
     # cycle. Each candidate is assigned a unique ID within a cycle.
-    attr_reader :name, :id, :state, :district, :party, :fec_uri, :committee, 
+    attr_reader :name, :id, :state, :district, :party, :fec_uri, :committee_id, 
                 :mailing_city, :mailing_address, :mailing_state, :mailing_zip,
                 :total_receipts, :total_contributions, :total_from_individuals, 
                 :total_from_pacs, :candidate_loans, :total_disbursements,
                 :total_refunds, :debts_owed, :begin_cash, :end_cash, :status,
-                :date_coverage_to, :date_coverage_from, :relative_uri
+                :date_coverage_to, :date_coverage_from, :relative_uri, :office
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -22,10 +22,11 @@ module CampaignCash
 			self.new :name => params['name'],
 							 :id => params['id'],
 							 :state => params['state'],
-							 :district => params['district'],
+							 :office => parse_office(params['id'].first)
+							 :district => parse_district(params['district']),
 							 :party => params['party'],
 							 :fec_uri => params['fec_uri'],
-							 :committee => params['committee'],
+							 :committee_id => params['committee'].split('/').last[0..8],
 							 :mailing_city => params['mailing_city'],
 							 :mailing_address => params['mailing_address'],
 							 :mailing_state => params['mailing_state'],
@@ -49,11 +50,29 @@ module CampaignCash
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
 		           :state => params['state'],
-		           :district => params['district'],
+		           :office => parse_office(params['candidate']['id'].first),
+		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
-		           :relative_uri => params['candidate']['relative_uri'],
-		           :committee => params['committee']
+		           :committee_id => params['committee'].split('/').last[0..8]
 		  
+		end
+		
+		def self.create_office(id)
+		  if id == "H"
+		    'house'
+		  elsif id == 'S'
+		    'senate'
+		  else
+		    'president'
+		  end
+		end
+		
+		def self.parse_district(uri)
+		  if uri.split('/').last.split('.').first.to_i > 0
+		    uri.split('/').last.split('.').first.to_i
+		  else
+		    0
+		  end
 		end
 		
 		# Retrieve a candidate object via its FEC candidate id within a cycle.
