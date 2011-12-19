@@ -21,7 +21,7 @@ module CampaignCash
 		def self.create(params={})
 			self.new :name => params['name'],
 							 :id => params['id'],
-							 :state => params['state'],
+							 :state => params['state'].split('/').last[0..1],
 							 :office => parse_office(params['id'].first),
 							 :district => parse_district(params['district']),
 							 :party => params['party'],
@@ -49,7 +49,7 @@ module CampaignCash
 		def self.create_from_search_results(params={})
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
-		           :state => params['state'],
+		           :state => params['state'].split('/').last[0..1],
 		           :office => parse_office(params['candidate']['id'].first),
 		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
@@ -58,9 +58,9 @@ module CampaignCash
 		end
 		
 		def self.parse_office(id)
-		  if id == "H"
+		  if id.first == "H"
 		    'house'
-		  elsif id == 'S'
+		  elsif id.first == 'S'
 		    'senate'
 		  else
 		    'president'
