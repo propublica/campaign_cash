@@ -21,8 +21,8 @@ module CampaignCash
 		def self.create(params={})
 			self.new :name => params['name'],
 							 :id => params['id'],
-							 :state => params['state'].split('/').last[0..1],
-							 :office => parse_office(params['id'][0..0]),
+							 :state => parse_state(params['state']),
+							 :office => parse_office(params['id']),
 							 :district => parse_district(params['district']),
 							 :party => params['party'],
 							 :fec_uri => params['fec_uri'],
@@ -49,7 +49,7 @@ module CampaignCash
 		def self.create_from_search_results(params={})
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
-		           :state => params['state'].split('/').last[0..1],
+		           :state => params['candidate']['id'][2..3],
 		           :office => parse_office(params['candidate']['id'][0..0]),
 		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
@@ -57,14 +57,19 @@ module CampaignCash
 		  
 		end
 		
+		def self.parse_state(state)
+		  state.split('/').last[0..1] if state
+		end
+		
 		def self.parse_committee_id(committee)
 		  committee.nil? ? nil : committee.split('/').last[0..8]
 		end
 		
 		def self.parse_office(id)
-		  if id == "H"
+		  return nil unless id
+		  if id[0..0] == "H"
 		    'house'
-		  elsif id.first == 'S'
+		  elsif id[0..0] == 'S'
 		    'senate'
 		  else
 		    'president'
