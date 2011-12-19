@@ -14,7 +14,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 			assert_kind_of(Candidate, @candidate)
 		end
 		
-		%w(name id state district party fec_uri committee).each do |attr|
+		%w(name id party fec_uri).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@result[attr], @candidate.send(attr))
 			end
@@ -37,7 +37,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "New Candidates" do
 	  setup do
-		  reply = Base.invoke('2010/candidates/new', {})
+		  reply = Base.invoke('2012/candidates/new', {})
 			results = reply['results']
 	    @candidates = results.map{|c| Candidate.create(c)}
 	  end

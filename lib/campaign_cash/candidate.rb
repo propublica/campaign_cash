@@ -26,7 +26,7 @@ module CampaignCash
 							 :district => parse_district(params['district']),
 							 :party => params['party'],
 							 :fec_uri => params['fec_uri'],
-							 :committee_id => params['committee'].split('/').last[0..8],
+							 :committee_id => parse_committee_id(params['committee']),
 							 :mailing_city => params['mailing_city'],
 							 :mailing_address => params['mailing_address'],
 							 :mailing_state => params['mailing_state'],
@@ -53,8 +53,12 @@ module CampaignCash
 		           :office => parse_office(params['candidate']['id'][0..0]),
 		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
-		           :committee_id => params['committee'].split('/').last[0..8]
+		           :committee_id => parse_committee_id(params['committee'])
 		  
+		end
+		
+		def self.parse_committee_id(committee)
+		  committee.nil? ? nil : committee.split('/').last[0..8]
 		end
 		
 		def self.parse_office(id)
@@ -68,7 +72,7 @@ module CampaignCash
 		end
 		
 		def self.parse_district(uri)
-		  if uri.split('/').last.split('.').first.to_i > 0
+		  if uri and uri.split('/').last.split('.').first.to_i > 0
 		    uri.split('/').last.split('.').first.to_i
 		  else
 		    0
