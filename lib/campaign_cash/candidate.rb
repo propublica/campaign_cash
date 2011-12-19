@@ -50,7 +50,7 @@ module CampaignCash
 		  self.new :name => params['candidate']['name'],
 		           :id => params['candidate']['id'],
 		           :state => params['state'].split('/').last[0..1],
-		           :office => parse_office(params['candidate']['id'].first),
+		           :office => parse_office(params['candidate']['id']),
 		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
 		           :committee_id => params['committee'].split('/').last[0..8]
