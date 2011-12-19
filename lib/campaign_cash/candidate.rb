@@ -57,7 +57,7 @@ module CampaignCash
 		  
 		end
 		
-		def self.create_office(id)
+		def self.parse_office(id)
 		  if id == "H"
 		    'house'
 		  elsif id == 'S'
