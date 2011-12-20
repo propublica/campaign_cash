@@ -35,7 +35,7 @@ module CampaignCash
 							 :end_cash => params['end_cash'],
 							 :date_coverage_from => params['date_coverage_from'],
 							 :date_coverage_to => params['date_coverage_to'],
-							 :candidate => params['candidate'],
+							 :candidate_id => parse_candidate(params['candidate']),
 							 :other_cycles => params['other_cycles'].map{|cycle| cycle['cycle']['fec_committee']['cycle']}
 		end
 		
@@ -48,12 +48,17 @@ module CampaignCash
 		           :district => params['district'],
 		           :party => params['party'],
 		           :relative_uri => params['relative_uri'],
-		           :candidate => params['candidate'],
+		           :candidate_id => parse_candidate(params['candidate']),
 		           :treasurer => params['treasurer'],
 		           :fec_uri => params['fec_uri'],
 		           :super_pac => params['super_pac'],
 		           :sponsor_name => params['sponsor_name']
 		  
+		end
+		
+		def self.parse_candidate(candidate)
+		  return nil if candidate.nil?
+		  candidate.split('/').last.split('.').first
 		end
     
     def self.find(fecid, cycle=CURRENT_CYCLE)
