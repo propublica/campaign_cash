@@ -42,7 +42,7 @@ module CampaignCash
 		end
 		
 		def self.date(year, month, day)
-		  cycle = cycle_from_date(Date.parse("#{month}/#{day}/#{year}"))
+		  cycle = cycle_from_date(Date.strptime("#{month}/#{day}/#{year}", '%m/%d/%Y'))
 		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {})
 		  results = reply['results']
 			@filings = results.map{|c| Filing.create(c)}

@@ -1,0 +1,19 @@
+PATH
+  remote: .
+  specs:
+    campaign_cash (1.7)
+      json
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    json (1.6.3)
+    shoulda (2.11.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (>= 1.0.0)
+  campaign_cash!
+  shoulda

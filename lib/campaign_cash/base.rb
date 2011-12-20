@@ -42,7 +42,7 @@ module CampaignCash
   		end
   		
   		def date_parser(date)
-  		  date ? Date.parse(date) : nil
+  		  date ? Date.strptime(date, '%Y-%m-%d') : nil
   		end
   		
   		# Returns the election cycle (even-numbered) from a date.
