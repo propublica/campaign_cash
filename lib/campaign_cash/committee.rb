@@ -67,8 +67,8 @@ module CampaignCash
 			create(result.first) if result.first
     end
     
-    def self.search(name, cycle=CURRENT_CYCLE)
-			reply = invoke("#{cycle}/committees/search", {:query => name})
+    def self.search(name, cycle=CURRENT_CYCLE, offset=0)
+			reply = invoke("#{cycle}/committees/search", {:query => name,:offset => offset})
 			results = reply['results']      
       results.map{|c| create_from_search_results(c)}
     end
@@ -79,8 +79,8 @@ module CampaignCash
       results.map{|c| create(c)}      
     end
     
-    def self.superpacs(cycle=CURRENT_CYCLE)
-      reply = invoke("#{cycle}/committees/superpacs")
+    def self.superpacs(cycle=CURRENT_CYCLE, offset=0)
+      reply = invoke("#{cycle}/committees/superpacs",{:offset => offset})
 			results = reply['results']      
       results.map{|c| create_from_search_results(c)}
     end
