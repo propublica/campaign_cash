@@ -51,6 +51,7 @@ Check out the tests for further examples.
 == Authors
 
 Derek Willis, dwillis@nytimes.com
+Jason Holt, jjh@offensivepolitics.net
 
 == Copyright
 
