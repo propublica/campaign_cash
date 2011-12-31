@@ -1,6 +1,9 @@
-= campaign_cash
-
-* Source[http://github.com/nytimes/campaign_cash]
+   ___                            _                 ___          _     
+  / __\__ _ _ __ ___  _ __   __ _(_) __ _ _ __     / __\__ _ ___| |__  
+ / /  / _` | '_ ` _ \| '_ \ / _` | |/ _` | '_ \   / /  / _` / __| '_ \ 
+/ /__| (_| | | | | | | |_) | (_| | | (_| | | | | / /__| (_| \__ \ | | |
+\____/\__,_|_| |_| |_| .__/ \__,_|_|\__, |_| |_| \____/\__,_|___/_| |_|
+                     |_|            |___/                              
 
 == DESCRIPTION:
 
@@ -25,6 +28,7 @@ then issue the 'bundle install' command. Campaign Cash has been tested under Rub
 
 You'll want to set your API key as an environment variable in order to run the tests. Otherwise, you'll need to set it like so:
 
+  include CampaignCash
   Base.api_key = YOUR_API_KEY
   
 Currently there are methods to support retrieving candidates, committees, electronic filings, committee contributions and independent expenditures. Almost every method requires at least one parameter, the election cycle. Some examples (provided you've done include CampaignCash):
