@@ -113,7 +113,7 @@ module CampaignCash
     # current cycle.
     def self.new_candidates(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/candidates/new",{})
-			results = reply['results']      
+			results = reply['results']
       results.map{|c| self.create(c)}      
     end
     
