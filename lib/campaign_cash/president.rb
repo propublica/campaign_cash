@@ -28,7 +28,7 @@ module CampaignCash
 		
 		# Creates a detailed president object
 		def self.create_detail(params={})
-			self.new :name => params['name'],
+			self.new :name => params['candidate_name'],
 							 :id => params['candidate_id'],
 							 :party => params['party'],
 							 :committee_id => params['committee_id'],
@@ -61,7 +61,7 @@ module CampaignCash
       results.map{|c| self.create_summary(c)}
     end
     
-    # Returns a Candidate object for a given presidential candidate in a given cycle, defaults to the current cycle.
+    # Returns a President object for a given presidential candidate in a given cycle, defaults to the current cycle.
     # Only returns candidates tracked by The New York Times.
     def self.detail(id, cycle=CURRENT_CYCLE)
       reply = invoke("#{cycle}/president/candidates/#{id}", {})

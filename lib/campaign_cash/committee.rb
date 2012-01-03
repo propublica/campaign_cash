@@ -47,10 +47,10 @@ module CampaignCash
 		           :zip => params['zip'],
 		           :district => params['district'],
 		           :party => params['party'],
-		           :relative_uri => params['relative_uri'],
 		           :candidate_id => parse_candidate(params['candidate']),
 		           :treasurer => params['treasurer'],
 		           :fec_uri => params['fec_uri'],
+		           :leadership => params['leadership'],
 		           :super_pac => params['super_pac'],
 		           :sponsor_name => params['sponsor_name']
 		  
