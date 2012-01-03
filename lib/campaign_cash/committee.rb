@@ -54,8 +54,7 @@ module CampaignCash
 		           :treasurer => params['treasurer'],
 		           :fec_uri => params['fec_uri'],
 		           :leadership => params['leadership'],
-		           :super_pac => params['super_pac'],
-		           :sponsor_name => params['sponsor_name']
+		           :super_pac => params['super_pac']
 		  
 		end
 		
