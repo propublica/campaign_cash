@@ -84,6 +84,20 @@ module CampaignCash
 		  end
 		end
 		
+		def self.categories
+		  {
+          "individual_total" => "Contributions from individuals",
+          "contribution_total" => "Total contributions",
+          "candidate_loan" => "Loans from candidate",
+          "receipts_total" => "Total receipts",
+          "refund_total" => "Total refunds",
+          "pac_total" => "Contributions from PACs",
+          "disbursements_total" => "Total disbursements",
+          "end_cash" => "Cash on hand",
+          "debts_owed" => "Debts owed by",
+      }
+		end
+		
 		# Retrieve a candidate object via its FEC candidate id within a cycle.
 		# Defaults to the current cycle.
     def self.find(fecid, cycle=CURRENT_CYCLE)

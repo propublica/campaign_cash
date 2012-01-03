@@ -20,7 +20,6 @@ module CampaignCash
 							 :party => params['party'],
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],
-							 :total_contributions => params['total_contributions'],
 							 :total_disbursements => params['total_disbursements'],
 							 :end_cash => params['cash_on_hand'],
 							 :date_coverage_from => params['date_coverage_from'],
