@@ -22,7 +22,7 @@ For use in a Rails 3 application, put the following in your Gemfile:
 
 then issue the 'bundle install' command. Campaign Cash has been tested under Ruby 1.8.7 and 1.9.2.
 
-== USAGE:
+== GETTING STARTED:
 
   require 'rubygems'
   require 'campaign_cash'
@@ -32,16 +32,79 @@ You'll want to set your API key as an environment variable in order to run the t
   include CampaignCash
   Base.api_key = YOUR_API_KEY
   
-Currently there are methods to support retrieving candidates, committees, electronic filings, committee contributions and independent expenditures. Almost every method requires at least one parameter, the election cycle. Some examples (provided you've done include CampaignCash):
+Currently there are methods to support retrieving candidates, presidential candidates, committees, electronic filings, committee contributions and independent expenditures. Almost every method requires at least one parameter, the election cycle.
 
-  Candidate.find("H4NY07011", 2012)  # find Gary Ackerman's details for the 2012 cycle
-  Committee.search("Growth", 2012) # find all committees in the 2012 cycle with the word 'Growth' in the name.
-  Candidate.search("Udall", 2010) # find all candidates in the 2010 cycle with the name 'Udall'
+== Candidates
+
+Candidate objects can be created in several ways. To locate a candidate by last name, supply the name and cycle:
+
+  Candidate.search("Bass", 2012)
+  #=> [#<CampaignCash::Candidate:0x101bb3d00 @name="BASS, CHARLES F.", @state="NH", @party="REP", @district=2, @committee_id="C00302570", @office="house", @id="H0NH02017">, #<CampaignCash::Candidate:0x101bb2f90 @name="BASS, KAREN", @state="CA", @party="DEM", @district=33, @committee_id="C00476523", @office="house", @id="H0CA33117">]
+
+Search returns an array of basic information about candidates, including the unique Federal Election Commission-provided identifier, which begins with an "H" for House candidates, "S" for Senate candidates and "P" for presidential candidates. The id, along with the election cycle, can be used to retrieve more information about a candidate:
+
+  Candidate.find("H0NH02017", 2012)
+  #=> #<CampaignCash::Candidate:0x101b9af80 @name="BASS, CHARLES F.", @state="NH", @fec_uri="http://query.nictusa.com/cgi-bin/fecimg/?H0NH02017", @total_disbursements=120650.0, @total_contributions=570853.0, @mailing_address="PO BOX 210", @begin_cash=31676.0, @party="REP", @candidate_loans=nil, @total_receipts=577512.0, @date_coverage_from="2011-01-01", @mailing_city="PETERBOROUGH", @debts_owed=nil, @district=2, @total_from_pacs=414250.0, @mailing_zip="03458", @date_coverage_to="2011-09-30", @committee_id="C00302570", @total_refunds=nil, @office="house", @total_from_individuals=156603.0, @id="H0NH02017", @mailing_state="NH", @end_cash=488538.0, @status="I">
+  
+Candidate.find returns an object containing more detailed information for a candidate, including the latest financial summary from the F.E.C. and the candidate's committee ID, which can be used to make other method calls.
+
+Several other canned queries are available. To list the top 20 candidates in terms of one of the financial categories (available by calling Candidate.categories or listed at http://developer.nytimes.com/docs/read/campaign_finance_api#h3-candidate-leaders), supply the category and cycle:
+
+  Candidate.leaders('end-cash', 2012)
+  #=> [#<CampaignCash::Candidate:0x101b76b80 @name="OBAMA, BARACK", @state=nil, @fec_uri=nil, @total_disbursements=29327600.0, @total_contributions=65393200.0, @mailing_address=nil, @begin_cash=2303400.0, @party="DEM", @candidate_loans=nil, @total_receipts=nil, @date_coverage_from="2011-01-01", @mailing_city=nil, @debts_owed=1709300.0, @district=0, @total_from_pacs=nil, @mailing_zip=nil, @date_coverage_to="2011-09-30", @committee_id="C00430892", @total_refunds=944100.0, @office=nil, @total_from_individuals=65393200.0, @id=nil, @mailing_state=nil, @end_cash=61400700.0, @status="I">, #<CampaignCash::Candidate:0x101b75730 @name="SHELBY, RICHARD C", @state="AL", @fec_uri=nil, @total_disbursements=1508100.0, @total_contributions=4693320.0, @mailing_address=nil, @begin_cash=13381000.0, @party="REP", @candidate_loans=nil, @total_receipts=nil, @date_coverage_from="2009-01-01", @mailing_city=nil, @debts_owed=nil, @district=0, @total_from_pacs=1671200.0, @mailing_zip=nil, @date_coverage_to="2010-12-31", @committee_id="C00193623", @total_refunds=25800.0, @office=nil, @total_from_individuals=3022120.0, @id=nil, @mailing_state=nil, @end_cash=17156600.0, @status="I"> ...]
+  
+Please note that not all candidates file on the same schedule, so some of the "date_coverage_to" will be different for these responses. Senate candidates, in particular, often file twice a year during the odd-numbered years prior to a general election.
+
+To retrieve an array of the 20 newest candidates (the F.E.C.'s data is updated every Monday), use the new_candidates class method:
+
+  Candidate.new_candidates
+  #=> [#<CampaignCash::Candidate:0x101b11d20 @name="ANDERSON, JASON EDWARD", @state="AL", @fec_uri="http://query.nictusa.com/cgi-bin/fecimg/?H2AL05086", @total_disbursements=nil, @total_contributions=nil, @mailing_address=nil, @begin_cash=nil, @party="REP", @candidate_loans=nil, @total_receipts=nil, @date_coverage_from=nil, @mailing_city="HAZEL GREEN", @debts_owed=nil, @district=5, @total_from_pacs=nil, @mailing_zip="35750", @date_coverage_to=nil, @committee_id="C00508374", @total_refunds=nil, @office="house", @total_from_individuals=nil, @id="H2AL05086", @mailing_state="AL", @end_cash=nil, @status=nil>, #<CampaignCash::Candidate:0x101b10420 @name="NORRIS, PHILLIP DWIGHT", @state="AL", @fec_uri="http://query.nictusa.com/cgi-bin/fecimg/?H2AL07165", @total_disbursements=nil, @total_contributions=nil, @mailing_address=nil, @begin_cash=nil, @party="REP", @candidate_loans=nil, @total_receipts=nil, @date_coverage_from=nil, @mailing_city="HOOVER", @debts_owed=nil, @district=7, @total_from_pacs=nil, @mailing_zip="35216", @date_coverage_to=nil, @committee_id="C00508382", @total_refunds=nil, @office="house", @total_from_individuals=nil, @id="H2AL07165", @mailing_state="AL", @end_cash=nil, @status=nil>,
+
+To retrieve an array of candidates for a particular seat, supply a state abbreviation, chamber ('house' or 'senate'), district (an integer or nil) and cycle. For example, the following asks for candidates for Maryland's 6th Congressional District in 2012:
+
+  Candidate.state_chamber('MD', 'house', 6, 2012)
+  #=> [#<CampaignCash::Candidate:0x101abea58 @name="CLARK, CASEY", @state="MD", @party="DEM", @district=0, @committee_id="C00460436", @office="house", @id="H0MD06173">, #<CampaignCash::Candidate:0x101abe2b0 @name="TAYLOR, STEVEN MICHAEL", @state="MD", @party="REP", @district=0, @committee_id="C00481788", @office="house", @id="H0MD06181">, #<CampaignCash::Candidate:0x101abdb08 @name="BARTLETT, ROSCOE G. REP.", @state="MD", @party="REP", @district=0, @committee_id="C00255190", @office="house", @id="H2MD06054">,...]
+
+== President
+  
+Presidential candidate objects are like regular Candidates, except that they have additional financial attributes that are calculated by The New York Times from electronic filings. There are two President methods. To retrieve a listing of all presidential candidates being tracked by The Times:
+
+  President.summary
+  #=> [#<CampaignCash::President:0x101be6c78 @name="Barack Obama", @party="D", @total_receipts="99597680.72", @date_coverage_from="2011-01-01", @date_coverage_to="2011-09-30", @committee_id="C00431445", @id="P80003338", @end_cash="61403710.55", @total_disbursements="106877585.73">, #<CampaignCash::President:0x101be6688 @name="Mitt Romney", @party="R", @total_receipts="32605827.32", @date_coverage_from="2010-10-01", @date_coverage_to="2011-09-30", @committee_id="C00431171", @id="P80003353", @end_cash="14656965.83", @total_disbursements="17953283.44">,...]
+  
+To retrieve detailed information for a single presidential candidate, pass the appropriate committee_id and cycle:
+
+  President.detail('C00431171', 2012)
+  #=> [#<CampaignCash::President:0x101bd3d58 @name="Romney, Mitt", @party="R", @contributions_less_than_200="3393540.5", @total_receipts="32605827.32", @date_coverage_from="2010-10-01", @net_candidate_contributions="0.0", @contributions_1500_2499="1566753.77", @federal_funds="0.0", @date_coverage_to="2011-09-30", @net_party_contributions="0.0", @committee_id="C00431171", @total_refunds="270101.47", @contributions_500_1499="5965455.03", @net_general_contributions="0.0", @id="P80003353", @end_cash="14656965.83", @net_pac_contributions="177301.13", @total_disbursements="17953283.44", @contributions_200_499="977647.0", @total_contributions="32482490.51", @net_primary_contributions="14656965.83", @net_individual_contributions="32035087.91", @contributions_max="19930000.0">]
+  
+Among the calculated attributes are totals for five ranges of contribution size (the maximum individual contribution for the 2012 cycle is $2,500 per person, per election, while in 2008 it was $2,300).
+
+== Committees
+
+Committee objects have information about F.E.C.-registered committees that may or may not be affiliated to a candidate. Searching for a committee currently executes a "begins with" query, so to find all committees in the 2012 cycle that start with the word 'Growth':
+
+  Committee.search("Growth", 2012)
+  #=> [#<CampaignCash::Committee:0x101bebb38 @name="GROWTH AND PROSPERITY POLITICAL ACTION COMMITTEE", @state="AL", @party="", @super_pac=nil, @leadership=true, @district=nil, @city="BIRMINGHAM", @id="C00388793", @treasurer="DOBBS, JOEY", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00388793/", @zip="35222", @candidate_id=nil>, #<CampaignCash::Committee:0x101beb368 @name="GROWTH ENERGY PAC", @state="DC", @party="", @super_pac=nil, @leadership=false, @district=nil, @city="WASHINGTON", @id="C00475665", @treasurer="BUTTERFIELD, BEN", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00475665/", @zip="20002", @candidate_id=nil>]
+
+If a committee is associated with a candidate, it will have values for the district, party and candidate_id attributes. Party committees should also have the party attribute set. If it is defined as a leadership committee, a committee's leadership attribute will be set to True; a similar attribute, super_pac, is set to True if the committee is registered with the F.E.C. as a "Super PAC" able to raise unlimited amounts for independent expenditures.
+
+To fetch details for a single committee in a cycle:
+
+  Committee.find("C00326389", 2012)
+  #=> #<CampaignCash::Committee:0x101bcb630 @name="SNAKE RIVER SUGAR COMPANY POLITICAL ACTION COMMITTEE", @state="ID", @party="", @candidate_loans=nil, @super_pac=false, @total_receipts=30363.3, @date_coverage_from="2011-01-01", @debts_owed=nil, @address="1951 SOUTH SATURN WAY", @leadership=false, @total_from_pacs=nil, @other_cycles=[2010, 2008, 2006, 2004, 2002, 2000, 1998], @date_coverage_to="2011-10-31", @total_refunds=nil, @city="BOISE", @total_from_individuals=30363.3, @id="C00326389", @sponsor_name=nil, @end_cash=16845.2, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00326389/", @total_disbursements=46500.0, @total_contributions=30363.3, @zip="83709", @candidate_id=nil, @begin_cash=32981.9>
+  
+The Committee object includes the most recent financial summary data available, plus the other election cycles that the committee is registered in dating back to 1980.
+
+
+  
+== Filings
+
   Filing.today  # find all the electronic filings made today.
+
+== Independent Expenditures
+
   Contribution.find("C00458588",2010,"H0NC02059") # find all contributions by the committee to the candidate in the 2010 cycle.
   IndependentExpenditure.candidate("P60003654", 2012) # find independent expenditures about Newt Gingrich in the 2012 cycle.
-
-Check out the tests for further examples.
 
 == Note on Patches/Pull Requests
 
