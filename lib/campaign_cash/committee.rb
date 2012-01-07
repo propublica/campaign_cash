@@ -75,7 +75,7 @@ module CampaignCash
       results.map{|c| create_from_search_results(c)}
     end
     
-    def self.new_committees(cycle=CURRENT_CYCLE)
+    def self.latest(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/new",{})
 			results = reply['results']      
       results.map{|c| create_from_search_results(c)}      

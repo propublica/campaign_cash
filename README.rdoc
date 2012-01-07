@@ -81,19 +81,26 @@ Among the calculated attributes are totals for five ranges of contribution size 
 
 == Committees
 
-Committee objects have information about F.E.C.-registered committees that may or may not be affiliated to a candidate. Searching for a committee currently executes a "begins with" query, so to find all committees in the 2012 cycle that start with the word 'Growth':
+Committee objects have information about F.E.C.-registered committees that may or may not be affiliated to a candidate. If a committee is associated with a candidate, it will have values for the district, party and candidate_id attributes. Party committees should also have the party attribute set. If it is defined as a leadership committee, a committee's leadership attribute will be set to True; a similar attribute, super_pac, is set to True if the committee is registered with the F.E.C. as a "Super PAC" able to raise unlimited amounts for independent expenditures.
+
+Searching for a committee currently executes a "begins with" query, so to find all committees in the 2012 cycle that start with the word 'Growth':
 
   Committee.search("Growth", 2012)
   #=> [#<CampaignCash::Committee:0x101bebb38 @name="GROWTH AND PROSPERITY POLITICAL ACTION COMMITTEE", @state="AL", @party="", @super_pac=nil, @leadership=true, @district=nil, @city="BIRMINGHAM", @id="C00388793", @treasurer="DOBBS, JOEY", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00388793/", @zip="35222", @candidate_id=nil>, #<CampaignCash::Committee:0x101beb368 @name="GROWTH ENERGY PAC", @state="DC", @party="", @super_pac=nil, @leadership=false, @district=nil, @city="WASHINGTON", @id="C00475665", @treasurer="BUTTERFIELD, BEN", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00475665/", @zip="20002", @candidate_id=nil>]
 
-If a committee is associated with a candidate, it will have values for the district, party and candidate_id attributes. Party committees should also have the party attribute set. If it is defined as a leadership committee, a committee's leadership attribute will be set to True; a similar attribute, super_pac, is set to True if the committee is registered with the F.E.C. as a "Super PAC" able to raise unlimited amounts for independent expenditures.
+As with Candidate.search, the results of Committee.search return a subset of all Committee attributes. The full Committee object includes the most recent financial summary data available, plus the other election cycles that the committee is registered in dating back to 1980. Some committees have a sponsor, which could be a corporation, association or candidate.
 
-To fetch details for a single committee in a cycle:
+To fetch the details for a single committee in a cycle:
 
   Committee.find("C00326389", 2012)
-  #=> #<CampaignCash::Committee:0x101bcb630 @name="SNAKE RIVER SUGAR COMPANY POLITICAL ACTION COMMITTEE", @state="ID", @party="", @candidate_loans=nil, @super_pac=false, @total_receipts=30363.3, @date_coverage_from="2011-01-01", @debts_owed=nil, @address="1951 SOUTH SATURN WAY", @leadership=false, @total_from_pacs=nil, @other_cycles=[2010, 2008, 2006, 2004, 2002, 2000, 1998], @date_coverage_to="2011-10-31", @total_refunds=nil, @city="BOISE", @total_from_individuals=30363.3, @id="C00326389", @sponsor_name=nil, @end_cash=16845.2, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00326389/", @total_disbursements=46500.0, @total_contributions=30363.3, @zip="83709", @candidate_id=nil, @begin_cash=32981.9>
+  #=> #<CampaignCash::Committee:0x101bb8440 @name="SNAKE RIVER SUGAR COMPANY POLITICAL ACTION COMMITTEE", @state="ID", @party="", @candidate_loans=nil, @super_pac=false, @total_receipts=30363.3, @date_coverage_from="2011-01-01", @debts_owed=nil, @address="1951 SOUTH SATURN WAY", @leadership=false, @total_from_pacs=nil, @other_cycles=[2010, 2008, 2006, 2004, 2002, 2000, 1998], @date_coverage_to="2011-11-30", @total_refunds=nil, @city="BOISE", @total_from_individuals=30363.3, @id="C00326389", @sponsor_name=nil, @end_cash=16845.2, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00326389/", @total_disbursements=46500.0, @total_contributions=30363.3, @zip="83709", @candidate_id=nil, @begin_cash=32981.9>
   
-The Committee object includes the most recent financial summary data available, plus the other election cycles that the committee is registered in dating back to 1980.
+To retrieve a list of the 20 most recently added committees (note that no cycle parameter is needed; this method always uses the most recent cycle):
+
+  Committee.latest
+  #=> [#<CampaignCash::Committee:0x101be6020 @name="AMERICA'S IMPACT POLITICAL FUND", @state="DC", @party="", @super_pac=false, @leadership=false, @district=nil, @city="WASHINGTON", @id="C00508366", @treasurer="BENJAMIN GOLDSMITH", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00508366/", @zip="20005", @candidate_id=nil>, #<CampaignCash::Committee:0x101be55a8 @name="JASON ANDERSON FOR CONGRESS", @state="AL", @party="REP", @super_pac=false, @leadership=false, @district=nil, @city="HAZEL GREEN", @id="C00508374", @treasurer="CHRISTOPHER MARK ANDREWS", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00508374/", @zip="35750", @candidate_id="H2AL05086">, ...]
+  
+
 
 
   
