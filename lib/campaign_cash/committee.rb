@@ -78,7 +78,7 @@ module CampaignCash
     def self.new_committees(cycle=CURRENT_CYCLE)
 			reply = invoke("#{cycle}/committees/new",{})
 			results = reply['results']      
-      results.map{|c| create(c)}      
+      results.map{|c| create_from_search_results(c)}      
     end
     
     def self.superpacs(cycle=CURRENT_CYCLE, offset=0)
