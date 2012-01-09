@@ -9,33 +9,49 @@ module CampaignCash
       end
     end
     
-		def self.create(params={})
-		  self.new :committee_uri => params['committee'],
-		           :total_results => params['total_results'],
-		           :cycle => params['cycle'],
-		           :total_amount => params['total_amount'],
-		           :results => params['results'].map{|c| OpenStruct.new({
+    def self.to_candidate(params={})
+      self.new :committee => parse_committee(params['committee']),
+               :cycle => params['cycle'],
+               :total_amount => params['total_amount'],
+               :results => params['results'].map{|c| OpenStruct.new({
+               :candidate => parse_candidate(params['candidate']),
                :date => date_parser(c['date']),
-		           :candidate_uri => c['candidate_uri'],
-		           :primary_general => c['primary_general'],
-		           :amount => c['amount'],
-		           :state => c['state'],
-		           :name => c['name'],
-		           :image_uri => c['image_uri'],
-		           :party => c['party'],
-		           :district => c['district']})}
-		           
-		end
-		
+               :primary_general => c['primary_general'],
+               :amount => c['amount'],
+               :state => c['state'],
+               :name => c['name'],
+               :image_uri => c['image_uri'],
+               :party => c['party'],
+               :district => c['district']})}
+               
+    end
+    
+    def self.all_candidates(params={})
+      self.new :committee => parse_committee(params['committee']),
+               :cycle => params['cycle'],
+               :total_amount => params['total_amount'],
+               :results => params['results'].map{|c| OpenStruct.new({
+               :date => date_parser(c['date']),
+               :candidate => parse_candidate(c['candidate']),
+               :primary_general => c['primary_general'],
+               :amount => c['amount'],
+               :state => c['state'],
+               :name => c['name'],
+               :image_uri => c['image_uri'],
+               :party => c['party'],
+               :district => c['district']})}
+               
+    end
+    
     def self.find(fecid, cycle=CURRENT_CYCLE, candidate=nil)
       if candidate
         reply = invoke("#{cycle}/committees/#{fecid}/contributions/candidates/#{candidate}")
-			else
-			  reply = invoke("#{cycle}/committees/#{fecid}/contributions")
-			end
-			results = reply['results']
-			results.map{|c| create(c)}
+        to_candidate(reply)
+      else
+        reply = invoke("#{cycle}/committees/#{fecid}/contributions")
+        all_candidates(reply)
+      end
     end
-		
+    
   end
 end

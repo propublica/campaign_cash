@@ -45,6 +45,16 @@ module CampaignCash
   		  date ? Date.strptime(date, '%Y-%m-%d') : nil
   		end
   		
+  		def self.parse_candidate(candidate)
+  		  return nil if candidate.nil?
+  		  candidate.split('/').last.split('.').first
+  		end
+  		
+  		def self.parse_committee(committee)
+  		  return nil if committee.nil?
+  		  committee.split('/').last.split('.').first
+  		end
+  		
   		# Returns the election cycle (even-numbered) from a date.
   		def cycle_from_date(date=Date.today)
   		  date.year.even? ? date.year : date.year+1

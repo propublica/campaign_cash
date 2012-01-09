@@ -103,11 +103,6 @@ module CampaignCash
 		           :super_pac => params['super_pac']
 		end
 		
-		def self.parse_candidate(candidate)
-		  return nil if candidate.nil?
-		  candidate.split('/').last.split('.').first
-		end
-		
 		def self.get_frequency(frequency)
 		  if frequency
 		    FILING_FREQUENCY[frequency.strip] unless frequency.empty?
