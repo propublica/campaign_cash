@@ -1,6 +1,48 @@
 module CampaignCash
   class Committee < Base
     
+    FILING_FREQUENCY = {
+      'A' => 'Administratively Terminated',
+      'D' => 'Debt',
+      'M' => 'Monthly',
+      'Q' => 'Quarterly',
+      'T' => 'Terminated',
+      'W' => 'Waived'
+    }
+    
+    INTEREST_GROUP = {
+      'C' => 'Corporation',
+      'L' => 'Labor Union',
+      'M' => 'Membership',
+      'T' => 'Trade Association',
+      'V' => 'Cooperative',
+      'W' => 'Corporation without Capital Stock'
+    }
+    
+    COMMITTEE_TYPE = {
+      'C' => 'Communication Cost',
+      'D' => 'Delegate',
+      'E' => 'Electioneering Communications',
+      'H' => 'House Candidate',
+      'I' => 'Independent Expenditure (Person or Group)',
+      'N' => 'Non-Party, Non-Qualified',
+      'P' => 'Presidential Candidate',
+      'Q' => 'Qualified Non-Party',
+      'S' => 'Senate Candidate',
+      'X' => 'Non-Qualified Party',
+      'Y' => 'Qualified Party',
+      'Z' => 'National Party Non-Federal'
+    }
+    
+    COMMITTEE_DESIGNATION = {
+      'A' => 'Authorized by a Candidate',
+      'J' => 'Joint Fundraiser',
+      'P' => 'Principal Campaign Committee',
+      'U' => 'Unauthorized',
+      'B' => 'Lobbyist/Registrant PAC',
+      'D' => 'Leadership PAC'
+    }
+    
     attr_reader :name, :id, :state, :district, :party, :fec_uri, :candidate, 
                 :city, :address, :state, :zip, :relative_uri, :sponsor_name,
                 :total_receipts, :total_contributions, :total_from_individuals, 
@@ -39,6 +81,10 @@ module CampaignCash
 							 :date_coverage_from => params['date_coverage_from'],
 							 :date_coverage_to => params['date_coverage_to'],
 							 :candidate_id => parse_candidate(params['candidate']),
+							 :filing_frequency => get_frequency(params['filing_frequency']),
+							 :interest_group => get_interest_group(params['interest_group']),
+							 :committee_type => get_committee_type(params['get_committee_type']),
+							 :designation => get_designation(params['designation']),
 							 :other_cycles => params['other_cycles'].map{|cycle| cycle['cycle']['fec_committee']['cycle']}
 		end
 		
@@ -61,6 +107,22 @@ module CampaignCash
 		def self.parse_candidate(candidate)
 		  return nil if candidate.nil?
 		  candidate.split('/').last.split('.').first
+		end
+		
+		def self.get_frequency(frequency)
+		  FILING_FREQUENCY[frequency] unless frequency.strip.blank?
+		end
+
+		def self.get_interest_group(interest_group)
+		  INTEREST_GROUP[interest_group] unless interest_group.strip.blank?
+		end
+		
+		def self.get_committee_type(committee_type)
+		  COMMITTEE_TYPE[committee_type] unless committee_type.strip.blank?
+		end
+		
+		def self.get_designation(designation)
+		  COMMITTEE_DESIGNATION[designation] unless designation.strip.blank?
 		end
     
     def self.find(fecid, cycle=CURRENT_CYCLE)
