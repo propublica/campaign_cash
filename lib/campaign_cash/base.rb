@@ -45,12 +45,12 @@ module CampaignCash
   		  date ? Date.strptime(date, '%Y-%m-%d') : nil
   		end
   		
-  		def self.parse_candidate(candidate)
+  		def parse_candidate(candidate)
   		  return nil if candidate.nil?
   		  candidate.split('/').last.split('.').first
   		end
   		
-  		def self.parse_committee(committee)
+  		def parse_committee(committee)
   		  return nil if committee.nil?
   		  committee.split('/').last.split('.').first
   		end
