@@ -33,7 +33,8 @@ module CampaignCash
 			else
 			  reply = invoke("#{cycle}/committees/#{fecid}/contributions")
 			end
-			create(reply)
+			results = reply['results']
+			results.map{|c| create(c)}
     end
 		
   end

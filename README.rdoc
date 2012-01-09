@@ -100,9 +100,15 @@ To retrieve a list of the 20 most recently added committees (note that no cycle 
   Committee.latest
   #=> [#<CampaignCash::Committee:0x101be6020 @name="AMERICA'S IMPACT POLITICAL FUND", @state="DC", @party="", @super_pac=false, @leadership=false, @district=nil, @city="WASHINGTON", @id="C00508366", @treasurer="BENJAMIN GOLDSMITH", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00508366/", @zip="20005", @candidate_id=nil>, #<CampaignCash::Committee:0x101be55a8 @name="JASON ANDERSON FOR CONGRESS", @state="AL", @party="REP", @super_pac=false, @leadership=false, @district=nil, @city="HAZEL GREEN", @id="C00508374", @treasurer="CHRISTOPHER MARK ANDREWS", @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00508374/", @zip="35750", @candidate_id="H2AL05086">, ...]
   
+"Super PACs" are independent-expenditure only committees formed in the wake of the 2010 Citizens United decision by the U.S. Supreme Court. They can raise money in unlimited donations from individuals, corporations, labor unions and other sources, but must register their intent to do so with the F.E.C. To retrieve the 20 most recent "Super PAC" registrations:
 
+  Committee.superpacs
+  #=> [#<CampaignCash::Committee:0x101bcfe10 @name="HUMAN RIGHTS CAMPAIGN EQUALITY VOTES", @state="DC", @party="", @designation="Unauthorized", @city="WASHINGTON", @treasurer="JAMES M RINEFIERD", @district=nil, @filing_frequency="Quarterly", @id="C00508440", @leadership=false, @zip="20036", @committee_type=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00508440/", @interest_group=nil, @super_pac=true, @candidate_id=nil>, #<CampaignCash::Committee:0x101bcf348 @name="LEADERS FOR FAMILIES SUPER PAC INC", @state="IN", @party="", @designation="Unauthorized", @city="TERRE HAUTE", @treasurer="CHARLES HURLEY", @district=nil, @filing_frequency="Quarterly", @id="C00508317", @leadership=false, @zip="47807", @committee_type=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00508317/", @interest_group=nil, @super_pac=true, @candidate_id=nil>,...]
+  
+Committees make contributions to candidates, among other activities. Given a committee, cycle and recipient candidate, to see any contributions from the committee to the candidate:
 
-
+  Contribution.find('C00388793',2012,'H0NY19139')
+  
   
 == Filings
 
