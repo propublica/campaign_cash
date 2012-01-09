@@ -110,19 +110,19 @@ module CampaignCash
 		end
 		
 		def self.get_frequency(frequency)
-		  FILING_FREQUENCY[frequency] unless frequency.strip.empty?
+		  FILING_FREQUENCY[frequency.strip] unless frequency.empty?
 		end
 
 		def self.get_interest_group(interest_group)
-		  INTEREST_GROUP[interest_group] unless interest_group.strip.empty?
+		  INTEREST_GROUP[interest_group.strip] unless interest_group.empty?
 		end
 		
 		def self.get_committee_type(committee_type)
-		  COMMITTEE_TYPE[committee_type] unless committee_type.strip.empty?
+		  COMMITTEE_TYPE[committee_type.strip] unless committee_type.empty?
 		end
 		
 		def self.get_designation(designation)
-		  COMMITTEE_DESIGNATION[designation] unless designation.strip.empty?
+		  COMMITTEE_DESIGNATION[designation.strip] unless designation.empty?
 		end
     
     def self.find(fecid, cycle=CURRENT_CYCLE)
