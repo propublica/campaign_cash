@@ -100,11 +100,7 @@ module CampaignCash
 		           :treasurer => params['treasurer'],
 		           :fec_uri => params['fec_uri'],
 		           :leadership => params['leadership'],
-		           :super_pac => params['super_pac'],
-							 :filing_frequency => get_frequency(params['filing_frequency']),
-							 :interest_group => get_interest_group(params['interest_group']),
-							 :committee_type => get_committee_type(params['get_committee_type']),
-							 :designation => get_designation(params['designation'])		  
+		           :super_pac => params['super_pac']
 		end
 		
 		def self.parse_candidate(candidate)
