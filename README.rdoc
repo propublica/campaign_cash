@@ -151,10 +151,32 @@ All Filing methods, with the exception of Filing.form_types, support the optiona
 
 == Independent Expenditures
 
-Committees can spend money to elect or defeat candidates independently of their campaigns; such activities are called independent expenditures and are {specifically reported to the F.E.C.}[http://www.fec.gov/finance/disclosure/ie_reports.shtml]. The target(s) of the expenditures is included in the reports, so to retrieve recent IEs about a specific candidate, use that candidate's ID:
+Committees can spend money to elect or defeat candidates independently of their campaigns; such activities are called independent expenditures and are {specifically reported to the F.E.C.}[http://www.fec.gov/finance/disclosure/ie_reports.shtml]. To retrieve the 20 most recent IE transactions:
+
+  IndependentExpenditure.latest
+  #=> [#<CampaignCash::IndependentExpenditure:0x101bd3920 @date_received=#<Date: 4911871/2,0,2299161>, @amount=200.0, @purpose="Online Advertising - 01/08/2012", @committee="C00503789", @district=0, @date=#<Date: 4911869/2,0,2299161>, @candidate="P20002721", @support_or_oppose="O", @committee_name="DGA ACTION", @office="President", @payee="Facebook", @state="", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?12950041238">,...]
+
+The support_or_oppose attribute contains either an "S" (for "Support") or "O" (for "Oppose"), indicating whether the expenditure is in favor or against the candidate identified. IEs should contain both the candidate mentioned in the expenditure and the office (state and district) that person is running for, but in practice some filings either omit this information or contain an incorrect candidate ID (usually a previous one for the correct candidate). The API does not guarantee that such mistakes will be corrected when you retrieve records. To retrieve recent IEs about a specific candidate, use that candidate's ID:
 
   IndependentExpenditure.candidate("P60003654", 2012) # find independent expenditures about Newt Gingrich.
+  #=> [#<CampaignCash::IndependentExpenditure:0x101bd8470 @date_received=#<Date: 4911865/2,0,2299161>, @amount=89961.8, @purpose="Direct Mail", @committee="C00490045", @district=0, @committee_name="RESTORE OUR FUTURE, INC.", @date=#<Date: 4911861/2,0,2299161>, @candidate="P60003654", @support_or_oppose="O", @office="President", @payee="Arena Communications", @state="FL", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?12950036002">, #<CampaignCash::IndependentExpenditure:0x101bd1c38 @date_received=#<Date: 4911861/2,0,2299161>, @amount=108982.0, @purpose="National Email Communication and Production", @committee="C00507525", @district=0, @committee_name="WINNING OUR FUTURE", @date=#<Date: 4911859/2,0,2299161>, @candidate="P60003654", @support_or_oppose="S", @office="President", @payee="Marketel Media, Inc.", @state="", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?12970039675">,...]
   
+To retrieve IEs by date, use a string date in MM/DD/YYYY format:
+
+  IndependentExpenditure.date('12/28/2011')
+  #=> #<CampaignCash::IndependentExpenditure:0x101a41968 @date_received=#<Date: 4911849/2,0,2299161>, @amount=19210.0, @purpose="TV Ad", @committee="C00508317", @district=0, @date=#<Date: 4911847/2,0,2299161>, @candidate="P20002721", @support_or_oppose="S", @committee_name="Leaders for Families Super PAC, Inc.", @office="President", @payee="NCC Media", @state="", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?11953345841">, #<CampaignCash::IndependentExpenditure:0x101a3b130 @date_received=#<Date: 4911849/2,0,2299161>, @amount=10450.0, @purpose="TV Ad", @committee="C00508317", @district=0, @date=#<Date: 4911847/2,0,2299161>, @candidate="P20002721", @support_or_oppose="S", @committee_name="Leaders for Families Super PAC, Inc.", @office="President", @payee="WHO", @state="", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?11953345842">,...]
+  
+Another way to fetch IEs is by the committee that paid for them, using the committee ID:
+
+  IndependentExpenditure.committee('C00508317', 2012)
+  #=> [#<CampaignCash::IndependentExpenditure:0x1019c5638 @date_received=#<Date: 4911865/2,0,2299161>, @amount=4235.0, @purpose="Radio Ad Buy", @committee="C00508317", @district=0, @date=#<Date: 4911865/2,0,2299161>, @candidate="P20002721", @support_or_oppose="S", @committee_name="Leaders for Families Super PAC, Inc.", @office="President", @payee="WGIR-FM & WQSO-FM", @state="NH", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?12950035907">,...]
+  
+There's also the option to retrieve the 20 most recent IEs for the presidential race:
+
+  IndependentExpenditure.president
+  #=> [#<CampaignCash::IndependentExpenditure:0x10192a728 @date_received=#<Date: 4911855/2,0,2299161>, @amount=350.0, @purpose="Font Purchase", @committee="C00508002", @district=0, @date=#<Date: 4911915/2,0,2299161>, @candidate="", @support_or_oppose="S", @committee_name="ENDORSE LIBERTY INC", @office="President", @payee="Commercial Type", @state="", @fec_uri="http://images.nictusa.com/cgi-bin/fecimg/?12970010100">,...]
+  
+The IE responses also accept an optional offset argument, using multiples of 20.
 
 == Note on Patches/Pull Requests
 
