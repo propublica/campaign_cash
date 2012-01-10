@@ -18,6 +18,9 @@ module CampaignCash
 							 :fec_uri => params['fec_uri'],
 							 :amended => params['amended'],
 							 :amended_uri => params['amended_uri'],
+							 :original_filing => params['original_filing'],
+							 :original_uri => params['original_uri'],
+							 :paper => params['paper'],
 							 :form_type => params['form_type']
 		end
 		
@@ -38,21 +41,21 @@ module CampaignCash
 		  cycle=CURRENT_CYCLE
 		  reply = Base.invoke("#{cycle}/filings", {})
 		  results = reply['results']
-			@filings = results.map{|c| Filing.create(c)}
+			results.map{|c| Filing.create(c)}
 		end
 		
 		def self.date(year, month, day)
 		  cycle = cycle_from_date(Date.strptime("#{month}/#{day}/#{year}", '%m/%d/%Y'))
 		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {})
 		  results = reply['results']
-			@filings = results.map{|c| Filing.create(c)}
+			results.map{|c| Filing.create(c)}
 		end
 		
 		def self.by_type(cycle, form_type)
 		  cycle = cycle
 		  reply = Base.invoke("#{cycle}/filings/types/#{form_type}")
 		  results = reply['results']
-			@filings = results.map{|c| Filing.create(c)}
+			results.map{|c| Filing.create(c)}
 		end
 	end
 end
