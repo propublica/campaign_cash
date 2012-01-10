@@ -95,6 +95,14 @@ To fetch the details for a single committee in a cycle:
   Committee.find("C00326389", 2012)
   #=> #<CampaignCash::Committee:0x101bd4118 @name="SNAKE RIVER SUGAR COMPANY POLITICAL ACTION COMMITTEE", @state="ID", @party="", @candidate_loans=nil, @total_receipts=30363.3, @date_coverage_from="2011-01-01", @designation="Unauthorized", @other_cycles=[2010, 2008, 2006, 2004, 2002, 2000, 1998], @city="BOISE", @debts_owed=nil, @total_from_pacs=nil, @date_coverage_to="2011-11-30", @filing_frequency="Monthly", @sponsor_name=nil, @total_refunds=nil, @total_from_individuals=30363.3, @id="C00326389", @leadership=false, @zip="83709", @end_cash=16845.2, @committee_type=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00326389/", @total_disbursements=46500.0, @total_contributions=30363.3, @interest_group="Cooperative", @super_pac=false, @address="1951 SOUTH SATURN WAY", @begin_cash=32981.9, @candidate_id=nil>
   
+Individual Committee objects can retrieve an array of filings they have made during a given cycle:
+
+  committee = Committee.find("C00326389", 2012)
+  committee.filings
+  #=> [#<CampaignCash::Filing:0x101bc9100 @amended_uri=nil, @paper=false, @amended=false, @committee_name=nil, @date_coverage_from=#<Date: 4911793/2,0,2299161>, @original_uri=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee=nil, @original_filing=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00326389/756540/">,...]
+  
+For more information on Filing objects, see Filings below.
+  
 To retrieve a list of the 20 most recently added committees (note that no cycle parameter is needed; this method always uses the most recent cycle):
 
   Committee.latest
@@ -108,11 +116,28 @@ To retrieve a list of the 20 most recently added committees (note that no cycle 
 Committees make contributions to candidates, among other activities. Given a committee, cycle and recipient candidate, to see any contributions from the committee to the candidate:
 
   Contribution.find('C00388793',2012,'H0NY19139')
+  #=> #<CampaignCash::Contribution:0x101b6af60 @results=[#<OpenStruct party="REP", date=#<Date: 4911301/2,0,2299161>, primary_general="General", state="NY", amount=5000.0, image_uri="http://images.nictusa.com/cgi-bin/fecimg/?11932087309", name="HAYWORTH, NAN", district="19", candidate="H0NY19139">, #<OpenStruct party="REP", date=#<Date: 4911289/2,0,2299161>, primary_general="Primary", state="NY", amount=5000.0, image_uri="http://images.nictusa.com/cgi-bin/fecimg/?11932087308", name="HAYWORTH, NAN", district="19", candidate="H0NY19139">], @cycle=2012, @total_amount=10000.0, @committee="C00388793">
   
+Removing the candidate's id from the previous method will yield an array of all contributions to candidates made by the committee during that cycle:
+
+  Contribution.find('C00388793',2012)
+  #=> #<CampaignCash::Contribution:0x101b8c098 @results=[#<OpenStruct party="REP", date=#<Date: 4911479/2,0,2299161>, primary_general="Primary", state="IL", amount=2000.0, image_uri="http://images.nictusa.com/cgi-bin/fecimg/?11932087311", name="KINZINGER, ADAM", district="11", candidate=nil>, #<OpenStruct party="REP", date=#<Date: 4911471/2,0,2299161>, primary_general="Primary", state="MI", amount=2500.0, image_uri="http://images.nictusa.com/cgi-bin/fecimg/?11932087316", name="WALBERG, TIMOTHY L. HON.", district="07", candidate=nil>,...]
+
+Both of the contribution responses have a results method that contains one or more contributions, assembled using Ruby's OpenStruct library. The image_uri attribute is a link to the page of the filing on fec.gov that contains that transaction.
   
 == Filings
 
-  Filing.today  # find all the electronic filings made today.
+Committees file reports with the F.E.C. detailing their fundraising and expenditures, as well as administrative matters such as a change of address or in committee status. Campaign Cash provides access to both electronic filings, the method used by most committees, and images of paper filings, which are submitted by Senate candidates and two Senate party committees. To retrieve the most recent 20 filings from today:
+
+  Filing.today
+  #=> [#<CampaignCash::Filing:0x101be03a0 @original_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00016899/741687/", @amended_uri=nil, @amended=false, @committee_name="OHIO DEMOCRATIC PARTY", @date_coverage_from=#<Date: 4911487/2,0,2299161>, @original_filing=741687, @report_title="AUG MONTHLY", @date_coverage_to=#<Date: 4911547/2,0,2299161>, @form_type="F3", @committee="C00016899", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00016899/756832/">, #<CampaignCash::Filing:0x101bd9eb0 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="CITIZENS FOR PAUL FEINER", @date_coverage_from=#<Date: 4911671/2,0,2299161>, @original_filing=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee="C00332411", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00332411/756831/">,...]
+  
+Each filing object contains several attributes that help place it into context. If the filing is amended by another filing, amended will be True and an amended_uri, the link to the updated filing, will appear. If a filing was submitted on paper, paper will be True. To retrieve filings from a specific date:
+
+  Filing.date(2012,1,9) # Jan. 9, 2012
+  #=> [#<CampaignCash::Filing:0x101aa5e68 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="HOYT HILSMAN FOR CONGRESS", @date_coverage_from=#<Date: 4911671/2,0,2299161>, @original_filing=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee="C00435966", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00435966/756828/">, #<CampaignCash::Filing:0x101a9f978 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="MARY PALLANT FOR CONGRESS", @date_coverage_from=#<Date: 4911671/2,0,2299161>, @original_filing=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee="C00415943", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00415943/756827/">,...]
+
+Both Filing methods support the optional offset parameter, in multiples of 20.
 
 == Independent Expenditures
 
