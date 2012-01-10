@@ -48,7 +48,7 @@ module CampaignCash
                 :total_receipts, :total_contributions, :total_from_individuals, 
                 :total_from_pacs, :candidate_loans, :total_disbursements,
                 :total_refunds, :debts_owed, :begin_cash, :end_cash,
-                :date_coverage_to, :date_coverage_from, :other_cycles, :super_pac
+                :date_coverage_to, :date_coverage_from, :other_cycles, :super_pac, :filings
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -152,7 +152,7 @@ module CampaignCash
     end
     
     def filings(cycle=CURRENT_CYCLE, offset=0)
-      reply = invoke("#{cycle}/committees/filings",{:offset => offset})
+      reply = Base.invoke("#{cycle}/committees/#{id}filings",{:offset => offset})
       results = reply['results']
       results.map{|c| Filing.create(c)}
     end
