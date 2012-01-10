@@ -190,9 +190,9 @@ The IE responses also accept an optional offset argument, using multiples of 20.
 
 == Authors
 
-Derek Willis, dwillis@nytimes.com
-Jason Holt, jjh@offensivepolitics.net
+* Derek Willis, dwillis@nytimes.com
+* Jason Holt, jjh@offensivepolitics.net
 
 == Copyright
 
-Copyright (c) 2011 The New York Times Company. See LICENSE for details.
+Copyright (c) 2012 The New York Times Company. See LICENSE for details.
