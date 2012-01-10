@@ -14,7 +14,7 @@ module CampaignCash
                :cycle => params['cycle'],
                :total_amount => params['total_amount'],
                :results => params['results'].map{|c| OpenStruct.new({
-               :candidate => parse_candidate(params['candidate']),
+               :candidate => parse_candidate(params['candidate_uri']),
                :date => date_parser(c['date']),
                :primary_general => c['primary_general'],
                :amount => c['amount'],
@@ -30,9 +30,10 @@ module CampaignCash
       self.new :committee => parse_committee(params['committee']),
                :cycle => params['cycle'],
                :total_amount => params['total_amount'],
+               :total_results => params['total_results'],
                :results => params['results'].map{|c| OpenStruct.new({
                :date => date_parser(c['date']),
-               :candidate => parse_candidate(c['candidate']),
+               :candidate => parse_candidate(c['candidate_uri']),
                :primary_general => c['primary_general'],
                :amount => c['amount'],
                :state => c['state'],
