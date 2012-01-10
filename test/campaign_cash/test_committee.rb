@@ -53,7 +53,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  setup do
 	    reply = Base.invoke('2010/committees/C00312223/filings', {})
 	    results = reply['results']
-	    @filings = results.map{|f| Filing.create_from_filings(f)}
+	    @filings = results.map{|f| Filing.create(f)}
 	  end
 	  
 	  should "return 11 filings" do
@@ -81,7 +81,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  end
 	  
 	  should "return a $5,000 contribution to Renee Ellmers" do
-	    assert_equal @contribution.results.detect{|c| c.candidate_uri == "/candidates/H0NC02059.json"}.amount, 5000
+	    assert_equal @contribution.results.detect{|c| c.candidate == "H0NC02059"}.amount, 5000
 	  end
 	  
 	end
@@ -89,7 +89,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	context "committee contributions to a candidate" do
 	  setup do
 	    reply = Base.invoke('2010/committees/C00458588/contributions/candidates/H0NC02059', {})
-	    @contribution = Contribution.create(reply)
+	    @contribution = Contribution.to_candidate(reply)
 	  end
 	  
 	  should "return 2 results totaling $10,000" do

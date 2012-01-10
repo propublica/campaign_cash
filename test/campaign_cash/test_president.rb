@@ -33,7 +33,7 @@ class TestCampaignCash::TestPresident < Test::Unit::TestCase
 			assert_kind_of(President, @detail)
 		end
 		
-		%w(name net_primary_contributions party total_refunds).each do |attr|
+		%w(net_primary_contributions party total_refunds).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@results.first[attr], @detail.send(attr))
 			end
