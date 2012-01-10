@@ -10,9 +10,9 @@ module CampaignCash
     end
     
     def self.create(params={})
-      self.new :fec_committee_id => params['fec_committee'].split('/').last.split('.').first,
+      self.new :committee => parse_committee(params['fec_committee']),
                :fec_committee_name => params['fec_committee_name'],
-               :fec_candidate_id => params['fec_candidate'].split('/').last.split('.').first,
+               :candidate => parse_candidate(params['fec_candidate']),
                :office => params['office'],
                :state => params['state'].strip,
                :district => params['district'],

@@ -137,12 +137,24 @@ Each filing object contains several attributes that help place it into context. 
   Filing.date(2012,1,9) # Jan. 9, 2012
   #=> [#<CampaignCash::Filing:0x101aa5e68 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="HOYT HILSMAN FOR CONGRESS", @date_coverage_from=#<Date: 4911671/2,0,2299161>, @original_filing=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee="C00435966", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00435966/756828/">, #<CampaignCash::Filing:0x101a9f978 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="MARY PALLANT FOR CONGRESS", @date_coverage_from=#<Date: 4911671/2,0,2299161>, @original_filing=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee="C00415943", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00415943/756827/">,...]
 
-Both Filing methods support the optional offset parameter, in multiples of 20.
+To retrieve a list of Filing form types, which explain a little more about the form_type attributes on Filing objects:
+
+  Filing.form_types
+  #=> [#<OpenStruct name="STATEMENT OF ORGANIZATION", id="F1">, #<OpenStruct name="24-HOUR NOTICE OF EXPENDITURES FROM CANDIDATE PERSONAL FUNDS", id="F10">, #<OpenStruct name="24-HOUR NOTICE OF EXPENDITURES FROM OPPONENT'S PERSONAL FUNDS", id="F11">, #<OpenStruct name="24-HOUR NOTICE OF SUSPENSION OF INDIVIDUAL CONTRIBUTION LIMITS", id="F12">,...]
+  
+The form type IDs can be used to retrieve the most recent filings of that type:
+
+  Filing.by_type(2012,'F1') # Latest Statements of Organization
+  #=> [#<CampaignCash::Filing:0x101c5fee8 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="DUNCAN D. HUNTER FOR CONGRESS", @date_coverage_from=nil, @original_filing=nil, @report_title="STATEMENT OF ORGANIZATION", @date_coverage_to=nil, @form_type=nil, @committee="C00433524", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00433524/756824/">, #<CampaignCash::Filing:0x101c5f448 @original_uri=nil, @amended_uri=nil, @amended=false, @committee_name="THE BILL KEATING COMMITTEE", @date_coverage_from=nil, @original_filing=nil, @report_title="STATEMENT OF ORGANIZATION", @date_coverage_to=nil, @form_type=nil, @committee="C00479063", @paper=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00479063/756813/">,...]
+
+All Filing methods, with the exception of Filing.form_types, support the optional offset parameter, using multiples of 20.
 
 == Independent Expenditures
 
-  Contribution.find("C00458588",2010,"H0NC02059") # find all contributions by the committee to the candidate in the 2010 cycle.
-  IndependentExpenditure.candidate("P60003654", 2012) # find independent expenditures about Newt Gingrich in the 2012 cycle.
+Committees can spend money to elect or defeat candidates independently of their campaigns; such activities are called independent expenditures and are {specifically reported to the F.E.C.}[http://www.fec.gov/finance/disclosure/ie_reports.shtml]. The target(s) of the expenditures is included in the reports, so to retrieve recent IEs about a specific candidate, use that candidate's ID:
+
+  IndependentExpenditure.candidate("P60003654", 2012) # find independent expenditures about Newt Gingrich.
+  
 
 == Note on Patches/Pull Requests
 

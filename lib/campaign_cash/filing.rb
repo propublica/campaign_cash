@@ -51,6 +51,13 @@ module CampaignCash
 			results.map{|c| Filing.create(c)}
 		end
 		
+		def self.form_types
+		  cycle=CURRENT_CYCLE
+		  reply = Base.invoke("#{cycle}/filings/types",{})
+		  results = reply['results']
+		  results.map{|ft| OpenStruct.new({:id => ft['id'], :name => ft['name'].strip})}
+		end
+		
 		def self.by_type(cycle, form_type)
 		  cycle = cycle
 		  reply = Base.invoke("#{cycle}/filings/types/#{form_type}")
