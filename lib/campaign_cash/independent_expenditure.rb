@@ -11,7 +11,7 @@ module CampaignCash
     
     def self.create(params={})
       self.new :committee => parse_committee(params['fec_committee']),
-               :fec_committee_name => params['fec_committee_name'],
+               :committee_name => params['fec_committee_name'],
                :candidate => parse_candidate(params['fec_candidate']),
                :office => params['office'],
                :state => params['state'].strip,
@@ -25,10 +25,10 @@ module CampaignCash
                :date_received => date_parser(params['date_received'])
     end
     
-    def self.latest
-      reply = Base.invoke("#{Base::CURRENT_CYCLE}/independent_expenditures")
+    def self.latest(offset=0)
+      reply = Base.invoke("#{Base::CURRENT_CYCLE}/independent_expenditures",{:offset => offset})
       results = reply['results']
-      @independent_expenditures = results.map{|c| IndependentExpenditure.create(c)}
+      results.map{|c| IndependentExpenditure.create(c)}
     end
     
     def self.date(date,offset=0)
@@ -36,37 +36,37 @@ module CampaignCash
       cycle = cycle_from_date(d)
       reply = Base.invoke("#{cycle}/independent_expenditures/#{d.year}/#{d.month}/#{d.day}",{:offset => offset})
       results = reply['results']
-      @independent_expenditures = results.map{|c| IndependentExpenditure.create(c)}      
+      results.map{|c| IndependentExpenditure.create(c)}      
     end
     
     def self.committee(id, cycle, offset=0)
-      @independent_expenditures = []
+      independent_expenditures = []
       reply = Base.invoke("#{cycle}/committees/#{id}/independent_expenditures",{:offset => offset})
       results = reply['results']
       comm = reply['fec_committee']
       results.each do |result|
         result['fec_committee'] = comm
-        @independent_expenditures << IndependentExpenditure.create(result)
+        independent_expenditures << IndependentExpenditure.create(result)
       end
-      @independent_expenditures
+      independent_expenditures
     end
     
     def self.candidate(id, cycle, offset=0)
-      @independent_expenditures = []
+      independent_expenditures = []
       reply = Base.invoke("#{cycle}/candidates/#{id}/independent_expenditures",{:offset => offset})
       results = reply['results']
       cand = reply['fec_candidate']
       results.each do |result|
         result['fec_candidate'] = cand
-        @independent_expenditures << IndependentExpenditure.create(result)
+        independent_expenditures << IndependentExpenditure.create(result)
       end
-      @independent_expenditures
+      independent_expenditures
     end
     
     def self.president(cycle=Base::CURRENT_CYCLE,offset=0)
       reply = Base.invoke("#{cycle}/president/independent_expenditures",{:offset => offset})
       results = reply['results']
-      @independent_expenditures = results.map{|c| IndependentExpenditure.create(c)}
+      results.map{|c| IndependentExpenditure.create(c)}
     end
     
   end
