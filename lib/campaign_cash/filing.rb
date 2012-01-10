@@ -13,7 +13,7 @@ module CampaignCash
 			self.new :committee_name => params['committee_name'],
 							 :date_coverage_from => date_parser(params['date_coverage_from']),
 							 :date_coverage_to => date_parser(params['date_coverage_to']),
-							 :committee => params['committee'],
+							 :committee => parse_committee(params['committee']),
 							 :report_title => params['report_title'].strip,
 							 :fec_uri => params['fec_uri'],
 							 :amended => params['amended'],
@@ -37,16 +37,16 @@ module CampaignCash
 		end
 		
 		
-		def self.today
+		def self.today(offset=0)
 		  cycle=CURRENT_CYCLE
-		  reply = Base.invoke("#{cycle}/filings", {})
+		  reply = Base.invoke("#{cycle}/filings", {:offset => offset})
 		  results = reply['results']
 			results.map{|c| Filing.create(c)}
 		end
 		
-		def self.date(year, month, day)
+		def self.date(year, month, day, offset=0)
 		  cycle = cycle_from_date(Date.strptime("#{month}/#{day}/#{year}", '%m/%d/%Y'))
-		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {})
+		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {:offset => offset})
 		  results = reply['results']
 			results.map{|c| Filing.create(c)}
 		end
