@@ -152,7 +152,7 @@ module CampaignCash
     end
     
     def filings(cycle=CURRENT_CYCLE, offset=0)
-      reply = Base.invoke("#{cycle}/committees/#{id}filings",{:offset => offset})
+      reply = Base.invoke("#{cycle}/committees/#{id}/filings",{:offset => offset})
       results = reply['results']
       results.map{|c| Filing.create(c)}
     end
