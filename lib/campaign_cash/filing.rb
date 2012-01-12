@@ -1,7 +1,7 @@
 module CampaignCash
   class Filing < Base
     
-    attr_reader :committee_name, :date_coverage_from, :amended_uri, :fec_uri, :date_coverage_to, :committee, :report_title, :amended, :date_filed, :cycle, :form_type
+    attr_reader :committee_name, :date_coverage_from, :amended_uri, :fec_uri, :date_coverage_to, :committee, :report_title, :amended, :date_filed, :cycle, :form_type, :original_filing, :original_uri, :paper
     
     def initialize(params={})
       params.each_pair do |k,v|
