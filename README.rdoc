@@ -10,6 +10,10 @@
 
 Simple ruby wrapper for The New York Times Campaign Finance API[http://developer.nytimes.com/docs/read/campaign_finance_api]. You'll need an API key.
 
+== News
+
+* Jan. 11, 2012: Version 2.0.1 released. Bugfix for some attributes on Filing class.
+
 == INSTALL:
 
 Install Campaign Cash as a gem:
