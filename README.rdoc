@@ -12,6 +12,7 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == News
 
+* Jan. 13, 2012: Version 2.0.2 released. Bugfix to set offset=nil as default.
 * Jan. 11, 2012: Version 2.0.1 released. Bugfix for some attributes on Filing class.
 
 == INSTALL:
