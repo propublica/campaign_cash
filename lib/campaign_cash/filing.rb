@@ -37,14 +37,14 @@ module CampaignCash
 		end
 		
 		
-		def self.today(offset=0)
+		def self.today(offset=nil)
 		  cycle=CURRENT_CYCLE
 		  reply = Base.invoke("#{cycle}/filings", {:offset => offset})
 		  results = reply['results']
 			results.map{|c| Filing.create(c)}
 		end
 		
-		def self.date(year, month, day, offset=0)
+		def self.date(year, month, day, offset=nil)
 		  cycle = cycle_from_date(Date.strptime("#{month}/#{day}/#{year}", '%m/%d/%Y'))
 		  reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {:offset => offset})
 		  results = reply['results']

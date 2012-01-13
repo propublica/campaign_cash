@@ -25,13 +25,13 @@ module CampaignCash
                :date_received => date_parser(params['date_received'])
     end
     
-    def self.latest(offset=0)
+    def self.latest(offset=nil)
       reply = Base.invoke("#{Base::CURRENT_CYCLE}/independent_expenditures",{:offset => offset})
       results = reply['results']
       results.map{|c| IndependentExpenditure.create(c)}
     end
     
-    def self.date(date,offset=0)
+    def self.date(date,offset=nil)
       d = Date.strptime(date, '%m/%d/%Y')
       cycle = cycle_from_date(d)
       reply = Base.invoke("#{cycle}/independent_expenditures/#{d.year}/#{d.month}/#{d.day}",{:offset => offset})
@@ -39,7 +39,7 @@ module CampaignCash
       results.map{|c| IndependentExpenditure.create(c)}      
     end
     
-    def self.committee(id, cycle, offset=0)
+    def self.committee(id, cycle, offset=nil)
       independent_expenditures = []
       reply = Base.invoke("#{cycle}/committees/#{id}/independent_expenditures",{:offset => offset})
       results = reply['results']
@@ -51,7 +51,7 @@ module CampaignCash
       independent_expenditures
     end
     
-    def self.candidate(id, cycle, offset=0)
+    def self.candidate(id, cycle, offset=nil)
       independent_expenditures = []
       reply = Base.invoke("#{cycle}/candidates/#{id}/independent_expenditures",{:offset => offset})
       results = reply['results']
@@ -63,7 +63,7 @@ module CampaignCash
       independent_expenditures
     end
     
-    def self.president(cycle=CURRENT_CYCLE,offset=0)
+    def self.president(cycle=CURRENT_CYCLE,offset=nil)
       reply = Base.invoke("#{cycle}/president/independent_expenditures",{:offset => offset})
       results = reply['results']
       results.map{|c| IndependentExpenditure.create(c)}
