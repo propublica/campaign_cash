@@ -65,8 +65,8 @@ module CampaignCash
     # Only returns candidates tracked by The New York Times.
     def self.detail(id, cycle=CURRENT_CYCLE)
       reply = invoke("#{cycle}/president/candidates/#{id}", {})
-      results = reply['results']
-      results.map{|c| self.create_detail(c)}
+      results = reply['results'].first
+      create_detail(results)
     end
   end
 end
