@@ -34,7 +34,7 @@ module CampaignCash
     def self.date(date,offset=nil)
       d = Date.strptime(date, '%m/%d/%Y')
       cycle = cycle_from_date(d)
-      reply = Base.invoke("#{cycle}/independent_expenditures/#{d.year}/#{d.month}/#{d.day}",{:offset => offset})
+      reply = Base.invoke("#{cycle}/independent_expenditures/#{d.year}/#{d.month}/#{d.day}", {:offset => offset})
       results = reply['results']
       results.map{|c| IndependentExpenditure.create(c)}      
     end

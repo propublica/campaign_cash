@@ -75,6 +75,7 @@ module CampaignCash
   				end
 
   				full_params = params.merge 'api-key' => @@api_key
+  				full_params.delete_if {|k,v| k.nil?}
 
   				uri = build_request_url(path, full_params)
 
