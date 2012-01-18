@@ -59,6 +59,10 @@ module CampaignCash
   		def cycle_from_date(date=Date.today)
   		  date.year.even? ? date.year : date.year+1
   		end
+  		
+  		def check_offset(offset)
+  		  raise "Offset must be a multiple of 20" if offset % 20 != 0
+  		end
 
   		##
   		# Builds a request URI to call the API server
@@ -76,6 +80,8 @@ module CampaignCash
 
   				full_params = params.merge 'api-key' => @@api_key
   				full_params.delete_if {|k,v| v.nil?}
+  				
+  				check_offset(params[:offset]) if params[:offset]
 
   				uri = build_request_url(path, full_params)
 
