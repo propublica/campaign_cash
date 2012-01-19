@@ -1,7 +1,7 @@
 module CampaignCash
   class IndependentExpenditure < Base
     
-    attr_reader :committee, :district, :state, :committee_name, :purpose, :candidate, :support_or_oppose, :date, :amount, :office, :amendment, :date_received, :payee, :fec_uri
+    attr_reader :committee, :district, :state, :committee_name, :purpose, :candidate, :support_or_oppose, :date, :amount, :office, :amendment, :date_received, :payee, :fec_uri, :transaction_id
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -23,7 +23,8 @@ module CampaignCash
                :amount => params['amount'],
                :fec_uri => params['fec_uri'],
                :date_received => date_parser(params['date_received']),
-               :amendment => params['amendment']
+               :amendment => params['amendment'],
+               :transaction_id => params['transaction_id']
     end
     
     def self.latest(offset=nil)
