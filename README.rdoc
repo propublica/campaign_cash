@@ -12,6 +12,7 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == News
 
+* Jan. 19, 2012: Version 2.0.5 released. Bugfix to add amendment param to IndependentExpenditure objects.
 * Jan. 18, 2012: Version 2.0.4 released. Bugfix to handle offsets better.
 * Jan. 14, 2012: Version 2.0.3 released. Bugfix so that President.detail returns 1 object, not an array.
 * Jan. 13, 2012: Version 2.0.2 released. Bugfix to set offset=nil as default.
@@ -199,6 +200,7 @@ The IE responses also accept an optional offset argument, using multiples of 20.
 
 * Derek Willis, dwillis@nytimes.com
 * Jason Holt, jjh@offensivepolitics.net
+* Al Shaw, almshaw@gmail.com
 
 == Copyright
 
