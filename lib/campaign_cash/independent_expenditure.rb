@@ -22,7 +22,8 @@ module CampaignCash
                :purpose => params['purpose'],
                :amount => params['amount'],
                :fec_uri => params['fec_uri'],
-               :date_received => date_parser(params['date_received'])
+               :date_received => date_parser(params['date_received']),
+               :amendment => params['amendment']
     end
     
     def self.latest(offset=nil)
