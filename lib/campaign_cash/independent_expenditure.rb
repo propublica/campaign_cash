@@ -25,6 +25,7 @@ module CampaignCash
                :date_received => date_parser(params['date_received']),
                :amendment => params['amendment'],
                :transaction_id => params['transaction_id']
+               :candidate_name => params['candidate_name']
     end
     
     def self.latest(offset=nil)
