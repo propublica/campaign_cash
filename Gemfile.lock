@@ -1,13 +1,14 @@
 PATH
   remote: .
   specs:
-    campaign_cash (1.7)
+    campaign_cash (2.0.7)
       json
 
 GEM
   remote: http://rubygems.org/
   specs:
-    json (1.6.3)
+    json (1.6.5)
+    rake (0.8.7)
     shoulda (2.11.3)
 
 PLATFORMS
@@ -16,4 +17,5 @@ PLATFORMS
 DEPENDENCIES
   bundler (>= 1.0.0)
   campaign_cash!
+  rake (= 0.8.7)
   shoulda
