@@ -151,8 +151,8 @@ module CampaignCash
       results.map{|c| create_from_search_results(c)}
     end
     
-    def filings(cycle=CURRENT_CYCLE, offset=nil)
-      reply = Base.invoke("#{cycle}/committees/#{id}/filings",{:offset => offset})
+    def self.filings(id, cycle=CURRENT_CYCLE, offset=nil)
+      reply = invoke("#{cycle}/committees/#{id}/filings",{:offset => offset})
       results = reply['results']
       results.map{|c| Filing.create(c)}
     end
