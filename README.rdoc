@@ -40,6 +40,8 @@ You'll want to set your API key as an environment variable in order to run the t
   include CampaignCash
   Base.api_key = YOUR_API_KEY
   
+In a Rails app, you can put those lines in a file in config/initializers/.
+  
 Currently there are methods to support retrieving candidates, presidential candidates, committees, electronic filings, committee contributions and independent expenditures. Almost every method requires at least one parameter, the election cycle.
 
 == Candidates
