@@ -14,11 +14,16 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 			assert_kind_of(Committee, @committee)
 		end
 		
-		%w(name id state party fec_uri candidate).each do |attr|
+		%w(name id state fec_uri candidate).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@result[attr], @committee.send(attr))
 			end
 		end
+		
+		should "assign the party to the first letter of the attribute from the 'party' key in the hash" do
+      assert_equal(@result['party'][0], @committee.party)
+    end
+    
 	end
 	
 	context "Committee search" do

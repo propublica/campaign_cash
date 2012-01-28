@@ -24,7 +24,7 @@ module CampaignCash
 							 :state => parse_state(params['state']),
 							 :office => parse_office(params['id']),
 							 :district => parse_district(params['district']),
-							 :party => params['party'],
+							 :party => params['party'][0],
 							 :fec_uri => params['fec_uri'],
 							 :committee_id => parse_committee(params['committee']),
 							 :mailing_city => params['mailing_city'],
@@ -52,7 +52,7 @@ module CampaignCash
 		           :state => params['candidate']['id'][2..3],
 		           :office => parse_office(params['candidate']['id'][0..0]),
 		           :district => parse_district(params['district']),
-		           :party => params['candidate']['party'],
+		           :party => params['candidate']['party'][0],
 		           :committee_id => parse_committee(params['committee'])
 		  
 		end

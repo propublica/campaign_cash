@@ -17,7 +17,7 @@ module CampaignCash
 		def self.create_summary(params={})
 			self.new :name => params['name'],
 							 :id => params['candidate_id'],
-							 :party => params['party'],
+							 :party => params['party'][0],
 							 :office => 'president',
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],
@@ -31,7 +31,7 @@ module CampaignCash
 		def self.create_detail(params={})
 			self.new :name => params['candidate_name'],
 							 :id => params['candidate_id'],
-							 :party => params['party'],
+							 :party => params['party'][0],
 							 :office => 'president',
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],

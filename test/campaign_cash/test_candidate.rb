@@ -14,13 +14,17 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 			assert_kind_of(Candidate, @candidate)
 		end
 		
-		%w(name id party fec_uri).each do |attr|
+		%w(name id fec_uri).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@result[attr], @candidate.send(attr))
 			end
 		end
 		
-		should "assign the committee_id to a stripped version of the attribute from the 'committee' key in the hash" do
+    should "assign the party to the first letter of the attribute from the 'party' key in the hash" do
+      assert_equal(@result['party'][0], @candidate.party)
+    end
+    
+    should "assign the committee_id to a stripped version of the attribute from the 'committee' key in the hash" do
       assert_equal(Base.parse_committee(@result['committee']), @candidate.committee_id)
     end
     
