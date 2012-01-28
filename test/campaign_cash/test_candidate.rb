@@ -19,13 +19,18 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 				assert_equal(@result[attr], @candidate.send(attr))
 			end
 		end
+		
+		should "assign the committee_id to a stripped version of the attribute from the 'committee' key in the hash" do
+      assert_equal(Base.parse_committee(@result['committee']), @candidate.committee_id)
+    end
+    
   end
 	
 	context "Candidate search" do
 	  setup do
 		  reply = Base.invoke('2010/candidates/search', {:query => "Udall"})
-			results = reply['results']
-	    @candidates = results.map{|c| Candidate.create_from_search_results(c)}
+			@results = reply['results']
+	    @candidates = @results.map{|c| Candidate.create_from_search_results(c)}
 	  end
 	  
 	  should "return two candidate objects" do
@@ -33,6 +38,11 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	    assert_kind_of(Candidate, @candidates.first)
 	    assert_kind_of(Candidate, @candidates.last)
 	  end
+	  
+	  should "assign the committee_id to a stripped version of the attribute from the 'committee' key in the hash" do
+      assert_equal(Base.parse_committee(@results.first['committee']), @candidates.first.committee_id)
+    end    
+		
 	end
 	
 	context "New Candidates" do
