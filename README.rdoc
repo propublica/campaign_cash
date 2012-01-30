@@ -12,6 +12,7 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == News
 
+* Jan. 28, 2012: Version 2.0.8 released. Bugfix for Candidate#search. Thanks to @benjaminjackson for patch.
 * Jan. 24, 2012: Version 2.0.7 released. Added candidate_name attribute accessor to IndependentExpenditure objects.
 * Jan. 19, 2012: Version 2.0.6 released. Added transaction_id param to IndependentExpenditure objects.
 * Jan. 19, 2012: Version 2.0.5 released. Bugfix to add amendment param to IndependentExpenditure objects.
@@ -39,6 +40,8 @@ You'll want to set your API key as an environment variable in order to run the t
 
   include CampaignCash
   Base.api_key = YOUR_API_KEY
+  
+In a Rails app, you can put those lines in a file in config/initializers/.
   
 Currently there are methods to support retrieving candidates, presidential candidates, committees, electronic filings, committee contributions and independent expenditures. Almost every method requires at least one parameter, the election cycle.
 
@@ -201,6 +204,7 @@ The IE responses also accept an optional offset argument, using multiples of 20.
 * Derek Willis, dwillis@nytimes.com
 * Al Shaw, almshaw@gmail.com
 * Jason Holt, jjh@offensivepolitics.net
+* Benjamin Jackson, http://twitter.com/benjaminjackson
 
 == Copyright
 

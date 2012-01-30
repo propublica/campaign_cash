@@ -53,7 +53,7 @@ module CampaignCash
 		           :office => parse_office(params['candidate']['id'][0..0]),
 		           :district => parse_district(params['district']),
 		           :party => params['candidate']['party'],
-		           :committee => parse_committee(params['committee'])
+		           :committee_id => parse_committee(params['committee'])
 		  
 		end
 		
