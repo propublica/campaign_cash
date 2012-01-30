@@ -54,5 +54,17 @@ module CampaignCash
       end
     end
     
+    def self.committee(fecid, cycle=CURRENT_CYCLE, offset=nil)
+      reply = invoke("#{cycle}/contributions/committee/#{fecid}")
+    end
+    
+    def self.filing(form_id, cycle=CURRENT_CYCLCE, offset=nil)
+      reply = invoke("#{cycle}/contributions/filing/#{form_id}")
+    end
+    
+    def self.candidate(fecid, cycle=CURRENT_CYCLE, offset=nil)
+      reply = invoke("#{cycle}/contributions/candidate/#{fecid}")
+    end
+    
   end
 end
