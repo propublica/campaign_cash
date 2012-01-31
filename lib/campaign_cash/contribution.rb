@@ -52,7 +52,6 @@ module CampaignCash
         reply = invoke("#{cycle}/committees/#{fecid}/contributions")
         all_candidates(reply)
       end
-    end
-    
+    end    
   end
 end
