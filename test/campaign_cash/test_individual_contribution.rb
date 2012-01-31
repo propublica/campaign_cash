@@ -3,7 +3,7 @@ require 'test_helper'
 class TestCampaignCash::TestIndividualContribution < Test::Unit::TestCase
 	include CampaignCash
   
-	should "get contributions" do
+	context "get contributions" do
 	  objs_collection = []
 	  objs_collection << IndividualContribution.committee("C00496497")
 	  objs_collection << IndividualContribution.filing("724196")

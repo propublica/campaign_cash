@@ -14,7 +14,7 @@ module CampaignCash
 							 :date_coverage_from => date_parser(params['date_coverage_from']),
 							 :date_coverage_to => date_parser(params['date_coverage_to']),
 							 :committee => parse_committee(params['committee']),
-							 :report_title => params['report_title'].strip,
+							 :report_title => params['report_title'] ? params['report_title'].strip : "",
 							 :fec_uri => params['fec_uri'],
 							 :amended => params['amended'],
 							 :amended_uri => params['amended_uri'],
@@ -63,10 +63,5 @@ module CampaignCash
 		  results = reply['results']
 			results.map{|c| Filing.create(c)}
 		end
-		
-		def self.by_id(id)
-		  cycle = CURRENT_CYCLE
-		  result = Filing.create(Base.invoke("#{cycle}/filings/#{id}"))
-	  end
 	end
 end

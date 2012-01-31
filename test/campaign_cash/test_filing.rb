@@ -37,16 +37,5 @@ class TestCampaignCash::TestFiling < Test::Unit::TestCase
 	    assert_equal @filings.size, 20
 	    assert_equal @filings.first.report_title, "STATEMENT OF ORGANIZATION"
 	  end
-	end
-	
-	context "individual filings" do
-	  setup do
-	    @filing = Filing.by_id(751678)
-    end
-    should "get a filing by form id" do
-      assert_kind_of(Filing, @filing)
-    end
-  end
-	
-	
+	end	
 end
