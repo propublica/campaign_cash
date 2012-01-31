@@ -8,10 +8,8 @@ require 'ostruct'
   require File.join(File.dirname(__FILE__), '../lib/campaign_cash', f)
 end
 
-require 'nyt_api_key'
-
-# Create a file called nyt_api_key.rb in test/campaign_cash with your API key:
-# API_KEY = "your_api_key"
+# set your NYT Campaign Finance API key as an environment variable to run the tests
+API_KEY = ENV['NYT_CAMPFIN_API_KEY']
 CampaignCash::Base.api_key = API_KEY
 
 module TestCampaignCash
