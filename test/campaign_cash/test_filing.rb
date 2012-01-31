@@ -37,5 +37,5 @@ class TestCampaignCash::TestFiling < Test::Unit::TestCase
 	    assert_equal @filings.size, 20
 	    assert_equal @filings.first.report_title, "STATEMENT OF ORGANIZATION"
 	  end
-	end
+	end	
 end
