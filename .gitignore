@@ -1,3 +1,4 @@
 pkg/*
 *.gem
 .bundle
+*nyt_api_key.rb
