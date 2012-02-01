@@ -15,11 +15,23 @@ class TestCampaignCash::TestPresident < Test::Unit::TestCase
 			assert_kind_of(President, @summary)
 		end
 		
-		%w(name total_contributions party total_receipts).each do |attr|
+		%w(name total_contributions total_receipts).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@results.first[attr], @summary.send(attr))
 			end
 		end
+
+        should "assign the office to 'president'" do
+            assert_equal('president', @summary.office)
+        end
+        
+        should "assign the party to 'REP' if the candidate is republican or 'DEM' if democrat" do
+            party = @results.first['party']
+            party = "REP" if party == "R"
+            party = "DEM" if party == "D"
+            assert_equal(party, @summary.party)
+        end
+        
   end
   
 	context "President.detail" do
@@ -33,10 +45,21 @@ class TestCampaignCash::TestPresident < Test::Unit::TestCase
 			assert_kind_of(President, @detail)
 		end
 		
-		%w(net_primary_contributions party total_refunds).each do |attr|
+		%w(net_primary_contributions total_refunds).each do |attr|
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@results.first[attr], @detail.send(attr))
 			end
 		end
+
+		should "assign the office to 'president'" do
+			assert_equal('president', @detail.office)
+		end
+        
+        should "assign the party to 'REP' if the candidate is republican or 'DEM' if democrat" do
+            party = @results.first['party']
+            party = "REP" if party == "R"
+            party = "DEM" if party == "D"
+            assert_equal(party, @detail.party)
+        end
   end
 end

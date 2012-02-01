@@ -10,7 +10,7 @@ module CampaignCash
     end
     
     def self.create(params={})
-      self.new(params)
+      self.new(params['contribution'])
     end
     
     def self.committee(fecid, offset=nil)
