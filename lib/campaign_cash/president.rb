@@ -17,7 +17,7 @@ module CampaignCash
 		def self.create_summary(params={})
 			self.new :name => params['name'],
 							 :id => params['candidate_id'],
-							 :party => params['party'],
+							 :party => get_party(params['party']),
 							 :office => 'president',
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],
@@ -31,7 +31,7 @@ module CampaignCash
 		def self.create_detail(params={})
 			self.new :name => params['candidate_name'],
 							 :id => params['candidate_id'],
-							 :party => params['party'],
+							 :party => get_party(params['party']),
 							 :office => 'president',
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],
@@ -69,6 +69,14 @@ module CampaignCash
       reply = invoke("#{cycle}/president/candidates/#{id}", {})
       results = reply['results'].first
       create_detail(results)
+    end
+    
+    private
+    
+    def self.get_party party_identifier
+       return "DEM" if party_identifier == "D"
+       return "REP" if party_identifier == "R"
+       party_identifier
     end
   end
 end
