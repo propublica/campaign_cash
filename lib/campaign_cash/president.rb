@@ -1,7 +1,7 @@
 module CampaignCash
   class President < Base
       
-    attr_reader :committee_id, :name, :id, :party, :date_coverage_from, :date_coverage_to, :total_receipts, :total_disbursements,
+    attr_reader :committee_id, :name, :id, :party, :office, :date_coverage_from, :date_coverage_to, :total_receipts, :total_disbursements,
                 :end_cash, :total_refunds, :total_contributions, :net_individual_contributions, :net_pac_contributions, 
                 :net_party_contributions, :net_candidate_contributions, :net_primary_contributions, :net_general_contributions,
                 :federal_funds, :contributions_less_than_200, :contributions_200_499, :contributions_500_1499, :contributions_1500_2499,
@@ -18,6 +18,7 @@ module CampaignCash
 			self.new :name => params['name'],
 							 :id => params['candidate_id'],
 							 :party => params['party'],
+							 :office => 'president',
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],
 							 :total_disbursements => params['total_disbursements'],
@@ -31,6 +32,7 @@ module CampaignCash
 			self.new :name => params['candidate_name'],
 							 :id => params['candidate_id'],
 							 :party => params['party'],
+							 :office => 'president',
 							 :committee_id => params['committee_id'],
 							 :total_receipts => params['total_receipts'],
 							 :total_contributions => params['total_contributions'],

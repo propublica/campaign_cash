@@ -20,6 +20,11 @@ class TestCampaignCash::TestPresident < Test::Unit::TestCase
 				assert_equal(@results.first[attr], @summary.send(attr))
 			end
 		end
+
+		should "assign the office to 'president'" do
+			assert_equal('president', @summary.office)
+		end
+		
   end
   
 	context "President.detail" do
@@ -37,6 +42,10 @@ class TestCampaignCash::TestPresident < Test::Unit::TestCase
 			should "assign the value of the @#{attr} attribute from the '#{attr}' key in the hash" do
 				assert_equal(@results.first[attr], @detail.send(attr))
 			end
+		end
+
+		should "assign the office to 'president'" do
+			assert_equal('president', @detail.office)
 		end
   end
 end
