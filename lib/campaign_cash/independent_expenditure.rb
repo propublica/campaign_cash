@@ -14,7 +14,7 @@ module CampaignCash
                :committee_name => params['fec_committee_name'],
                :candidate => parse_candidate(params['fec_candidate']),
                :office => params['office'],
-               :state => params['state'].strip,
+               :state => params['state'] ? params['state'].strip : nil,
                :district => params['district'],
                :date => date_parser(params['date']),
                :support_or_oppose => params['support_or_oppose'],
