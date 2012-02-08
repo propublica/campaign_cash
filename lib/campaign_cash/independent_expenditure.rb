@@ -25,7 +25,9 @@ module CampaignCash
                :date_received => date_parser(params['date_received']),
                :amendment => params['amendment'],
                :transaction_id => params['transaction_id'],
-               :candidate_name => params['candidate_name']
+               :candidate_name => params['candidate_name'],
+               # hash is a SHA1 of committee_id, date and transaction_id
+               :hash => params['hash']
     end
     
     def self.latest(offset=nil)
