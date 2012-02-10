@@ -26,7 +26,11 @@ module CampaignCash
                :amendment => params['amendment'],
                :transaction_id => params['transaction_id'],
                :candidate_name => params['candidate_name'],
-               # hash is a SHA1 of committee_id, date and transaction_id
+               :filing_id      => params['filing_id'],
+               :amended_from   => params['amended_from'], # <= original filing ID will be nil if amendment is false
+               # hash is a SHA1 of filing_id and transaction_id
+               # If the expenditure is amended, the hash will be amended_from + transaction_id
+               # so it can be used as an overrideable unique key
                :hash => params['hash']
     end
     
