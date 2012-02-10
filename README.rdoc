@@ -189,6 +189,21 @@ There's also the option to retrieve the 20 most recent IEs for the presidential 
   
 The IE responses also accept an optional offset argument, using multiples of 20.
 
+== Individual Contributions
+
+IndividualContribution objects are line items from committees' receipt filings. You can get them in three ways, by an FEC committee ID, a filing ID or an FEC candidate ID in groups of 20. These will be returned from newest to oldest. Note: in IndividualContribution responses, `pac_name` refers to any institutional donation, not just donations from other PACs.
+
+  IndividualContribution.committee("C00490045") # Restore Our Future
+  #=> [=> #<CampaignCash::IndividualContribution:0x102fd3948 @display_name=nil, @fec_form_type=nil, @aggregate_amount=100000.0, @zip="94129", @zip5="94129", @state="CA", @middle_name=nil, @conduit_state=nil, @conduit_address_one=nil, @conduit_name=nil, @memo_code=nil, @last_name=nil, @candidate_id=nil, @back_ref_sched_name=nil, @conduit_zip=nil, @committee_id=133, @suffix=nil, @donor_cmte_id=nil, @flag_orgind="ORG", @back_ref_tran_id=nil, @city="San Francisco", @amended_cd=nil, @donor_district=nil, @id=4571002, @exclude=nil, @donor_candidate=nil, @prigen=nil, @donor_cand_id=nil, @donor_office=nil, @occupation=nil, @tran_id="SA11AI.4427", @lng=nil, @prefix=nil, @memo_text=nil, @lat=nil, @employer=nil, @pac_name="Wendt Family Trust", @amount=100000.0, @increased_limit=nil, @transaction_description=nil, @donor_state=nil, @date="2011-12-31", @filing_id=764828, @system_code=nil, @first_name=nil, @address_one="1 Muir Loop", @transaction_type=nil, @conduit_city=nil, @linenumber="SA11AI", @full_name=nil, @address_two=nil, @conduit_address_two=nil>, ...]
+
+  IndividualContribution.candidate("P80003338") # Barack Obama
+  IndividualContribution.filing(762683)         # Obama for America's 2011 year-end filing
+
+If you're just interested in grabbing the contributions from a certain filing or date-range, but don't know that filing ID, get it via `Committee#filings`. Here's how to find the 2011 year-end filing ID for Restore Our Future, which you can then pass to IndividualContributions.
+
+   PPCampaignCash::Committee.find("C00490045", 2012).filings.select {|q| q.date_coverage_to == "2011-12-31".to_date && q.report_title == "YEAR-END" } 
+
+
 == Note on Patches/Pull Requests
 
 * Fork the project.
