@@ -12,12 +12,11 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == News
 
+* Feb. 8, 2012: Version 2.1.0 released. Added better support for independent expenditures and FilingSummary class for presidential candidate filings.
 * Jan. 28, 2012: Version 2.0.8 released. Bugfix for Candidate#search. Thanks to @benjaminjackson for patch.
 * Jan. 24, 2012: Version 2.0.7 released. Added candidate_name attribute accessor to IndependentExpenditure objects.
 * Jan. 19, 2012: Version 2.0.6 released. Added transaction_id param to IndependentExpenditure objects.
 * Jan. 19, 2012: Version 2.0.5 released. Bugfix to add amendment param to IndependentExpenditure objects.
-* Jan. 18, 2012: Version 2.0.4 released. Bugfix to handle offsets better.
-* Jan. 14, 2012: Version 2.0.3 released. Bugfix so that President.detail returns 1 object, not an array.
 
 == INSTALL:
 
