@@ -200,7 +200,7 @@ IndividualContribution objects are line items from committees' receipt filings. 
 
 If you're just interested in grabbing the contributions from a certain filing or date-range, but don't know that filing ID, get it via <tt>Committee#filings</tt>. Here's how to find the 2011 year-end filing ID for Restore Our Future, which you can then pass to IndividualContributions.
 
-   PPCommittee.find("C00490045", 2012).filings.select do |q|
+   Committee.find("C00490045", 2012).filings.select do |q|
      q.date_coverage_to == "2011-12-31".to_date && q.report_title == "YEAR-END"
    end
 
