@@ -204,6 +204,16 @@ If you're just interested in grabbing the contributions from a certain filing or
      q.date_coverage_to == "2011-12-31".to_date && q.report_title == "YEAR-END"
    end
 
+== Electioneering Communications
+
+Electioneering Communications are broadcast ads funded by third party groups that mention one or more candidates, but don't specifically support or oppose one. <tt>ElectioneeringCommunication</tt> objects are available newest first, or by committee ID or date (all in groups of 20). Within each object is an array of <tt>electioneering_communication_candidates</tt> mentioned in the ad.
+
+  ElectioneeringCommunication.latest
+  #=> [#<CampaignCash::ElectioneeringCommunication:0x10370a180 @payee_suffix=nil, @cycle=2012, @communication_date="2012-02-06", @committee_name="Crossroads Grassroots Policy Strategies", @purpose="TV/Media Production (Every Level)", @payee_address_2=nil, @electioneering_communication_candidates=[{"candidate_state"=>"HI", "electioneering_communication_id"=>847, "filing_id"=>764901, "transaction_id"=>"C.", "amended_from"=>nil, "back_reference_tran_id_number"=>"E.1", "candidate_name"=>"OBAMA, BARACK", "fec_candidate_id"=>"P80003338", "candidate_district"=>nil}], @back_reference_tran_id_number=nil, @unique_id="1116aadc5d5b7c793f0d0adfebb503709da1029f", @payee_middle_name=nil, @amended_from=nil, @back_reference_sched_name=nil, @payee_organization="Upgrade Films", @payee_state="DC", @transaction_id="E.1", @election_code="P2012", @payee_city="Washington", @payee_address_1="3299 K Street NW, Ste 200", @amount=65, @entity_type="ORG", @payee_first_name=nil, @filing_id=764901, @filed_date="2012-02-07", @payee_last_name=nil, @fec_committee_id="C30001655", @expenditure_date="2012-01-30", @payee_zip="20007">, ...]
+
+  ElectioneeringCommunication.committee("C30001655")    # Crossroads GPS
+  ElectioneeringCommunication.date("2012", "02", "06")  # EC's from February 6, 2012
+
 
 == Note on Patches/Pull Requests
 
