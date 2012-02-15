@@ -1,7 +1,7 @@
 module CampaignCash
   class IndependentExpenditure < Base
     
-    attr_reader :committee, :district, :state, :committee_name, :purpose, :candidate, :candidate_name, :support_or_oppose, :date, :amount, :office, :amendment, :date_received, :payee, :fec_uri, :transaction_id
+    attr_reader :committee, :district, :state, :committee_name, :purpose, :candidate, :candidate_name, :support_or_oppose, :date, :amount, :office, :amendment, :date_received, :payee, :fec_uri, :transaction_id, :unique_id
     
     def initialize(params={})
       params.each_pair do |k,v|
