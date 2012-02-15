@@ -28,10 +28,10 @@ module CampaignCash
                :candidate_name => params['candidate_name'],
                :filing_id      => params['filing_id'],
                :amended_from   => params['amended_from'], # <= original filing ID will be nil if amendment is false
-               # hash is a SHA1 of filing_id and transaction_id
-               # If the expenditure is amended, the hash will be amended_from + transaction_id
+               # unique_id is a SHA1 of filing_id and transaction_id
+               # If the expenditure is amended, the unique_id will be amended_from + transaction_id
                # so it can be used as an overrideable unique key
-               :hash => params['hash']
+               :unique_id => params['unique_id']
     end
     
     def self.latest(offset=nil)
