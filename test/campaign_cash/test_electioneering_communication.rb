@@ -7,7 +7,7 @@ class TestCampaignCash::TestElectioneeringCommunication < Test::Unit::TestCase
     objs_collection = []
     objs_collection << ElectioneeringCommunication.latest
     objs_collection << ElectioneeringCommunication.committee("C30001655")
-    objs_collection << ElectioneeringCommunication.date("2012", "02", "06")
+    objs_collection << ElectioneeringCommunication.date("02/06/2012")
     
     objs_collection.each do |objs|
       should "return a list of objects of the ElectioneeringCommunication type or an empty list" do
