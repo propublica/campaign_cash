@@ -27,7 +27,6 @@ module CampaignCash
     def self.date(date, offset = nil)
       cycle = CURRENT_CYCLE
       d     = Date.strptime(date, '%m/%d/%Y')
-
       results = invoke("#{cycle}/electioneering_communications/#{d.year}/#{d.month}/#{d.day}", {:offset => offset})['results']
       results.map {|obj| ElectioneeringCommunication.create(obj["electioneering_communication"])}
     end
