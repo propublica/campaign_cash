@@ -1,6 +1,6 @@
 module CampaignCash
   class ElectioneeringCommunication < Base
-    attr_reader :payee_zip, :committee_name, :entity_type, :filing_id, :payee_organization, :electioneering_communication_candidates, :amount, :fec_committee_id, :payee_city, :transaction_id, :amended_from, :communication_date, :payee_first_name, :payee_state, :back_reference_tran_id_number, :expenditure_date, :cycle, :payee_address_1, :back_reference_sched_name, :payee_address_2, :payee_last_name, :election_code, :payee_middle_name, :payee_suffix, :purpose, :unique_id
+    attr_reader :payee_zip, :committee_name, :entity_type, :filing_id, :payee_organization, :electioneering_communication_candidates, :amount, :fec_committee_id, :payee_city, :transaction_id, :amended_from, :communication_date, :payee_first_name, :payee_state, :back_reference_tran_id_number, :expenditure_date, :cycle, :payee_address_1, :back_reference_sched_name, :payee_address_2, :payee_last_name, :election_code, :payee_middle_name, :payee_suffix, :purpose, :unique_id, :filed_date
 
     def initialize(params={})
       params.each_pair do |k,v|
