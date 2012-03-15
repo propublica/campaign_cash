@@ -12,6 +12,7 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == News
 
+* March 15, 2012: Version 2.3 released. Added committee_type to Filing objects and offset to Candidate methods.
 * March 9, 2012: Version 2.2.1 released. Added transfers_in attribute to President#detail.
 * Feb. 8, 2012: Version 2.1.0 released. Added better support for independent expenditures and FilingSummary class for presidential candidate filings.
 * Jan. 28, 2012: Version 2.0.8 released. Bugfix for Candidate#search. Thanks to @benjaminjackson for patch.
