@@ -113,25 +113,25 @@ module CampaignCash
     
     # Returns an array of candidates matching a search term within a cycle. Defaults to the
     # current cycle.
-    def self.search(name, cycle=CURRENT_CYCLE)
-			reply = invoke("#{cycle}/candidates/search", {:query => name})
+    def self.search(name, cycle=CURRENT_CYCLE, offset=nil)
+			reply = invoke("#{cycle}/candidates/search", {:query => name, :offset => offset})
 			results = reply['results']      
       results.map{|c| self.create_from_search_results(c)}
     end
     
     # Returns an array of newly created FEC candidates within a current cycle. Defaults to the
     # current cycle.
-    def self.new_candidates(cycle=CURRENT_CYCLE)
-			reply = invoke("#{cycle}/candidates/new",{})
+    def self.new_candidates(cycle=CURRENT_CYCLE, offset=nil)
+			reply = invoke("#{cycle}/candidates/new",{:offset => offset})
 			results = reply['results']
       results.map{|c| self.create(c)}      
     end
     
     # Returns an array of candidates for a given state and chamber within a cycle, with an optional
     # district parameter. For example, House candidates from New York. Defaults to the current cycle.
-    def self.state_chamber(state, chamber, district=nil, cycle=CURRENT_CYCLE)
+    def self.state_chamber(state, chamber, district=nil, cycle=CURRENT_CYCLE, offset=nil)
       district ? path = "#{cycle}/seats/#{state}/#{chamber}/#{district}" : path = "#{cycle}/seats/#{state}/#{chamber}"
-			reply = invoke(path,{})
+			reply = invoke(path,{:offset => offset})
 			results = reply['results']
       results.map{|c| self.create_from_search_results(c)}      
     end
