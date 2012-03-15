@@ -56,8 +56,8 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    @filings = results.map{|f| Filing.create(f)}
 	  end
 	  
-	  should "return 11 filings" do
-	    assert_equal @filings.size, 11
+	  should "return 8 filings" do
+	    assert_equal @filings.size, 8
 	  end
 	end
 
