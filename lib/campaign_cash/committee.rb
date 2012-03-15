@@ -83,7 +83,7 @@ module CampaignCash
 							 :candidate_id => parse_candidate(params['candidate']),
 							 :filing_frequency => get_frequency(params['filing_frequency']),
 							 :interest_group => get_interest_group(params['interest_group']),
-							 :committee_type => get_committee_type(params['get_committee_type']),
+							 :committee_type => get_committee_type(params['committee_type']),
 							 :designation => get_designation(params['designation']),
 							 :other_cycles => params['other_cycles'].map{|cycle| cycle['cycle']['fec_committee']['cycle']}
 		end
