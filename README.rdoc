@@ -233,6 +233,7 @@ Electioneering Communications are broadcast ads funded by third party groups tha
 * Al Shaw, almshaw@gmail.com
 * Jason Holt, jjh@offensivepolitics.net
 * Benjamin Jackson, http://twitter.com/benjaminjackson
+* Daniel Leavitt, https://github.com/dleavitt
 
 == Copyright
 
