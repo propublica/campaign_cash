@@ -74,12 +74,20 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	end
 		
 	context "state candidates" do
-	  setup do
-		  @candidates = Candidate.state_chamber('RI', 'house', nil, 2010)
-	  end
+	  should "return 32 total candidates from Rhode Island" do
+	    assert_equal Candidate.state('RI', nil, nil, 2010).length, 32
+    end
 	  
 	  should "return 29 House candidates from Rhode Island" do
-	    assert_equal @candidates.size, 29
+	    assert_equal Candidate.state('RI', "house", nil, 2010).length, 29
+	  end
+	  
+	  should "return 3 Senate candidates from Rhode Island" do
+	    assert_equal Candidate.state('RI', "senate", nil, 2010).length, 3
+	  end
+	  
+	  should "return 17 House candidates from District 1 of Rhode Island" do
+	    assert_equal Candidate.state('RI', "house", 1, 2010).length, 17
 	  end
 	end
 end
