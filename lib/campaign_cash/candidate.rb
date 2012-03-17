@@ -127,14 +127,19 @@ module CampaignCash
       results.map{|c| self.create(c)}      
     end
     
-    # Returns an array of candidates for a given state and chamber within a cycle, with an optional
-    # district parameter. For example, House candidates from New York. Defaults to the current cycle.
-    def self.state_chamber(state, chamber, district=nil, cycle=CURRENT_CYCLE, offset=nil)
-      district ? path = "#{cycle}/seats/#{state}/#{chamber}/#{district}" : path = "#{cycle}/seats/#{state}/#{chamber}"
-			reply = invoke(path,{:offset => offset})
-			results = reply['results']
+    # Returns an array of candidates for a given state within a cycle, with optional chamber and
+    # district parameters. For example, House candidates from New York. Defaults to the current cycle.
+    def self.state(state, chamber=nil, district=nil, cycle=CURRENT_CYCLE, offset=nil)
+      path = "#{cycle}/seats/#{state}"
+      if chamber
+        path += "/#{chamber}"
+        path += "/#{district}" if district
+      end
+      reply = invoke(path,{:offset => offset})
+      results = reply['results']
       results.map{|c| self.create_from_search_results(c)}      
     end
     
+    instance_eval { alias :state_chamber :state }
   end
 end
