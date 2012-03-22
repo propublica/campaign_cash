@@ -1,7 +1,7 @@
 module CampaignCash
   class Filing < Base
     
-    attr_reader :committee_name, :date_coverage_from, :amended_uri, :fec_uri, :date_coverage_to, :committee, :report_title, :amended, :date_filed, :cycle, :form_type, :original_filing, :original_uri, :paper
+    attr_reader :committee_name, :date_coverage_from, :amended_uri, :fec_uri, :date_coverage_to, :committee, :report_title, :amended, :date_filed, :cycle, :form_type, :original_filing, :original_uri, :paper, :committee_type, :filing_id
     
     def initialize(params={})
       params.each_pair do |k,v|
@@ -21,7 +21,9 @@ module CampaignCash
 							 :original_filing => params['original_filing'],
 							 :original_uri => params['original_uri'],
 							 :paper => params['paper'],
-							 :form_type => params['form_type']
+							 :form_type => params['form_type'],
+							 :filing_id => params['form_id'],
+							 :committee_type => Committee.get_committee_type(params['committee_type'])
 		end
 		
 		def self.create_from_filings(params={})

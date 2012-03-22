@@ -83,7 +83,7 @@ module CampaignCash
 							 :candidate_id => parse_candidate(params['candidate']),
 							 :filing_frequency => get_frequency(params['filing_frequency']),
 							 :interest_group => get_interest_group(params['interest_group']),
-							 :committee_type => get_committee_type(params['get_committee_type']),
+							 :committee_type => get_committee_type(params['committee_type']),
 							 :designation => get_designation(params['designation']),
 							 :other_cycles => params['other_cycles'].map{|cycle| cycle['cycle']['fec_committee']['cycle']}
 		end
@@ -154,6 +154,12 @@ module CampaignCash
     def filings(cycle=CURRENT_CYCLE, offset=nil)
       reply = Base.invoke("#{cycle}/committees/#{id}/filings",{:offset => offset})
       results = reply['results']
+      results.map{|c| Filing.create(c)}
+    end
+    
+    def unamended_filings(cycle=CURRENT_CYCLE, offset=nil)
+      reply = Base.invoke("#{cycle}/committees/#{id}/filings",{:offset => offset})
+      results = reply['results'].select{|f| f['amended'] == false}
       results.map{|c| Filing.create(c)}
     end
     
