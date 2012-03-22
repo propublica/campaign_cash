@@ -12,6 +12,7 @@ Simple ruby wrapper for The New York Times Campaign Finance API[http://developer
 
 == News
 
+* March 22, 2012: Version 2.3.1 released. Added filing_id to Filing objects and Committee#unamended_filings method.
 * March 15, 2012: Version 2.3 released. Added committee_type to Filing objects and offset to Candidate methods.
 * March 9, 2012: Version 2.2.1 released. Added transfers_in attribute to President#detail.
 * Feb. 8, 2012: Version 2.1.0 released. Added better support for independent expenditures and FilingSummary class for presidential candidate filings.
@@ -112,6 +113,11 @@ Individual Committee objects can retrieve an array of filings they have made dur
   committee = Committee.find("C00326389", 2012)
   committee.filings
   #=> [#<CampaignCash::Filing:0x101bc9100 @amended_uri=nil, @paper=false, @amended=false, @committee_name=nil, @date_coverage_from=#<Date: 4911793/2,0,2299161>, @original_uri=nil, @report_title="YEAR-END", @date_coverage_to=#<Date: 4911853/2,0,2299161>, @form_type="F3", @committee=nil, @original_filing=nil, @fec_uri="http://query.nictusa.com/cgi-bin/dcdev/forms/C00326389/756540/">,...]
+  
+The filings method returns an array of all filings, including originals and amendments. If you want to retrieve the list of unamended filings for a committee within a cycle -- in other words, the latest version of reports -- use the unamended_filings method:
+
+  committee = Committee.find("C00326389", 2012)
+  committee.unamended_filings  
   
 For more information on Filing objects, see Filings below.
   
