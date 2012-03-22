@@ -56,8 +56,20 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    @filings = results.map{|f| Filing.create(f)}
 	  end
 	  
-	  should "return 8 filings" do
-	    assert_equal @filings.size, 8
+	  should "return 11 filings" do
+	    assert_equal @filings.size, 11
+	  end
+	end
+	
+	context "committee unamended filings" do
+	  setup do
+	    reply = Base.invoke('2012/committees/C00431171/filings', {})
+	    results = reply['results'].select{|f| f['amended'] == false}
+	    @filings = results.map{|f| Filing.create(f)}
+	  end
+	  
+	  should "return filings that are not amended" do
+	    assert_equal @filings.select{|f| f.amended == true}.size, 0
 	  end
 	end
 
@@ -107,7 +119,6 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	  should "return an array of super pacs" do
 	    assert_equal([true], @committees.map{|c| c.super_pac }.uniq)
 	  end
-	  
 	end
 	
 end
