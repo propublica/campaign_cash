@@ -15,7 +15,7 @@ module CampaignCash
     def self.latest(offset = nil)
       cycle = CURRENT_CYCLE
       results = invoke("#{cycle}/electioneering_communications", {:offset => offset})['results']
-      results.map {|obj| ElectioneeringCommunication.create(obj["electioneering_communication"])}
+      results.map {|obj| ElectioneeringCommunication.create(obj)}
     end
     
     def self.committee(committee_id, offset = nil)
