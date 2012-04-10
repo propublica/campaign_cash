@@ -74,20 +74,20 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	end
 		
 	context "state candidates" do
-	  should "return 32 total candidates from Rhode Island" do
-	    assert_equal Candidate.state('RI', nil, nil, 2010).length, 32
+	  should "return 33 total candidates from Rhode Island" do
+	    assert_equal Candidate.state('RI', nil, nil, 2010).size, 33
     end
 	  
-	  should "return 29 House candidates from Rhode Island" do
-	    assert_equal Candidate.state('RI', "house", nil, 2010).length, 29
+	  should "return 30 House candidates from Rhode Island" do
+	    assert_equal Candidate.state('RI', "house", nil, 2010).size, 30
 	  end
 	  
-	  should "return 3 Senate candidates from Rhode Island" do
-	    assert_equal Candidate.state('RI', "senate", nil, 2010).length, 3
+	  should "return least 3 Senate candidates from Rhode Island" do
+	    assert_equal Candidate.state('RI', "senate", nil, 2010).size, 3
 	  end
 	  
 	  should "return 17 House candidates from District 1 of Rhode Island" do
-	    assert_equal Candidate.state('RI', "house", 1, 2010).length, 17
+	    assert_equal Candidate.state('RI', "house", 1, 2010).size, 17
 	  end
 	end
 end

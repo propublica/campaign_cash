@@ -15,7 +15,7 @@ module CampaignCash
 		
 		def self.by_id(id)
       cycle = CURRENT_CYCLE
-      result = FilingSummary.create(Base.invoke("#{cycle}/filings/#{id}")["results"]["filing_summary"])
+      result = FilingSummary.create(Base.invoke("#{cycle}/filings/#{id}")["results"])
     end
   end
 end
