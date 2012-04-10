@@ -16,19 +16,19 @@ module CampaignCash
     def self.committee(fecid, offset=nil)
       cycle = CURRENT_CYCLE
       results = invoke("#{cycle}/contributions/committee/#{fecid}", {:offset => offset})['results']
-      results.map{|c| IndividualContribution.create(c["contribution"]) }
+      results.map{|c| IndividualContribution.create(c) }
     end
     
     def self.filing(form_id, offset=nil)
       cycle = CURRENT_CYCLE
       results = invoke("#{cycle}/contributions/filing/#{form_id}", {:offset => offset})['results']
-      results.map{|c| IndividualContribution.create(c["contribution"]) }
+      results.map{|c| IndividualContribution.create(c) }
     end
     
     def self.candidate(fecid, offset=nil)
       cycle = CURRENT_CYCLE
       results = invoke("#{cycle}/contributions/candidate/#{fecid}", {:offset => offset})['results']
-      results.map{|c| IndividualContribution.create(c["contribution"]) }
+      results.map{|c| IndividualContribution.create(c) }
     end
     
   end
