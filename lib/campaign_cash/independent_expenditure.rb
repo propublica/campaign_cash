@@ -1,7 +1,9 @@
 module CampaignCash
   class IndependentExpenditure < Base
 
-    attr_reader :committee, :district, :state, :committee_name, :purpose, :candidate, :candidate_name, :support_or_oppose, :date, :amount, :office, :amendment, :date_received, :payee, :fec_uri, :transaction_id, :unique_id, :filing_id, :amended_from
+    attr_reader :committee, :district, :state, :committee_name, :purpose, :candidate, :candidate_name, 
+    :support_or_oppose, :date, :amount, :office, :amendment, :date_received, :payee, :fec_uri, 
+    :transaction_id, :unique_id, :filing_id, :amended_from
 
     def initialize(params={})
       params.each_pair do |k,v|
@@ -20,13 +22,13 @@ module CampaignCash
         :support_or_oppose => params['support_or_oppose'],
         :payee => params['payee'],
         :purpose => params['purpose'],
-        :amount => params['amount'],
+        :amount => params['amount'].to_f,
         :fec_uri => params['fec_uri'],
         :date_received => date_parser(params['date_received']),
         :amendment => params['amendment'],
         :transaction_id => params['transaction_id'],
         :candidate_name => params['candidate_name'],
-        :filing_id      => params['filing_id'],
+        :filing_id      => params['filing_id'].to_i,
         :amended_from   => params['amended_from'], # <= original filing ID will be nil if amendment is false
         # unique_id is a SHA1 of filing_id and transaction_id
         # If the expenditure is amended, the unique_id will be amended_from + transaction_id

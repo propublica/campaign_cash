@@ -19,7 +19,7 @@ class TestCampaignCash::TestIndependentExpenditure < Test::Unit::TestCase
 	  end
 	  
 	  should "return at least one independent expenditure against Barack Obama" do
-	    assert_equal("P80003338", @independent_expenditures.first.candidate)
+	    assert_equal("P80003338", @independent_expenditures.select{|ie| ie.candidate == 'P80003338'}.first.candidate)
 	  end
 	end
 	
