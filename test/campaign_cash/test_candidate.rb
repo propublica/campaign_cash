@@ -61,7 +61,7 @@ class TestCampaignCash::TestCandidate < Test::Unit::TestCase
 	
 	context "candidate leaders" do
 	  setup do
-		  reply = Base.invoke('2010/candidates/leaders/end-cash', {})
+		  reply = Base.invoke('2012/candidates/leaders/end-cash', {})
 			results = reply['results']
 	    @candidates = results.map{|c| Candidate.create(c)}
 	  end
