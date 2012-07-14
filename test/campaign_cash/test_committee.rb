@@ -88,8 +88,8 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    @contribution = Contribution.find('C00458588', 2010)
 	  end
 	  
-	  should "return 125 total results" do
-	    assert_equal @contribution.total_results, 125
+	  should "return 141 total results" do
+	    assert_equal @contribution.total_results, 141
 	  end
 	  
 	  should "return a $5,000 contribution to Renee Ellmers" do
