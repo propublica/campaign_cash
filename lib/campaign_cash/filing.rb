@@ -23,21 +23,13 @@ module CampaignCash
         :paper => params['paper'],
         :form_type => params['form_type'],
         :filing_id => params['form_id'],
-        :committee_type => Committee.get_committee_type(params['committee_type'])
+        :committee_type => Committee.get_committee_type(params['committee_type']),
+        :committee_name => params['committee_name'],
+        :receipts_total => params['receipts_total'],
+        :contributions_total => params['contributions_total'],
+        :disbursements_total => params['disbursements_total'],
+        :cash_on_hand => params['cash_on_hand']
     end
-
-    def self.create_from_filings(params={})
-      self.new :date_coverage_from => date_parser(params['date_coverage_from']),
-        :date_coverage_to => date_parser(params['date_coverage_to']),
-        :report_title => params['report_title'].strip,
-        :fec_uri => params['fec_uri'],
-        :amended => params['amended'],
-        :amended_uri => params['amended_uri'],
-        :cycle => params['cycle'],
-        :form_type => params['form_type'],
-        :date_filed => date_parser(params['date_filed'])
-    end
-
 
     def self.today(offset=nil)
       cycle=CURRENT_CYCLE
@@ -58,6 +50,13 @@ module CampaignCash
       reply = Base.invoke("#{cycle}/filings/types",{})
       results = reply['results']
       results.map{|ft| OpenStruct.new({:id => ft['id'], :name => ft['name'].strip})}
+    end
+    
+    def self.amendments(offset=nil)
+      cycle=CURRENT_CYCLE
+      reply = Base.invoke("#{cycle}/filings/amendments", {:offset => offset})
+      results = reply['results']
+      results.map{|c| Filing.create(c)}
     end
 
     def self.by_type(cycle, form_type)
