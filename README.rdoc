@@ -8,7 +8,7 @@
 
 == DESCRIPTION:
 
-Simple ruby wrapper for The New York Times Campaign Finance API[http://developer.nytimes.com/docs/read/campaign_finance_api]. You'll need an API key. Tested under Ruby 1.8.7, 1.9.2 and 1.9.3 and JRuby 1.6.7.
+Simple ruby wrapper for portions of The New York Times Campaign Finance API[http://developer.nytimes.com/docs/read/campaign_finance_api]. You'll need an API key. Tested under Ruby 1.8.7, 1.9.2 and 1.9.3 and JRuby 1.6.7.
 
 == News
 
