@@ -214,6 +214,16 @@ If you're just interested in grabbing the contributions from a certain filing or
      q.date_coverage_to == "2011-12-31".to_date && q.report_title == "YEAR-END"
    end
 
+== Late Contributions
+
+During the final 20 days before a primary or general election, candidate committees that receive contributions of at least $1,000 must report them in filings to the F.E.C. within 48 hours of receipt. These contributions may be from individuals or other committees.
+
+  LateContribution.latest
+  #=> [#<CampaignCash::LateContribution:0x10116c6d0 @contributor_city="Brownsville", @contributor_zip=nil, @fec_committee_id="C00466854", @contributor_fec_id=nil, @fec_candidate_id="H0TN08246", @contributor_employer="Simmco", @transaction_id="20716.C7755", @contributor_street_2=nil, @contributor_prefix=nil, @office_state="TN", @contributor_state="TN", @fec_filing_id=798678, @contributor_street_1="PO Box 545", @contribution_date="2012-07-16", @contributor_last_name="Blurton", @contributor_organization_name=nil, @contributor_middle_name=nil, @contributor_suffix=nil, @contribution_amount="2500.0", @cycle=2012, @contributor_first_name="David", @entity_type="IND", @contributor_occupation="Owner">, ...]
+  
+  LateContribution.candidate("H0TN08246")
+  LateContribution.committee("C00466854") # must be a candidate committee
+
 == Electioneering Communications
 
 Electioneering Communications are broadcast ads funded by third party groups that mention one or more candidates, but don't specifically support or oppose one. <tt>ElectioneeringCommunication</tt> objects are available newest first, or by committee ID or date (all in groups of 20). Within each object is an array of <tt>electioneering_communication_candidates</tt> mentioned in the ad.
