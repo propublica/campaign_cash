@@ -12,6 +12,7 @@ Simple ruby wrapper for portions of The New York Times Campaign Finance API[http
 
 == News
 
+* Nov. 13, 2012: Version 2.5 released. Fixes a bug in Filing object attribute assignment.
 * July 19, 2012: Version 2.4 released. Updated for new API responses and to return integers and floats.
 * April 10, 2012: Version 2.3.2 released. Bugfix for Committee#find.
 * March 22, 2012: Version 2.3.1 released. Added filing_id to Filing objects and Committee#unamended_filings method.
