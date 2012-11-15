@@ -9,9 +9,8 @@ module CampaignCash
       end
     end
 
-    def self.create(params={})
-      self.new :committee_name => params['committee_name'],
-        :date_coverage_from => date_parser(params['date_coverage_from']),
+    def self.create(params={}, name=nil)
+      self.new :date_coverage_from => date_parser(params['date_coverage_from']),
         :date_coverage_to => date_parser(params['date_coverage_to']),
         :committee => parse_committee(params['committee']),
         :report_title => params['report_title'].strip,
@@ -22,13 +21,14 @@ module CampaignCash
         :original_uri => params['original_uri'],
         :paper => params['paper'],
         :form_type => params['form_type'],
-        :filing_id => params['form_id'],
+        :filing_id => params['id'],
         :committee_type => Committee.get_committee_type(params['committee_type']),
-        :committee_name => params['committee_name'],
+        :committee_name => params['name'],
         :receipts_total => params['receipts_total'],
         :contributions_total => params['contributions_total'],
         :disbursements_total => params['disbursements_total'],
-        :cash_on_hand => params['cash_on_hand']
+        :cash_on_hand => params['cash_on_hand'],
+        :is_amendment => params['is_amendment']
     end
 
     def self.today(offset=nil)

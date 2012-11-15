@@ -163,7 +163,7 @@ module CampaignCash
     def unamended_filings(cycle=CURRENT_CYCLE, offset=nil)
       reply = Base.invoke("#{cycle}/committees/#{id}/filings",{:offset => offset})
         results = reply['results'].select{|f| f['amended'] == false}
-      results.map{|c| Filing.create(c)}
+      results.map{|c| Filing.create(c, name=self.name)}
     end
 
   end
