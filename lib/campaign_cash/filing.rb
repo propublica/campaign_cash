@@ -23,7 +23,7 @@ module CampaignCash
         :original_uri => params['original_uri'],
         :paper => params['paper'],
         :form_type => params['form_type'],
-        :filing_id => params['id'],
+        :filing_id => params['filing_id'],
         :committee_type => Committee.get_committee_type(params['committee_type']),
         :committee_name => params['committee_name'],
         :receipts_total => params['receipts_total'],
