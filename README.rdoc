@@ -13,6 +13,9 @@ Simple ruby wrapper for portions of The New York Times Campaign Finance API[http
 == News
 
 * July 22, 2013: Version 2.6 released. Changed current cycle to 2014.
+* April 10, 2013: Version 2.6.1 released. Fixed bad attribute name for Filing#filing_id.
+* April 9, 2013: Version 2.6 released. Added missing attribute accessors to Filing objects.
+* April 9, 2013: Version 2.5.1 released. Fixed a bug that showed committee_name in Filing objects as nil.
 * Nov. 13, 2012: Version 2.5 released. Fixes a bug in Filing object attribute assignment.
 * July 19, 2012: Version 2.4 released. Updated for new API responses and to return integers and floats.
 * April 10, 2012: Version 2.3.2 released. Bugfix for Committee#find.
