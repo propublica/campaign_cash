@@ -67,9 +67,9 @@ module CampaignCash
       ##
       # Builds a request URI to call the API server
       def build_request_url(path, params)
-        URI::HTTP.build :host => API_SERVER,
-          :path => "#{API_BASE}/#{path}.json",
-        :query => params.map {|k,v| "#{k}=#{v}"}.join('&')
+        URI::HTTP.build host: API_SERVER,
+        path: "#{API_BASE}/#{path}.json",
+        query: params.map {|k,v| "#{k}=#{v}"}.join('&')
       end
 
       def invoke(path, params={})
@@ -78,7 +78,7 @@ module CampaignCash
             raise "You must initialize the API key before you run any API queries"
           end
 
-          full_params = params.merge 'api-key' => @@api_key
+          full_params = params.merge({"api-key" => @@api_key})
           full_params.delete_if {|k,v| v.nil?}
 
           check_offset(params[:offset]) if params[:offset]

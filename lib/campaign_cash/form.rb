@@ -10,8 +10,8 @@ module CampaignCash
     end
 
     def self.create(params={})
-      self.new :id => params['id'],
-        :name => params['name']
+      self.new id: params['id'],
+      name: params['name']
     end
 
     def self.form_types
