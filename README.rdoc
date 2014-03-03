@@ -8,10 +8,11 @@
 
 == DESCRIPTION:
 
-Simple ruby wrapper for portions of The New York Times Campaign Finance API[http://developer.nytimes.com/docs/read/campaign_finance_api]. You'll need an API key. Tested under Ruby 1.8.7, 1.9.2 and 1.9.3 and JRuby 1.6.7.
+Simple ruby wrapper for portions of The New York Times Campaign Finance API[http://developer.nytimes.com/docs/read/campaign_finance_api]. You'll need an API key. Tested under Ruby 1.9.3, 2.0.0 and 2.1.0.
 
 == News
 
+* March 3, 2014: Version 2.7 released. Updated for Ruby 2.x support, dropped support for 1.8.7.
 * July 22, 2013: Version 2.6.2 released. Changed current cycle to 2014.
 * April 10, 2013: Version 2.6.1 released. Fixed bad attribute name for Filing#filing_id.
 * April 9, 2013: Version 2.6 released. Added missing attribute accessors to Filing objects.
@@ -260,4 +261,4 @@ Electioneering Communications are broadcast ads funded by third party groups tha
 
 == Copyright
 
-Copyright (c) 2012 The New York Times Company. See LICENSE for details.
+Copyright (c) 2014 The New York Times Company. See LICENSE for details.
