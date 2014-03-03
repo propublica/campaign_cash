@@ -4,18 +4,31 @@ class TestCampaignCash::TestElectioneeringCommunication < Test::Unit::TestCase
   include CampaignCash
   
   context "get electioneering communications" do
-    objs_collection = []
-    objs_collection << ElectioneeringCommunication.latest
-    objs_collection << ElectioneeringCommunication.committee("C30001655")
-    objs_collection << ElectioneeringCommunication.date("02/06/2012")
-    
-    objs_collection.each do |objs|
-      should "return a list of objects of the ElectioneeringCommunication type or an empty list" do
-        if objs.size > 0
-          assert_kind_of(ElectioneeringCommunication, objs.first)
-        else
-          assert_equal([], objs)
-        end
+    latest = ElectioneeringCommunication.latest
+    committee = ElectioneeringCommunication.committee("C30001655")
+    date = ElectioneeringCommunication.date("02/06/2012")
+
+    should "return a list of latest objects of the ElectioneeringCommunication type or an empty list" do
+      if latest.size > 0
+        assert_kind_of(ElectioneeringCommunication, latest.first)
+      else
+        assert_equal([], latest)
+      end
+    end
+
+    should "return a list of objects of the ElectioneeringCommunication type or an empty list for a cmte" do
+      if committee.size > 0
+        assert_kind_of(ElectioneeringCommunication, committee.first)
+      else
+        assert_equal([], committee)
+      end
+    end
+
+    should "return a list of latest objects of the ElectioneeringCommunication type or an empty list by date" do
+      if date.size > 0
+        assert_kind_of(ElectioneeringCommunication, date.first)
+      else
+        assert_equal([], date)
       end
     end
   end   

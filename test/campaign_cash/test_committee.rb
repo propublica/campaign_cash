@@ -78,8 +78,8 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	    @committee = Committee.find('C00084475', 2012)
 	  end
 	  
-	  should "return 16 other cycles" do
-	    assert_equal @committee.other_cycles.size, 16
+	  should "return 17 other cycles" do
+	    assert_equal @committee.other_cycles.size, 17
 	  end
 	end
 	

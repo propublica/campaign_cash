@@ -36,7 +36,7 @@ class TestCampaignCash::TestIndependentExpenditure < Test::Unit::TestCase
 	context "independent expenditures about a given candidate" do
 	  setup do
 	    @independent_expenditures = IndependentExpenditure.candidate("P60003654", 2012)
-	    @candidate = Candidate.find('P60003654')
+	    @candidate = Candidate.find('P60003654', 2012)
 	  end
 	  
 	  should "return an array of IEs about presidential candidate Newt Gingrich" do
