@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    campaign_cash (2.7)
+    campaign_cash (2.7.1)
       json
 
 GEM
