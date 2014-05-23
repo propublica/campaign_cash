@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestIndependentExpenditure < Test::Unit::TestCase
+class TestCampaignCash::TestIndependentExpenditure < Minitest::Test
 	include CampaignCash
 		
 	context "latest independent expenditures" do

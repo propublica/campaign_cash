@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestForm < Test::Unit::TestCase
+class TestCampaignCash::TestForm < Minitest::Test
 	include CampaignCash
 		
 	context "form types" do

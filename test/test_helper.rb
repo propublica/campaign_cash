@@ -1,4 +1,4 @@
-require 'test/unit'
+require 'minitest/autorun'
 require 'rubygems'
 require 'shoulda'
 require 'json'

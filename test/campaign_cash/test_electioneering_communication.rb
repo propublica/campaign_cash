@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestElectioneeringCommunication < Test::Unit::TestCase
+class TestCampaignCash::TestElectioneeringCommunication < Minitest::Test
   include CampaignCash
   
   context "get electioneering communications" do
