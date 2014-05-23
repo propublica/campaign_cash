@@ -137,6 +137,7 @@ module CampaignCash
     end
 
     def self.search(name, cycle=CURRENT_CYCLE, offset=nil)
+      name = name.gsub(/ /,"+")
       reply = invoke("#{cycle}/committees/search", {query: name, offset: offset})
       results = reply['results']      
       results.map{|c| create_from_search_results(c)}

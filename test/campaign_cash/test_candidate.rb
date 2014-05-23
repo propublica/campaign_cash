@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestCandidate < Test::Unit::TestCase
+class TestCampaignCash::TestCandidate < Minitest::Test
   include CampaignCash
   
   context "Candidate.create" do

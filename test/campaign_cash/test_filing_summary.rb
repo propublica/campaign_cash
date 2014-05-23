@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestFilingSummary < Test::Unit::TestCase
+class TestCampaignCash::TestFilingSummary < Minitest::Test
 	include CampaignCash
 	
 	context "filing summaries" do

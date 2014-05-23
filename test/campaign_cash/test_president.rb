@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestPresident < Test::Unit::TestCase
+class TestCampaignCash::TestPresident < Minitest::Test
 	include CampaignCash
 
 	context "President.summary" do

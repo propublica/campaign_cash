@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class TestCampaignCash::TestCommittee < Test::Unit::TestCase
+class TestCampaignCash::TestCommittee < Minitest::Test
 	include CampaignCash
 	
 	context "Committee.create_from_api" do
@@ -23,9 +23,7 @@ class TestCampaignCash::TestCommittee < Test::Unit::TestCase
 	
 	context "Committee search" do
 	  setup do
-		  reply = Base.invoke('2010/committees/search', {:query => "Boeing"})
-			results = reply['results']
-	    @committees = results.map{|c| Committee.create_from_search_results(c)}
+		  @committees = Committee.search("Obama for America", 2012)
 	  end
 	  
 	  should "return two committee objects" do
