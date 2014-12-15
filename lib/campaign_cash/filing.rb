@@ -1,7 +1,7 @@
 module CampaignCash
   class Filing < Base
 
-    attr_reader :committee_name, :date_coverage_from, :amended_uri, :fec_uri, :date_coverage_to, :committee, :report_title, :amended, :date_filed, 
+    attr_reader :committee_name, :date_coverage_from, :amended_uri, :fec_uri, :date_coverage_to, :committee, :report_title, :amended, :date_filed,
   :cycle, :form_type, :original_filing, :original_uri, :paper, :committee_type, :filing_id, :receipts_total, :disbursements_total, :cash_on_hand,
   :is_amendment
 
@@ -14,6 +14,7 @@ module CampaignCash
     def self.create(params={}, name=nil)
       self.new date_coverage_from: date_parser(params['date_coverage_from']),
       date_coverage_to: date_parser(params['date_coverage_to']),
+      date_filed: date_parser(params['date_filed']),
       committee: parse_committee(params['committee']),
       report_title: params['report_title'].strip,
       fec_uri: params['fec_uri'],
@@ -53,7 +54,7 @@ module CampaignCash
       results = reply['results']
       results.map{|ft| OpenStruct.new({id: ft['id'], name: ft['name'].strip})}
     end
-    
+
     def self.amendments(offset=nil)
       cycle=CURRENT_CYCLE
       reply = Base.invoke("#{cycle}/filings/amendments", {offset: offset})
