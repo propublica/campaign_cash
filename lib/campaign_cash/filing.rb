@@ -43,9 +43,16 @@ module CampaignCash
 
     def self.date(year, month, day, offset=nil)
       cycle = cycle_from_date(Date.strptime("#{month}/#{day}/#{year}", '%m/%d/%Y'))
-        reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {offset: offset})
-        results = reply['results']
+      reply = Base.invoke("#{cycle}/filings/#{year}/#{month}/#{day}", {offset: offset})
+      results = reply['results']
       results.map{|c| Filing.create(c)}
+    end
+
+    def self.search(query, offset=nil)
+      cycle=CURRENT_CYCLE
+      reply = Base.invoke("#{cycle}/filings/search", {query: query, offset: offset})
+      results = reply['results']
+      results.map{|c| Filing.create(c)}      
     end
 
     def self.form_types
