@@ -12,6 +12,7 @@ Simple ruby wrapper for portions of The New York Times Campaign Finance API[http
 
 == News
 
+* Dec. 16, 2014: Version 2.8 released. Added Filing#search method to support name or id searches.
 * Dec. 15, 2014: Version 2.7.2 released. Added `date_filed` to Filing objects.
 * May 23, 2014: Version 2.7.1 released. Fixed Committee#search (thanks @alshaw!).
 * March 3, 2014: Version 2.7 released. Updated for Ruby 2.x support, dropped support for 1.8.7.
