@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    campaign_cash (2.7.1)
+    campaign_cash (2.8.1)
       json
 
 GEM
@@ -35,3 +35,6 @@ DEPENDENCIES
   campaign_cash!
   rake (>= 10.0)
   shoulda
+
+BUNDLED WITH
+   1.10.5

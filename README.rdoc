@@ -12,6 +12,7 @@ Simple ruby wrapper for portions of The New York Times Campaign Finance API[http
 
 == News
 
+* July 24, 2015: Version 2.9 released. Made Filing#search cycle-specific.
 * June 15, 2015: Version 2.8.1 released. Bumped cycle to 2016 and fixed tests.
 * Dec. 16, 2014: Version 2.8 released. Added Filing#search method to support name or id searches.
 * Dec. 15, 2014: Version 2.7.2 released. Added `date_filed` to Filing objects.
@@ -265,4 +266,4 @@ Electioneering Communications are broadcast ads funded by third party groups tha
 
 == Copyright
 
-Copyright (c) 2014 The New York Times Company. See LICENSE for details.
+Copyright (c) 2015 The New York Times Company. See LICENSE for details.
