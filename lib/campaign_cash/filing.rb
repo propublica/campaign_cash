@@ -48,11 +48,10 @@ module CampaignCash
       results.map{|c| Filing.create(c)}
     end
 
-    def self.search(query, offset=nil)
-      cycle=CURRENT_CYCLE
+    def self.search(query, cycle, offset=nil)
       reply = Base.invoke("#{cycle}/filings/search", {query: query, offset: offset})
       results = reply['results']
-      results.map{|c| Filing.create(c)}      
+      results.map{|c| Filing.create(c)}
     end
 
     def self.form_types
