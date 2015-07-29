@@ -1,3 +1,3 @@
 module CampaignCash
-  VERSION = "2.9"
+  VERSION = "2.9.1"
 end
