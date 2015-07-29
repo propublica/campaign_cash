@@ -43,9 +43,9 @@ module CampaignCash
       D: 'Leadership PAC'
     }
 
-    attr_reader :name, :id, :state, :district, :party, :fec_uri, :candidate, 
+    attr_reader :name, :id, :state, :district, :party, :fec_uri, :candidate,
     :city, :address, :state, :zip, :relative_uri, :sponsor_name,
-    :total_receipts, :total_contributions, :total_from_individuals, 
+    :total_receipts, :total_contributions, :total_from_individuals,
     :total_from_pacs, :candidate_loans, :total_disbursements,
     :total_refunds, :debts_owed, :begin_cash, :end_cash,
     :date_coverage_to, :date_coverage_from, :other_cycles, :super_pac, :filings,
@@ -139,25 +139,26 @@ module CampaignCash
     def self.search(name, cycle=CURRENT_CYCLE, offset=nil)
       name = name.gsub(/ /,"+")
       reply = invoke("#{cycle}/committees/search", {query: name, offset: offset})
-      results = reply['results']      
+      results = reply['results']
       results.map{|c| create_from_search_results(c)}
     end
 
     def self.latest(cycle=CURRENT_CYCLE)
       reply = invoke("#{cycle}/committees/new",{})
-      results = reply['results']      
-      results.map{|c| create_from_search_results(c)}      
+      results = reply['results']
+      results.map{|c| create_from_search_results(c)}
     end
 
     def self.superpacs(cycle=CURRENT_CYCLE, offset=nil)
       reply = invoke("#{cycle}/committees/superpacs",{offset: offset})
-      results = reply['results']      
+      results = reply['results']
       results.map{|c| create_from_search_results(c)}
     end
 
     def filings(cycle=CURRENT_CYCLE, offset=nil)
       reply = Base.invoke("#{cycle}/committees/#{id}/filings",{offset: offset})
-        results = reply['results']
+      results = reply['results']
+      results.map{|r| r["filing_id"] = r["id"]}
       results.map{|c| Filing.create(c)}
     end
 
