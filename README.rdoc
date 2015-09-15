@@ -12,6 +12,7 @@ Simple ruby wrapper for portions of The New York Times Campaign Finance API[http
 
 == News
 
+* Sept. 14, 2015: Version 2.9.2 released. Bug fix for Filing#today.
 * July 28, 2015: Version 2.9.1 released. Patch for Committee#filings
 * July 24, 2015: Version 2.9 released. Made Filing#search cycle-specific.
 * June 15, 2015: Version 2.8.1 released. Bumped cycle to 2016 and fixed tests.
