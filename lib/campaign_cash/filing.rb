@@ -16,7 +16,7 @@ module CampaignCash
       date_coverage_to: date_parser(params['date_coverage_to']),
       date_filed: date_parser(params['date_filed']),
       committee: parse_committee(params['committee']),
-      report_title: params['report_title'].strip,
+      report_title: params['report_title'],
       fec_uri: params['fec_uri'],
       amended: params['amended'],
       amended_uri: params['amended_uri'],
