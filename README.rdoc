@@ -8,10 +8,12 @@
 
 == DESCRIPTION:
 
-Simple ruby wrapper for portions of The New York Times Campaign Finance API[http://developer.nytimes.com/docs/read/campaign_finance_api]. You'll need an API key. Tested under Ruby 1.9.3, 2.0.0 and 2.1.0.
+Simple ruby wrapper for portions of the ProPublica Campaign Finance API[https://propublica.github.io/campaign-finance-api-docs/]. You'll need an API key. Tested under Ruby 1.9.3, 2.0.0 and 2.1.0. As of Feb. 12, 2016,
+this gem does not work with the Campaign Finance API, but it will soon.
 
 == News
 
+* Feb. 12, 2016: Ownership of this gem transferred to ProPublica.
 * Sept. 14, 2015: Version 2.9.2 released. Bug fix for Filing#today.
 * July 28, 2015: Version 2.9.1 released. Patch for Committee#filings
 * July 24, 2015: Version 2.9 released. Made Filing#search cycle-specific.
@@ -260,7 +262,7 @@ Electioneering Communications are broadcast ads funded by third party groups tha
 
 == Authors
 
-* Derek Willis, dwillis@nytimes.com
+* Derek Willis, derek.willis@propublica.org
 * Al Shaw, almshaw@gmail.com
 * Jason Holt, jjh@offensivepolitics.net
 * Benjamin Jackson, http://twitter.com/benjaminjackson
@@ -268,4 +270,4 @@ Electioneering Communications are broadcast ads funded by third party groups tha
 
 == Copyright
 
-Copyright (c) 2015 The New York Times Company. See LICENSE for details.
+Copyright (c) 2016 ProPublica Inc. See LICENSE for details.
