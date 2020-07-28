@@ -15,7 +15,7 @@ GEM
     concurrent-ruby (1.0.5)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    json (2.1.0)
+    json (2.3.1)
     minitest (5.11.3)
     rake (12.3.1)
     shoulda (3.5.0)
